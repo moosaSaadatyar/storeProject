@@ -1,0 +1,26 @@
+.header-banner {
+  background-color: #1a1a1a;
+  color: #d4af37;
+
+  h1 {
+    font-family: "Playfair Display", serif;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 1.25rem;
+    color: #f0d88f;
+  }
+
+  .btn {
+    font-weight: 600;
+    color: #1a1a1a;
+    background-color: #d4af37;
+    border: none;
+
+    &:hover {
+      background-color: #b9972e;
+      color: #fff;
+    }
+  }
+}

@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ApiService } from './service-api.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './core/layouts/header/header.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,HttpClientModule],
+  imports: [HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -17,8 +17,8 @@ export class AppComponent {
   private api = inject(ApiService)
 
   ngOnInit() {
-    this.api.getHello().subscribe(res => {
-      this.message = res.message;
-    });
+    // this.api.getHello().subscribe(res => {
+    //   this.message = res.message;
+    // });
   }
 }
