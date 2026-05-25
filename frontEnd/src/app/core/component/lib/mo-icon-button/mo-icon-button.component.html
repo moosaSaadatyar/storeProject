@@ -1,0 +1,12 @@
+<button
+  type="button"
+  class="icon-button"
+  [ngClass]="btnClass"
+  pButton
+  pRipple
+  [class]="btnClass"
+  [type]="type ?? 'button'"
+  [disabled]="disabled"
+  (click)="clickHandler($event)"
+  [icon]="icon"
+></button>

@@ -1,0 +1,147 @@
+<div class='uploader-wrapper'>
+  <div class='uploader-container'>
+    <div class='row justify-content-center justify-md-content-between'>
+      <div class='card-header d-block pt-0'>
+        <h3 class='pt-2'>{{"FILE_UPLOADING" | translate}}</h3>
+
+        <div
+          class='file-uploader-close-btn button-box btn-danger animate__animated animate__zoomIn animate__delay-500ms animate__faster'
+          *ngIf='closeButton' (click)='closeFileUploader()'>
+          <div class='button-icon'>
+            <i class='las la-times fs-18 pt-2'></i>
+          </div>
+          <input showDelay='300' type='button' [value]='"CLOSE"|translate' readonly class='button-title' />
+        </div>
+      </div>
+    </div>
+
+    <ng-container *ngIf='!showSelectedFiles && !multiSelect'>
+      <div class='upload-container'>
+        <div class='border-container'>
+          <div class='bg-withe rounded' (dragover)='onDragOver($event)' (drop)='onDrop($event)'>
+            <div class='icons fa-4x'>
+              <i class='fas fa-file-image mr-2'></i>
+              <i class='fas fa-file-alt mr-2'></i>
+              <i class='fas fa-file-pdf'></i>
+            </div>
+            <p class='mb-3'>
+              {{"DRAG_FILE_TO_CHOOSE"|translate}}<br />
+              {{"AND" | translate}} {{"ELSE" |translate}}
+              <a class='choose-file-btn' type='button' (click)='fileUploaderInput.click()'
+                 id='file-browser1'>{{"UPLOAD"|translate}}</a>
+              {{"DO"|translate}}.
+            </p>
+            <span>{{"ACCEPTABLE_FILES_TO_CHOOSE"|translate}}
+              : <b>png.</b> ، <b>jpg.</b> ، <b>pdf.</b> ، <b>docx.</b></span>
+            <br />
+            <span class='fs-12'>{{"MAX_LENGTH_SHOULD_NOT_BE_MORE_THAN_TOW_MEG"|translate}}.</span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf='showSelectedFiles && !multiSelect && isImage'>
+      <div class='upload-container'>
+        <div class='border-container'>
+          <img id='image' [src]='imageSrc' [alt]='"FILE"|translate' />
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf='multiSelect'>
+      <div class='upload-container'>
+        <div class='border-container'>
+          <div class='bg-withe rounded' (dragover)='onDragOver($event)' (drop)='onDrop($event)'>
+            <div class='icons fa-4x'>
+              <i class='fas fa-file-image mr-2'></i>
+              <i class='fas fa-file-alt mr-2'></i>
+              <i class='fas fa-file-pdf'></i>
+            </div>
+            <p class='mb-3'>
+              {{"DRAG_FILES_TO_CHOOSE" | translate}}<br />
+              {{"AND" | translate}} {{"ELSE" |translate}}
+              <a class='choose-file-btn' type='button' (click)='fileUploaderInput.click()'
+                 id='file-browser2'>{{"UPLOAD"|translate}}</a> {{"DO"|translate}}.
+            </p>
+            <span>{{"ACCEPTABLE_FILES_TO_CHOOSE"|translate}}
+              : <b>png.</b> ، <b>jpg.</b> ، <b>pdf.</b> ، <b>docx.</b></span>
+            <br />
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+
+    <div class='selected-files-container' *ngIf='showSelectedFiles'>
+      <ng-container *ngFor='let fileItem of selectedFiles'>
+        <!-- *************** SELECTED ITEM *********************** -->
+
+        <div class='selected-file mb-2'>
+          <div class='d-flex flex-column shadow px-3 selected-file'>
+            <div class='d-flex w-100 py-2 justify-content-between'>
+              <div class='d-flex'>
+                <div>
+                  <ng-container *ngTemplateOutlet='fileItem.spinner === 0? closeButton:(fileItem.spinner === 1?spinner:successButton);
+                      context: { $implicit: fileItem }
+                    '></ng-container>
+                </div>
+              </div>
+              <div class='my-auto'>
+                {{ fileItem.file.name }} <span class='las la-file-image fs-20 text-primary'></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- *************** SELECTED ITEM *********************** -->
+      </ng-container>
+    </div>
+
+    <div class='uploader-actions'>
+      <p-button (click)='startUploadFiles()' [label]='"UPLOADING" | translate' icon='pi pi-upload'
+                styleClass='bg-primary'
+                [disabled]='disableUploadBtn'></p-button>
+
+      <p-button (onClick)='closeFileUploader()' [label]='"CANCEL" | translate' icon=''
+                styleClass='p-button-danger mx-2'></p-button>
+    </div>
+  </div>
+</div>
+
+<!-- **************** HIDEN INPUT FOR FILE-SELECTOR ********************** -->
+<input #fileUploaderInput (change)='onFileSelected($event)' [attr.accept]='fileUploaderConfig?.accept'
+       [attr.multiple]='fileUploaderConfig?.selectMode' id='file-uploader-model-input' type='file'
+       class='file-chooser' />
+
+<!-- **************** HIDEN INPUT FOR FILE-SELECTOR ********************** -->
+
+<!-- **************** FILE CLOSE BUTTON ********************** -->
+
+<ng-template #closeButton let-file>
+  <p-button (click)='removeFromList(file)' icon='pi pi-times fs-16' type='button'
+            styleClass='p-button-rounded p-button-danger p-button-text'></p-button>
+</ng-template>
+
+<!-- **************** FILE CLOSE BUTTON ********************** -->
+
+<!-- **************** FILE SPINNER ********************** -->
+
+<ng-template #spinner let-file>
+  <div class='button-spinner'>
+    <p-button icon='spinner-border spinner-border-sm text-danger'
+              styleClass='p-button-rounded p-button-danger p-button-text'>
+    </p-button>
+  </div>
+</ng-template>
+
+<!-- **************** FILE SPINNER ********************** -->
+
+<!-- **************** FILE UPLOADED SUCCESSFULY ********************** -->
+
+<ng-template #successButton let-file>
+  <p-button icon='pi pi-check fs-16' type='button'
+            styleClass='p-button-rounded p-button-success p-button-text '></p-button>
+</ng-template>
+
+<!-- **************** FILE UPLOADED SUCCESSFULY ********************** -->
+

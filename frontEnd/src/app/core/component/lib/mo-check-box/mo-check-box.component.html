@@ -1,0 +1,10 @@
+<div class="h-42 ks-cboxtags">
+  <input
+    type="checkbox"
+    [id]="'checkbox' + id"
+    (ngModelChange)="onChange($event)"
+    [(ngModel)]="checkBoxValue"
+    [disabled]="disabled || readonly"
+  />
+  <label class="h-42 w-100" [for]="'checkbox' + id">{{ title }}</label>
+</div>

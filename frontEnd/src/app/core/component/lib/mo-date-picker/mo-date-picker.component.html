@@ -1,0 +1,54 @@
+<div class='time-picker-container'>
+  <span
+    [class]='{"p-float-label": customFloatLabel}'
+    class='p-inputgroup d-flex height' >
+      <input
+        [id]="'datepicker-input'+ customFloatLabel"
+        type='text'
+        [placeholder]="placeholder ?? ''"
+        [disabled]='disabled'
+        (blur)='onTouched($event)'
+        (ngModelChange)='onChange($event)'
+        [(ngModel)]='dateValue'
+        class='w-100'
+        pInputText
+        readonly
+        name='datepicker'
+        [matDatepicker]='picker'
+        [matDatepickerFilter]="myFilter"
+        matInput
+        (click)="readonly ? null : picker.open()">
+      <label
+        [class]='otherOptions.labelClass + " fs-12"'
+        [for]="'datepicker-input'+ customFloatLabel">
+        {{customFloatLabel}}
+      </label>  
+
+    <mo-icon-button
+      type='button'
+      tooltip='انتخاب تاریخ'
+      icon='las la-calendar fs-24'
+      buttonClass='border-left-0 border-right-0 rounded-0'
+      [disabled]='disabled'
+      color='primary'
+      (btnClick)="readonly ? null : picker.open()"
+/>
+
+    <mo-icon-button
+      type='button'
+      tooltip='پاک کردن'
+      icon='las la-calendar-times fs-24'
+      buttonClass='border-right-0'
+      [disabled]='disabled'
+      color='danger'
+      (btnClick)="readonly ? null : clear()"/>
+  </span>
+</div>
+
+<mat-datepicker #picker [disabled]='disabled'></mat-datepicker>
+
+<div class='mt-1'>
+  <app-form-errors
+    [config]='errorConfig'>
+  </app-form-errors>
+</div>

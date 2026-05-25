@@ -1,9 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ApiService } from './service-api.service';
-import { HeaderComponent } from './core/layouts/header/header.component';
-import { Footer } from './core/layouts/footer/footer';
-import { HomePage } from './shared/ui/home-page/home-page';
+import { Footer } from './layouts/footer/footer';
+import { HeaderComponent } from './layouts/header/header.component';
 
 @Component({
   selector: 'app-root',

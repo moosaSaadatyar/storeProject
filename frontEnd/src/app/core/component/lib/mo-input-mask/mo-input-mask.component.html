@@ -1,0 +1,71 @@
+<div [class]='{"p-inputgroup" : config.startGroup || config.endGroup}'>
+
+  <ng-container
+    *ngTemplateOutlet='groupRef;
+     context: {$implicit: config.startGroup}'>
+  </ng-container>
+
+    <span
+      class='d-flex flex-column h-42'
+      [class]="config.containerClass ?? ''">
+    <p-inputMask
+      styleClass='w-100 h-42'
+      [id]='config.inputId'
+      [class]="config.inputClass ?? ''"
+      [autoClear]='false'
+      [showClear]='true'
+      [ngModel]='model'
+      [disabled]='disabled'
+      (ngModelChange)='changeHandler($event)'
+      (onBlur)='onTouched()'
+      [mask]='config.mask'
+      [readonly]='readonly'
+      [maxlength]="config.maxlength"
+      [minlength]="config.minlength"
+    />
+    <label
+      class='fs-12 order'
+      [class]='config.labelClass'
+      [for]='config.inputId'>
+    {{ config.floatLabel ?? config.label }}
+    </label>
+  </span>
+
+  <ng-container
+    *ngTemplateOutlet='groupRef;
+     context: {$implicit: config.endGroup}'>
+  </ng-container>
+
+</div>
+
+
+<div class='mt-1'>
+  <app-form-errors [config]='errorConfig'/>
+</div>
+
+<ng-template #groupRef let-items>
+
+  <ng-container *ngIf='items'>
+    <div
+      *ngFor='let item of items'
+      class='p-inputgroup-addon p-0'>
+
+      <i
+        *ngIf='item.startIcon'
+        [class]='item.startIcon'>
+      </i>
+
+      <span
+        *ngIf='item.text'
+        [class]='item.startIcon'>
+        {{item.text}}
+      </span>
+
+      <i
+        *ngIf='item.endIcon'
+        [class]='item.endIcon'>
+      </i>
+
+    </div>
+  </ng-container>
+</ng-template>

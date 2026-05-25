@@ -1,0 +1,66 @@
+.metismenu-horizontal .p-menubar {
+  background: #ffffff;
+  border: none;
+  border-radius: 0;
+  padding: 0.5rem 1rem;
+}
+
+.metismenu-horizontal .p-menubar-root-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .metismenu-horizontal .p-menubar {
+    position: relative;
+    padding: 0.5rem;
+  }
+  
+  .metismenu-horizontal .p-menubar-button {
+    display: flex !important; /* Force show the mobile menu button */
+    margin-left: auto;
+    border: none;
+    background: transparent;
+    color: #333;
+  }
+  
+  .metismenu-horizontal .p-menubar-root-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 1000;
+  }
+  
+  .metismenu-horizontal .p-menubar-root-list.p-menubar-visible {
+    display: flex;
+  }
+  
+  .metismenu-horizontal .p-menuitem {
+    width: 100%;
+  }
+  
+  .metismenu-horizontal .p-menuitem-link {
+    width: 100%;
+    padding: 1rem;
+  }
+  
+  .metismenu-horizontal .p-submenu-list {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    border-left: 3px solid #eee;
+  }
+  .metismenu-horizontal .p-menubar-root-list {
+    transition: all 0.3s ease;
+  }
+}
+
+::ng-deep .p-menubar .active-menu > .p-menuitem-link {
+  background-color: #dfe6f2 !important;
+  font-weight: bold;
+}

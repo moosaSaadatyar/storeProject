@@ -1,18 +1,23 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# Compiled output
+# compiled output
 /dist
+./dist
 /tmp
 /out-tsc
+# Only exists if Bazel was run (Nothing is here)
 /bazel-out
 
-# Node
+# dependencies
 /node_modules
-npm-debug.log
-yarn-error.log
+/vscode
+/angular
+
+# profiling files
+chrome-profiler-events*.json
 
 # IDEs and editors
-.idea/
+/.idea
 .project
 .classpath
 .c9/
@@ -20,7 +25,7 @@ yarn-error.log
 .settings/
 *.sublime-workspace
 
-# Visual Studio Code
+# IDE - VSCode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -28,15 +33,28 @@ yarn-error.log
 !.vscode/extensions.json
 .history/*
 
-# Miscellaneous
+# misc
 /.angular/cache
-.sass-cache/
+/.sass-cache
 /connect.lock
 /coverage
 /libpeerconnection.log
+npm-debug.log
+yarn-error.log
 testem.log
 /typings
 
-# System files
+# System Files
 .DS_Store
 Thumbs.db
+.vscode/launch.json
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
+.vs/Front/FileContentIndex/25cde2f9-2421-4328-86a8-9e00cef5e80d.vsidx
+.vs/Front/FileContentIndex/f756e1d7-f130-4ab1-99dc-dad836095946.vsidx
+.vs/Front/v17/.wsuo
+.vs/Front/v17/DocumentLayout.json
+.vs/Front/v17/workspaceFileList.bin
+/.vs/Front/FileContentIndex
+/src/environments/environment.ts
+./src/environments/environment.ts

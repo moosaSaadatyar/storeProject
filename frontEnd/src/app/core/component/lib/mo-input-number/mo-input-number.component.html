@@ -1,0 +1,27 @@
+<span class="d-flex flex-column h-42" [class]="config.containerClass ?? ''">
+  <input
+    class="w-100 h-42"
+    [id]="config.inputId"
+    [class]="config.inputClass ?? ''"
+    [ngModel]="model"
+    [placeholder]="config.placeholder ?? ''"
+    [disabled]="config.disabled ?? disabled"
+    (ngModelChange)="changeHandler($event)"
+    (blur)="onTouched()"
+    OnlyNumber
+    [maxlength]="config.maxLength"
+    [minlength]="config.minLength"
+    [readonly]='readonly'
+    type="text"
+    pInputText
+    [CostFormatter]="config.moneySplitter"
+    [MaxNumber]="config.maxValue"
+  />
+  <label [class]="config.labelClass + ' fs-12'" [for]="config.inputId">
+    {{ config.floatLabel ?? config.label }}
+  </label>
+</span>
+
+<div class="mt-1">
+  <app-form-errors [config]="errorConfig"> </app-form-errors>
+</div>

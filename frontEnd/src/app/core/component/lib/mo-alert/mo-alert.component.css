@@ -1,0 +1,31 @@
+:host
+{
+    --cmp-color1:rgb(92,77,64);
+    --cmp-color2:rgb(200,113,42);
+    --cmp-color3:rgb(253,241,229);
+}
+
+.cmp-bg-warning
+{
+    background: var(--cmp-color3);
+}
+
+.cmp-text-warning
+{
+    color: var(--cmp-color1);
+}
+
+.cmp-text-warning2
+{
+    color: var(--cmp-color2);
+}
+
+.cmp-border-right-warning
+{
+    border-right: 10px solid var(--cmp-color2);;
+}
+
+#cmp-detail
+{
+    vertical-align: middle;
+}

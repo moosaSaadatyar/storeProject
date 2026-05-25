@@ -1,19 +1,28 @@
 const express = require("express");
+const mongo = require("mongoose");
 const cors = require("cors");
+const path = require("path");
+const boodyParser = require("body-parser");
+
+const adminRouter = require("./src/routes/admin");
+const shopeRouter = require("./src/routes/shope");
 
 const app = express();
+app.use("view engine", "ejs");
+app.set("views", "views");
+app.use(boodyParser.urlencoded({ extended: false }));
+// app.use(cors());
 
-app.use(cors());
-app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/home", (req, res) => {
-  // اگر می‌خواهید چیزی را چک کنید، فقط بخش‌های مهم را لاگ کنید
-  console.log("درخواست دریافت شد!");
+app.use(adminRouter);
+app.use(shopeRouter);
 
-  // حتماً باید یک پاسخ بفرستید
-  res.json({ message: "پاسخ از سمت سرور با موفقیت دریافت شد" });
-});
-
-app.listen(3000, () => {
-  console.log("running on port 3000");
-});
+mongo
+  .connect("mongodb://localhost/shop")
+  .then((result) => {
+    app.listen(3000, () => {
+      console.log("running on port 3000");
+    });
+  })
+  .catch((err) => console.log(err));
