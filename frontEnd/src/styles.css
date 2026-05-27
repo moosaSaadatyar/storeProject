@@ -33,3 +33,7 @@
 .h-90 {
   height: 90% !important;
 }
+
+.p-menubar-item-label {
+    line-height: 2 !important;
+}

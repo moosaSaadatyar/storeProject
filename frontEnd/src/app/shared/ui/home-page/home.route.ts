@@ -10,4 +10,9 @@ export const HomeRoutes: Routes = [
     path: 'home',
     loadComponent: () => import('./home-page').then((m) => m.HomePage),
   },
+  {
+    path: 'products',
+    loadChildren: () =>
+      import('../../../feature/product/product.route').then((m) => m.ProductRoutes),
+  },
 ];

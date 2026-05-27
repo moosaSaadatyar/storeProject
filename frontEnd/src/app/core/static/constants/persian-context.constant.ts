@@ -22,3 +22,18 @@ export enum MORE_ACTIONS {
   DELETE = 'حذف'
 }
 
+
+export const FA_TRANSLATIONS = {
+  HOME: 'خانه',
+  ABOUT: 'درباره ما',
+  CONTACT: 'تماس با ما',
+  PRODUCTS: 'محصولات',
+  MENU: {
+    PROFILE: 'پروفایل کاربری',
+    SETTINGS: 'تنظیمات'
+  },
+  BUTTONS: {
+    SAVE: 'ذخیره',
+    CANCEL: 'انصراف'
+  }
+};
