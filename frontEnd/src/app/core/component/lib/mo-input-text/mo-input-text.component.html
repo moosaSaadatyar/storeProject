@@ -1,7 +1,7 @@
 @if(!loadingMode){
-  <span class="d-flex flex-column" [class]="config.containerClass ?? ''">
+  <span class="d-flex flex-column" [class]="config?.containerClass ?? ''">
   <input
-    class="w-100 h-42"
+    class="w-100 h-35"
     [id]="config.inputId"
     [class]="config.inputClass ?? ''"
     [ngModel]="model"
@@ -15,7 +15,7 @@
     [minlength]="config.minLength"
     [readonly]='readonly'
   />
-  <label class="fs-12 order" [class]="config.labelClass" [for]="config.inputId">
+  <label class="fs-12 order" [class]="config?.labelClass" [for]="config?.inputId">
     {{ config.floatLabel ?? config.label }}
   </label>
 </span>

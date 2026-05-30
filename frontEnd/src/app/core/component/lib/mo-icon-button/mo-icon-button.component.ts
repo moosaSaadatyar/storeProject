@@ -13,7 +13,7 @@ import { RippleModule } from 'primeng/ripple';
    ButtonModule, RippleModule
   ],
 })
-export class BhrIconButtonComponent {
+export class MoIconButtonComponent {
   @Input()
   public color: 'warn' | 'info' | 'success' | 'dark' | 'primary' | 'secondary' | 'danger';
 

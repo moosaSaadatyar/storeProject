@@ -11,7 +11,7 @@ import { IInputTextConfig } from './mo-input-text.interface';
 
 @Component(
   {
-    selector: 'mo-input-text-l[config]',
+    selector: 'mo-input-text[config]',
     templateUrl: './mo-input-text.component.html',
     styleUrls: ['./mo-input-text.component.css'],
     standalone: true,
@@ -24,7 +24,7 @@ import { IInputTextConfig } from './mo-input-text.interface';
     ],
   }
 )
-export class BhrInputTextLComponent implements ControlValueAccessor, OnInit {
+export class MoInputTextComponent implements ControlValueAccessor, OnInit {
   @Input()
   public config !: IInputTextConfig;
 

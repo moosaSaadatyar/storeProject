@@ -1,4 +1,4 @@
-import { XOR } from 'core/types/xor/xor';
+import { XOR } from "../mo-input-text/mo-input-text.interface";
 
 export interface IInputNumberConfigParent {
   inputId: string;

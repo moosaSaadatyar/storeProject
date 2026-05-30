@@ -1,4 +1,4 @@
-export interface IBhrAlert
+export interface IMoAlert
 {
   id?:string,
   alertTitle?: string;

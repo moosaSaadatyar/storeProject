@@ -23,7 +23,7 @@ import { RequierdFiledService } from 'mo-ui/core/service/RequierdFiled/RequierdF
       ]
   }
 )
-export class BhrInputMaskComponent implements ControlValueAccessor, OnInit {
+export class MoInputMaskComponent implements ControlValueAccessor, OnInit {
   @Input()
   public config !: IInputMaskConfig;
 

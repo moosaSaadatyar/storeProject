@@ -30,7 +30,7 @@ import { RequierdFiledService } from '../../../service/RequierdFiled/RequierdFil
     ],
   }
 )
-export class BhrInputNumberComponent implements OnInit, ControlValueAccessor {
+export class MoInputNumberComponent implements OnInit, ControlValueAccessor {
 
   @Input()
   public config !: IInputNumberConfig;

@@ -1,60 +1,66 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, computed, inject, OnInit } from '@angular/core';
-import { BhrNavbarMenuComponent } from '../../core/component/lib/mo-navbar-menu/mo-navbar-menu.component';
+import {
+  Component,
+  computed,
+  OnInit,
+} from '@angular/core';
+import { MoNavbarMenuComponent } from '../../core/component/lib/mo-navbar-menu/mo-navbar-menu.component';
 import { MenuItem } from 'primeng/api';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { FA_TRANSLATIONS } from '../../core/static/constants/persian-context.constant';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, BhrNavbarMenuComponent, TranslocoModule],
+  imports: [CommonModule, MoNavbarMenuComponent, TranslocoModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
   menuItem!: MenuItem[];
 
-  public persianContense = FA_TRANSLATIONS
+  public persianContense = FA_TRANSLATIONS;
   constructor(
     private translocal: TranslocoService,
-    private ch: ChangeDetectorRef,
+    private router: Router,
+    private ActivatedRout: ActivatedRoute,
   ) {}
   ngOnInit(): void {
-    const translatedText = computed(() => {
-      return this.translocal.translate('HOME');
-    }
-  );
-  console.log(translatedText);
-
-  }
-  
-  ngAfterViewInit(){
     this.menuInIt();
   }
+
 
   private menuInIt() {
     this.menuItem = [
       {
-        label:this.persianContense.HOME,
-        url: '/',
+        label: this.persianContense.HOME,
         styleClass: 'text-white-50 px-2',
+        command: () => {
+          this.router.navigate(['/home']);
+        },
       },
       {
         label: this.persianContense.PRODUCTS,
-        url: '/products',
         styleClass: 'text-white-50 px-2',
+        command: () => {
+          this.router.navigate(['/products']);
+        },
       },
       {
         label: this.persianContense.ABOUT,
-        url: '/about',
         styleClass: 'text-white-50 px-2',
+
+        command: () => {
+          this.router.navigate(['/about']);
+        },
       },
       {
         label: this.persianContense.CONTACT,
-        url: '/contact',
         styleClass: 'text-white-50 px-2',
+        command: () => {
+          this.router.navigate(['/contact']);
+        },
       },
     ];
-    this.ch.detectChanges();
   }
 }

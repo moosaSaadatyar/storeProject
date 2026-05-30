@@ -18,7 +18,7 @@ import { TranslocoModule } from '@ngneat/transloco';
   
 })
 
-export class BhrNavbarMenuComponent implements OnInit, OnChanges {
+export class MoNavbarMenuComponent implements OnInit, OnChanges {
   @Input()
   public items!: MenuItem[];
 

@@ -2,7 +2,7 @@ import { Observable, ReplaySubject, Subject } from 'rxjs';
 
 import { IBodyResult } from 'interfaces/body-result/body-result.interface';
 
-export interface IBhrSelect {
+export interface IMoSelect {
   reloadData$?: Subject<unknown>;
   options$?: Observable<IBodyResult<IDynamicSelectItem>>;
   emptyFilterMessage?: string;

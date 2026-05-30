@@ -8,12 +8,16 @@ const adminRouter = require("./src/routes/admin");
 const shopeRouter = require("./src/routes/shope");
 
 const app = express();
-app.use("view engine", "ejs");
-app.set("views", "views");
-app.use(boodyParser.urlencoded({ extended: false }));
-// app.use(cors());
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  cors({
+    origin: "http://localhost:4200",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
+
+app.use(express.json());
+app.use(boodyParser.urlencoded({ extended: false }));
 
 app.use(adminRouter);
 app.use(shopeRouter);

@@ -7,7 +7,7 @@ import { IFileContainer } from './mo-file-uploader.interface';
 
 
 @Injectable()
-export class BhrFileUploaderService {
+export class MoFileUploaderService {
 
   private fileContainerList: IFileContainer[] = [];
 
@@ -56,6 +56,6 @@ export class BhrFileUploaderService {
 
   UploadFile(fileData:FormData):Observable<any> {
     return null
-    // this.http.post(`${environment.apis.default.url}/api/file-management/file`, fileData);
+    // this.http.post(`${environment.apiUrl}/api/file-management/file`, fileData);
   }
 }

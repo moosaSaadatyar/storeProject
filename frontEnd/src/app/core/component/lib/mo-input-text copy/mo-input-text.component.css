@@ -1,0 +1,6 @@
+input[readonly] {
+    background-color: #fff !important;
+    cursor: default;
+    opacity: 1 !important;
+  }
+  

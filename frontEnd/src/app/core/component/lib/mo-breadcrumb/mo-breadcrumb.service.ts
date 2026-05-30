@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject, filter, map, merge, Observable } from 'rxjs';
-import { IBhrBreadcrumb } from './mo-breadcrumb.interface';
+import { IMoBreadcrumb } from './mo-breadcrumb.interface';
 import { TranslateService } from '@ngx-translate/core';
 
 
@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 )
 export class DynamicBreadcrumbService {
 
-  private initialBreadCrumb$!: BehaviorSubject<IBhrBreadcrumb[]>;
+  private initialBreadCrumb$!: BehaviorSubject<IMoBreadcrumb[]>;
   private _route = inject(ActivatedRoute)
   private _router = inject(Router)
   private translate = inject(TranslateService)
@@ -27,7 +27,7 @@ export class DynamicBreadcrumbService {
     this.initialBreadCrumb$.next(this.convertActivatedRoutesToIDynamicBreadcrumbs(this.getTreeRoutes(this._route)))
   }
 
-  get breadcrumb$(): Observable<IBhrBreadcrumb[]> {
+  get breadcrumb$(): Observable<IMoBreadcrumb[]> {
     return merge(
       this._router.events.pipe(
         filter(
@@ -59,8 +59,8 @@ export class DynamicBreadcrumbService {
     return breadcrumbList;
   }
 
-  private convertActivatedRoutesToIDynamicBreadcrumbs(routesList: ActivatedRoute[]): IBhrBreadcrumb[] {
-    let breadcrumbs: IBhrBreadcrumb[] = [];
+  private convertActivatedRoutesToIDynamicBreadcrumbs(routesList: ActivatedRoute[]): IMoBreadcrumb[] {
+    let breadcrumbs: IMoBreadcrumb[] = [];
     routesList.forEach(
       (item) => {
         const canClick = item?.snapshot?.data?.['canClick'] !== undefined ? item?.snapshot?.data?.['canClick'] : true;
@@ -85,9 +85,9 @@ export class DynamicBreadcrumbService {
     return this.removeRepetitiveBreadCrumbs(breadcrumbs);
   }
 
-  private removeRepetitiveBreadCrumbs(breadcrumbs: IBhrBreadcrumb[]): IBhrBreadcrumb[] {
+  private removeRepetitiveBreadCrumbs(breadcrumbs: IMoBreadcrumb[]): IMoBreadcrumb[] {
     return breadcrumbs.reduce(
-      (acc: IBhrBreadcrumb[], curr) => {
+      (acc: IMoBreadcrumb[], curr) => {
         let exists = acc.find(
           (item) => {
             return item.path === curr.path && item.titleItem === curr.titleItem;

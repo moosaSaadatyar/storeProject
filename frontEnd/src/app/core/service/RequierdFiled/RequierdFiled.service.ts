@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { IInputTextConfig } from '../../component/lib/mo-input-text/mo-input-text.interface';
 import { ReplaySubject, Subscription } from 'rxjs';
 
@@ -56,5 +56,23 @@ export class RequierdFiledService  {
     return subscription;
   }
 
+
+   public showErrorMessages(control: FormGroup | FormArray): void {
+    this.markAllControlsDirtyAndTouched(control);
+  }
+
+  private markAllControlsDirtyAndTouched(control: AbstractControl): void {
+    if (control instanceof FormGroup) {
+      Object.values(control.controls).forEach(childControl =>
+        this.markAllControlsDirtyAndTouched(childControl)
+      );
+    } else if (control instanceof FormArray) {
+      control.controls.forEach(childControl => this.markAllControlsDirtyAndTouched(childControl));
+    } else if (control instanceof FormControl) {
+      control.markAsDirty();
+    }
+    control.markAllAsTouched();
+  }
+  
 }
 

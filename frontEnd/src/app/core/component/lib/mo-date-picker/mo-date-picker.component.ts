@@ -16,7 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { FormErrorsComponent } from '../form-errors/form-errors.component';
 import { IFormErrorConfig } from '../form-errors/form-errors.interface';
 import { RequierdFiledService } from '../../../service/RequierdFiled/RequierdFiled.service';
-import { BhrIconButtonComponent } from '../mo-icon-button/mo-icon-button.component';
+import { MoIconButtonComponent } from '../mo-icon-button/mo-icon-button.component';
 import { TooltipModule } from 'primeng/tooltip';
 
 const moment = (_moment as any).default || _moment;
@@ -30,7 +30,7 @@ const moment = (_moment as any).default || _moment;
     FormsModule,
     ButtonModule,
     RippleModule,
-    BhrIconButtonComponent,
+    MoIconButtonComponent,
     FormErrorsComponent,
     TooltipModule,
     TooltipModule,
@@ -38,7 +38,7 @@ const moment = (_moment as any).default || _moment;
     MatDatepickerModule,
   ],
 })
-export class BhrDatePickerComponent implements ControlValueAccessor, OnInit {
+export class MoDatePickerComponent implements ControlValueAccessor, OnInit {
   @Input() public disabled: boolean = false;
 
   @ViewChild('picker') dateInput: MatDatepicker<any>;

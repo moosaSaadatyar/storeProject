@@ -18,7 +18,7 @@ import { SpinOnDirective } from '../../../directives/spin-on-directive/spin-on.d
     ],
   }
 )
-export class BhrButtonComponent
+export class MoButtonComponent
 {
   @Input()
   public btnTitle: string;

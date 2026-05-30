@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 
 
-import { BhrFileUploaderService } from './mo-file-uploader.service';
+import { MoFileUploaderService } from './mo-file-uploader.service';
 import { IFileContainer, IFileUploaderConfig } from './mo-file-uploader.interface';
 import swal from 'sweetalert2';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -19,7 +19,7 @@ import { CONFIRM_CONFIG } from 'mo-ui/core/confirm-config/confirm-config.const';
   selector: 'mo-file-uploader',
   templateUrl: './mo-file-uploader.component.html',
   styleUrls: ['./mo-file-uploader.component.css'],
-  providers: [BhrFileUploaderService],
+  providers: [MoFileUploaderService],
   standalone: true,
   imports: [
     CommonModule,
@@ -28,7 +28,7 @@ import { CONFIRM_CONFIG } from 'mo-ui/core/confirm-config/confirm-config.const';
     TranslateModule
   ],
 })
-export class BhrFileUploaderComponent implements OnInit {
+export class MoFileUploaderComponent implements OnInit {
   /**
    * @example   upConfig: IFileUploaderConfig = {
     accept: FileTypes.PNG,
@@ -55,7 +55,7 @@ export class BhrFileUploaderComponent implements OnInit {
 
   private activeModal = inject(NgbActiveModal);
 
-  private _bhrFileUploaderService = inject(BhrFileUploaderService);
+  private _bhrFileUploaderService = inject(MoFileUploaderService);
 
   private _notify = inject(NotifyService);
 

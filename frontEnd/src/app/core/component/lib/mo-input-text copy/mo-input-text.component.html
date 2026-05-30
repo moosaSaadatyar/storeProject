@@ -1,0 +1,28 @@
+@if(!loadingMode){
+  <span class="d-flex flex-column" [class]="config?.containerClass ?? ''">
+  <input
+    class="w-100 h-35"
+    [id]="config.inputId"
+    [class]="config.inputClass ?? ''"
+    [ngModel]="model"
+    [placeholder]="config.placeholder ?? ''"
+    [disabled]="disabled"
+    (ngModelChange)="changeHandler($event)"
+    (blur)="onTouched()"
+    [type]="config.isPassword ? 'password': 'text' "
+    pInputText
+    [maxlength]="config.maxLength"
+    [minlength]="config.minLength"
+    [readonly]='readonly'
+  />
+  <label class="fs-12 order" [class]="config?.labelClass" [for]="config?.inputId">
+    {{ config.floatLabel ?? config.label }}
+  </label>
+</span>
+
+<div class="mt-1">
+  <app-form-errors [config]="errorConfig"> </app-form-errors>
+</div>
+}@else{
+  <p-skeleton id="skeleton-loader" width="100%" height="2.5rem"></p-skeleton>
+}

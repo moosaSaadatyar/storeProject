@@ -1,4 +1,4 @@
-export interface IBhrBreadcrumb
+export interface IMoBreadcrumb
 {
   path: string,
   titleItem: string,

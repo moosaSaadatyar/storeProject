@@ -3,7 +3,7 @@ import { AbstractControl, ControlValueAccessor, NgControl } from '@angular/forms
 import { Subscription } from 'rxjs';
 import { SelectModule } from 'primeng/select';
 
-import { IBhrSelect, IDynamicSelectItem } from './mo-select.interface';
+import { IMoSelect, IDynamicSelectItem } from './mo-select.interface';
 import { TranslateModule } from '@ngx-translate/core';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TooltipModule } from 'primeng/tooltip';
@@ -32,9 +32,9 @@ const events = [
     SelectModule
   ],
 })
-export class BhrSelectComponent extends Unsubscriber implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
+export class MoSelectComponent extends Unsubscriber implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
 
-  @Input() selectionConfig!: IBhrSelect;
+  @Input() selectionConfig!: IMoSelect;
 
   @Input()
   public readonly: boolean = false

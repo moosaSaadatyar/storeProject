@@ -13,27 +13,48 @@ export enum GLOBAL_WORDS {
   STATUS = 'وضعیت',
   NATIONAL_CODE = 'کد ملی',
   FULL_NAME = 'نام و نام‌خانوادگی',
-  NOT_FOUND = 'موردی یافت نشد.'
+  NOT_FOUND = 'موردی یافت نشد.',
 }
 
 export enum MORE_ACTIONS {
   ADD = 'افزودن',
   EDIT = 'ویرایش',
-  DELETE = 'حذف'
+  DELETE = 'حذف',
 }
-
 
 export const FA_TRANSLATIONS = {
   HOME: 'خانه',
   ABOUT: 'درباره ما',
   CONTACT: 'تماس با ما',
   PRODUCTS: 'محصولات',
+  TITLE: 'عنوان',
+  PRICE: 'قیمت',
+  DISCRIPTION: 'توضیحات',
+  SUBMIT: 'ثبت',
+  YES: 'بله',
+  NO: 'خیر',
+  WARNING: 'هشدار',
+  SEARCH: 'جست‌وجو',
+  NO_CONTENT: 'محتوایی برای نمایش وجود ندارد.',
+  START_DATE: 'تاریخ شروع',
+  END_DATE: 'تاریخ پایان',
+  FROM_DATE: 'از تاریخ',
+  TO_DATE: 'تا تاریخ',
+  FROM_REGISTER_DATE: 'تاریخ ثبت از',
+  TO_REGISTER_DATE: 'تاریخ ثبت تا',
+  STATUS: 'وضعیت',
+  NATIONAL_CODE: 'کد ملی',
+  FULL_NAME: 'نام و نام‌خانوادگی',
+  NOT_FOUND: 'موردی یافت نشد.',
+  URL: 'لینک تصویر',
+  SUCCESS_OPERATION: 'عملیات با موفقیت انجام شد.',
+
   MENU: {
     PROFILE: 'پروفایل کاربری',
-    SETTINGS: 'تنظیمات'
+    SETTINGS: 'تنظیمات',
   },
   BUTTONS: {
     SAVE: 'ذخیره',
-    CANCEL: 'انصراف'
-  }
+    CANCEL: 'انصراف',
+  },
 };

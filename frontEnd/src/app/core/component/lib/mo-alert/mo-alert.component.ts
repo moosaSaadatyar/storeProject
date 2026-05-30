@@ -1,7 +1,7 @@
 import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TooltipModule } from 'primeng/tooltip';
-import { IBhrAlert } from './mo-alert.interface';
+import { IMoAlert } from './mo-alert.interface';
 
 
 @Component(
@@ -16,7 +16,7 @@ import { IBhrAlert } from './mo-alert.interface';
     styleUrls: ['./mo-alert.component.css']
   }
 )
-export class BhrAlertComponent
+export class MoAlertComponent
 {
 
   @ContentChild('alertTitle')
@@ -26,7 +26,7 @@ export class BhrAlertComponent
   public alertContent: TemplateRef<any>;
 
   @Input()
-  public config: IBhrAlert =
+  public config: IMoAlert =
     {
       alertTitle: '',
       alertContent: ''

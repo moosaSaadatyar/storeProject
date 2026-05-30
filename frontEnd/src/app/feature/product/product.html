@@ -1,1 +1,29 @@
-<p>product works!</p>
+<div class="card-body">
+    <div class="">
+        <mo-header [title]="'ADD_PRODUCT'" [subTitle]="'ADD_PRODUCT_SUB'">
+        </mo-header>
+
+        <form [formGroup]="form">
+            <div class="row">
+
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-3">
+                    <mo-input-text [config]="titleConfig" formControlName="title"></mo-input-text>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-3">
+                    <mo-input-number [config]="priceConfig" formControlName="price"></mo-input-number>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4 my-3">
+                    <mo-input-text [config]="discriptionConfig" formControlName="description"></mo-input-text>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4 my-3">
+                    <mo-input-text [config]="urlConfig" formControlName="imageUrl"></mo-input-text>
+                </div>
+
+            </div>
+            <div class="d-flex my-3">
+                <mo-button class="btn btn-success" [btnTitle]="'SUBMIT'|transloco" [btnType]="'submit'" (btnClick)="submit()" ></mo-button>
+            </div>
+        </form>
+    </div>
+</div>

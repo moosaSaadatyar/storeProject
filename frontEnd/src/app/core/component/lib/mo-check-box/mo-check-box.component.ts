@@ -14,12 +14,12 @@ import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => BhrCheckBoxComponent),
+      useExisting: forwardRef(() => MoCheckBoxComponent),
       multi: true,
     },
   ],
 })
-export class BhrCheckBoxComponent {
+export class MoCheckBoxComponent {
 
   @Input() id!: string;
 

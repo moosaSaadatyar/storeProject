@@ -1,5 +1,4 @@
-import { CommonModule } from '@angular/common';
-import { Directive, ElementRef, HostListener, inject, Input, NgModule, OnInit } from '@angular/core';
+import { Directive, ElementRef, HostListener, inject, Input, OnInit } from '@angular/core';
 
 @Directive(
   {
@@ -61,6 +60,7 @@ export class OnlyNumber implements OnInit {
     else if (e.clipboardData.getData('text').search((/^[\d۰-۹.]+$/g)) === -1 && this.allowDot) {
       return false;
     }
+    return true;
   }
 
 
