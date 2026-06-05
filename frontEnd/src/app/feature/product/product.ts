@@ -16,7 +16,7 @@ import { MoInputNumberComponent } from '../../core/component/lib/mo-input-number
 import { IInputNumberFloatLabelRequired } from '../../core/component/lib/mo-input-number/mo-input-number.interface';
 import { MoButtonComponent } from '../../core/component/lib/mo-button/mo-button.component';
 import { TranslocoModule } from '@ngneat/transloco';
-import { CreateProductService } from './create-product';
+import { CreateProductService } from './create-product.service';
 import { NotifyService } from '../../core/service/notif/notif.service';
 import { RequierdFiledService } from '../../core/service/RequierdFiled/RequierdFiled.service';
 

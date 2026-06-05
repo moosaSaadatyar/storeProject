@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ProdactCard } from '../../dynamics/prodact-card/prodact-card';
 import { ProductCard } from '../../dynamics/prodact-card/prodactes.interface';
+import { GetProductService } from '../../services/get-product.service';
 
 @Component({
   selector: 'app-home-page',
@@ -8,31 +9,22 @@ import { ProductCard } from '../../dynamics/prodact-card/prodactes.interface';
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })
-export class HomePage {
-  products: ProductCard[] = [
-    {
-      id: 1,
-      name: 'لپ‌تاپ گیمینگ',
-      price: 45000000,
-      imageUrl: '/frontEnd/public/images/labtob.jpg',
-      description: '...',
-    },
-    {
-      id: 2,
-      name: 'موبایل هوشمند',
-      price: 15000000,
-      imageUrl: './frontEnd/public/images/1.jpg',
-      description: '...',
-    },
-    {
-      id: 2,
-      name: 'موبایل هوشمند',
-      price: 15000000,
-      imageUrl: '../../../../../public/images/iphone.jpg',
-      description: '...',
-    },
-  ];
+export class HomePage implements OnInit {
+  private getProductService = inject(GetProductService);
 
+  ngOnInit(): void {
+    this.getProduct();
+  }
+
+  products: ProductCard[] = [];
+
+  getProduct() {
+    this.getProductService.read().subscribe({
+      next: (data) => {
+        console.log(data);
+      },
+    });
+  }
   detailes(event: any) {
     console.log(event);
   }

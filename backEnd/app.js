@@ -4,8 +4,8 @@ const cors = require("cors");
 const path = require("path");
 const boodyParser = require("body-parser");
 
-const adminRouter = require("./src/routes/admin");
-const shopeRouter = require("./src/routes/shope");
+const adminRouter = require("./src/routes/adminRoutes/addProducts");
+const getProductesRouter = require("./src/routes/userRoutes/getProductes");
 
 const app = express();
 
@@ -18,6 +18,8 @@ app.use(
 
 app.use(express.json());
 app.use(boodyParser.urlencoded({ extended: false }));
+
+app.use(getProductesRouter);
 
 app.use(adminRouter);
 

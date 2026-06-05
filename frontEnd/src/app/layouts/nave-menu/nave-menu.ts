@@ -8,7 +8,7 @@ import { MoNavbarMenuComponent } from '../../core/component/lib/mo-navbar-menu/m
 
 @Component({
   selector: 'nave-menu',
-  imports: [CommonModule,MoNavbarMenuComponent],
+  imports: [CommonModule, MoNavbarMenuComponent],
   standalone: true,
   templateUrl: './nave-menu.html',
   styleUrl: './nave-menu.css',
@@ -22,7 +22,6 @@ export class NaveMenu implements OnInit {
     private router: Router,
     private ActivatedRout: ActivatedRoute,
   ) {}
-
 
   ngOnInit(): void {
     this.menuInIt();
@@ -64,7 +63,27 @@ export class NaveMenu implements OnInit {
           },
         ],
       },
-
+      {
+        label: this.persianContense.PRODUCTS_TYPE,
+        styleClass: 'text-white-50 px-2',
+        items: [
+          {
+            label: this.persianContense.PRODUCTS_TYPE,
+            styleClass: 'text-white-50 px-2',
+            command: () => {},
+          },
+          {
+            label: this.persianContense.PRODUCTS_TYPE,
+            styleClass: 'text-white-50 px-2',
+            command: () => {},
+          },
+          {
+            label: this.persianContense.PRODUCTS_TYPE,
+            styleClass: 'text-white-50 px-2',
+            command: () => {},
+          },
+        ],
+      },
       {
         label: this.persianContense.ABOUT,
         styleClass: 'text-white-50 px-2',
