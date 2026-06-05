@@ -1,18 +1,24 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  computed,
-  OnInit,
-} from '@angular/core';
+import { Component, computed, OnInit } from '@angular/core';
 import { MoNavbarMenuComponent } from '../../core/component/lib/mo-navbar-menu/mo-navbar-menu.component';
 import { MenuItem } from 'primeng/api';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { FA_TRANSLATIONS } from '../../core/static/constants/persian-context.constant';
 import { ActivatedRoute, Router } from '@angular/router';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { UserInfo } from './user-info/user-info';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, MoNavbarMenuComponent, TranslocoModule],
+  imports: [
+    CommonModule,
+    MoNavbarMenuComponent,
+    TranslocoModule,
+    InputTextModule,
+    ButtonModule,
+    UserInfo,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -29,7 +35,6 @@ export class HeaderComponent implements OnInit {
     this.menuInIt();
   }
 
-
   private menuInIt() {
     this.menuItem = [
       {
@@ -40,12 +45,33 @@ export class HeaderComponent implements OnInit {
         },
       },
       {
-        label: this.persianContense.PRODUCTS,
+        label: this.persianContense.PRODUCTS_MANAGMENT,
         styleClass: 'text-white-50 px-2',
-        command: () => {
-          this.router.navigate(['/products']);
-        },
+        items: [
+          {
+            label: this.persianContense.PRODUCTS_ADD,
+            styleClass: 'text-white-50 px-2',
+            command: () => {
+              this.router.navigate(['/products']);
+            },
+          },
+          {
+            label: this.persianContense.PRODUCTS_REPORT,
+            styleClass: 'text-white-50 px-2',
+            command: () => {
+              this.router.navigate(['/products']);
+            },
+          },
+          {
+            label: this.persianContense.USER_INFORMATION,
+            styleClass: 'text-white-50 px-2',
+            command: () => {
+              this.router.navigate(['/']);
+            },
+          },
+        ],
       },
+
       {
         label: this.persianContense.ABOUT,
         styleClass: 'text-white-50 px-2',

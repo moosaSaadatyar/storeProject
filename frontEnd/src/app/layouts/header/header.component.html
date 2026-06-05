@@ -1,16 +1,28 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-  <div class="container">
-    <a class="navbar-brand fw-bold text-warning" href="/">Golden Touch</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm mo-main-navbar">
+  <div class="px-4 w-100">
+    <!-- Flex wrapper -->
+    <div class="header-flex w-100">
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <!-- logo -->
+      <div id="logo" class="hf-logo">
+        <a class="navbar-brand fw-bold text-warning m-0" href="/">Golden Touch</a>
+      </div>
 
-    <div class="collapse navbar-collapse rtl" id="navbarNav">
-      <ul class="navbar-nav ms-auto align-items-center">
+      <!-- navbar -->
+      <div id="navbar" class="hf-nav">
         <mo-navbar-menu [items]="menuItem"></mo-navbar-menu>
-      </ul>
+      </div>
+
+      <!-- search -->
+      <div id="search" class="hf-search d-flex search-box">
+        <input class="form-control" type="search" placeholder="جستجوی محصولات..." aria-label="Search" />
+        <p-button class="search-btn text-white" icon="pi pi-search" />
+
+      </div>
+
+      <!-- users info -->
+      <user-info></user-info>
+
     </div>
   </div>
 </nav>

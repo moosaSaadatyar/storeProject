@@ -97,8 +97,8 @@ export class Product implements OnInit {
       this.requierdFeild.showErrorMessages(this.form)
     } else{
       this.productService.create(this.form.value).subscribe({
-        next:()=>{
-          this.notifyService.success(this.persianContext.SUCCESS_OPERATION)
+        next:(data)=>{          
+          this.notifyService.success(data.message)
         }
       })
     }

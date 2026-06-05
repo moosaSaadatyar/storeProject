@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     provideToastr({
-      positionClass: 'toast-bottom-left',
+      positionClass: 'toast-top-left',
       timeOut: 3000,
       closeButton: false,
       tapToDismiss: true,

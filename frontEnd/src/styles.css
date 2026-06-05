@@ -1,3 +1,4 @@
+@import 'ngx-toastr/toastr';
 .rtl {
   direction: rtl !important;
 }
@@ -41,3 +42,4 @@
 .card-body {
   padding: 0.5rem !important;
 }
+
