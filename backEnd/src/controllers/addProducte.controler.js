@@ -1,6 +1,5 @@
 const Product = require("../models/product");
 
-// این متد کلاً حذف شد چون Angular خودش صفحه را نشان می‌دهد
 
 exports.postAddProduct = async (req, res, next) => {
   try {

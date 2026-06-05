@@ -20,7 +20,6 @@ app.use(express.json());
 app.use(boodyParser.urlencoded({ extended: false }));
 
 app.use(adminRouter);
-app.use(shopeRouter);
 
 mongo
   .connect("mongodb://localhost/shop")
