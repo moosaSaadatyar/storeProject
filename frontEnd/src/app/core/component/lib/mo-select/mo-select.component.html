@@ -1,55 +1,44 @@
 @if(!loadingMode){
 <span [class]='{ "p-float-label": selectionConfig?.floatLabel, "dropdown-container": true }'>
-  <p-select 
-    #selectComp 
-    [id]='selectionConfig.selectId' 
-    [options]='selectionConfig.items' 
-    [(ngModel)]='treeSelectValue'
-    [optionLabel]="selectionConfig.optionLabel??'topic'" 
-    [optionValue]='selectionConfig.optionValue'
-    [filter]='selectionConfig.filter ?? true' 
-    [filterMode]="'lenient'" 
-    (onFilter)="filterFunction($event)"
-    [filterBy]="selectionConfig.filterBy??'topic'" 
-    [showClear]='selectionConfig.showClear?? !readonly'
-    [disabled]='disabled' 
-    [readonly]='readonly'
+  <p-select #selectComp [id]='selectionConfig.selectId' [options]='selectionConfig.items' [(ngModel)]='treeSelectValue'
+    [optionLabel]="selectionConfig.optionLabel??'topic'" [optionValue]='selectionConfig.optionValue'
+    [filter]='selectionConfig.filter ?? true' (onFilter)="filterFunction($event)"
+    [filterBy]="selectionConfig.filterBy??'topic'" [showClear]='selectionConfig.showClear?? !readonly'
+    [disabled]='disabled' [readonly]='readonly'
     [emptyMessage]="selectionConfig.emptyMessage || ('NOT_FOUND' | translate)"
     [emptyFilterMessage]="selectionConfig.emptyFilterMessage || ('NOT_FOUND_FILTER' | translate)"
-    [placeholder]="selectionConfig.placeholder ?? (selectionConfig.floatLabel ? ' ' : '')"
-    (onBlur)='onTouched($event)' 
-    (ngModelChange)='onChange($event)' 
-    [style]="{'width': '100%'}"
-    [panelStyle]="{'width': 'auto', 'max-width': '100%'}" 
-    [styleClass]="selectionConfig.panelStyleClass" 
-    [compareWith]="compareFn"
-    class="h-35">
+    [placeholder]="selectionConfig.placeholder ?? (selectionConfig.floatLabel ? ' ' : '')" (onBlur)='onTouched($event)'
+    (ngModelChange)='onChange($event)' [style]="{'width': '100%'}" [panelStyle]="{'width': 'auto', 'max-width': '100%'}"
+    [styleClass]="selectionConfig.panelStyleClass" class="h-35">
 
 
     <ng-template let-option pTemplate='value'>
-      <div class='item item-value' *ngIf='treeSelectValue != null'>
+      @if (treeSelectValue != null) {
+      <div class='item item-value'>
         <div>{{option[selectionConfig.optionLabel ?? 'topic']}}</div>
       </div>
+      }
     </ng-template>
 
     <ng-template pTemplate='empty'>
-        @if(loadingMode){
-          <div class='d-flex justify-content-center align-items-center'>
-            <rah-loading loaderSize='sm' />
-          </div>
-        }@else {
-          <div class='d-flex-justify-content-center'>
-            <span>{{'NOT_FOUND_MESSAGE'|translate}}</span>
-          </div>
-        }
+      @if(loadingMode){
+      <div class='d-flex justify-content-center align-items-center'>
+        <rah-loading loaderSize='sm' />
+      </div>
+      }@else {
+      <div class='d-flex-justify-content-center'>
+        <span>{{'NOT_FOUND_MESSAGE'|translate}}</span>
+      </div>
+      }
     </ng-template>
 
     <!-- Options  -->
 
     <ng-template let-option pTemplate='item'>
       <div class='country-item d-flex'>
-        <i *ngIf="option?.nodeData?.isVirtual" class="las la-sitemap text-info fs-20 "
-          [pTooltip]="'ORGANIZATION_VIRTUAL'|translate"></i>
+        @if(option?.nodeData?.isVirtual){
+        <i class="las la-sitemap text-info fs-20 " [pTooltip]="'ORGANIZATION_VIRTUAL'|translate"></i>
+        }
         <div class="px-2">{{option[selectionConfig.optionLabel ?? 'topic']}}</div>
       </div>
     </ng-template>
@@ -57,11 +46,11 @@
   </p-select>
 
 
-  <ng-container *ngIf='selectionConfig.floatLabel'>
-    <label [class]='selectionConfig.labelClass' class='fs-12' [for]='selectionConfig.selectId'>
-      {{selectionConfig.floatLabel}}
-    </label>
-  </ng-container>
+  @if (selectionConfig.floatLabel) {
+  <label [class]='selectionConfig.labelClass' class='fs-12' [for]='selectionConfig.selectId'>
+    {{selectionConfig.floatLabel |translate}}
+  </label>
+  }
 </span>
 } @else{
 <ng-template #skeletonField>

@@ -5,6 +5,7 @@ import { Router, NavigationEnd, RouterLink } from '@angular/router';
 
 import { ButtonModule } from 'primeng/button';
 import { DynamicBreadcrumbService } from './mo-breadcrumb.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'mo-breadcrumb',
@@ -14,7 +15,8 @@ import { DynamicBreadcrumbService } from './mo-breadcrumb.service';
   imports: [
     CommonModule,
     RouterLink,
-    ButtonModule
+    ButtonModule,
+    TranslateModule,
   ]
 })
 export class DynamicBreadcrumbComponent implements OnInit {

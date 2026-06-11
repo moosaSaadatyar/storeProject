@@ -1,6 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, forwardRef, inject, Input, OnInit, Optional, Self } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+import {
+  ChangeDetectorRef,
+  Component,
+  forwardRef,
+  inject,
+  Input,
+  OnInit,
+  Optional,
+  Self,
+} from '@angular/core';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormsModule,
+  NG_VALUE_ACCESSOR,
+  NgControl,
+} from '@angular/forms';
 
 import { ChipModule } from 'primeng/chip';
 import { SkeletonModule } from 'primeng/skeleton';
@@ -8,25 +23,25 @@ import { FormErrorsComponent } from '../form-errors/form-errors.component';
 import { IFormErrorConfig } from '../form-errors/form-errors.interface';
 import { RequierdFiledService } from '../../../service/RequierdFiled/RequierdFiled.service';
 import { IInputTextConfig } from './mo-input-text.interface';
+import { TranslateModule } from '@ngx-translate/core';
 
-@Component(
-  {
-    selector: 'mo-input-text[config]',
-    templateUrl: './mo-input-text.component.html',
-    styleUrls: ['./mo-input-text.component.css'],
-    standalone: true,
-    imports: [
-      CommonModule,
-      ChipModule,
-      FormsModule,
-      FormErrorsComponent,
-      SkeletonModule,
-    ],
-  }
-)
+@Component({
+  selector: 'mo-input-text[config]',
+  templateUrl: './mo-input-text.component.html',
+  styleUrls: ['./mo-input-text.component.css'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ChipModule,
+    FormsModule,
+    FormErrorsComponent,
+    SkeletonModule,
+    TranslateModule,
+  ],
+})
 export class MoInputTextComponent implements ControlValueAccessor, OnInit {
   @Input()
-  public config !: IInputTextConfig;
+  public config!: IInputTextConfig;
 
   @Input()
   public readonly?: boolean = false;
@@ -43,11 +58,12 @@ export class MoInputTextComponent implements ControlValueAccessor, OnInit {
 
   public loadingMode = false;
 
-  private readonly ngControl = inject(NgControl, { self: true, optional: true });
-  private _ch = inject(ChangeDetectorRef)
-  constructor(
-    private commonService: RequierdFiledService,
-  ) {
+  private readonly ngControl = inject(NgControl, {
+    self: true,
+    optional: true,
+  });
+  private _ch = inject(ChangeDetectorRef);
+  constructor(private commonService: RequierdFiledService) {
     this.ngControl.valueAccessor = this;
   }
 
@@ -65,7 +81,7 @@ export class MoInputTextComponent implements ControlValueAccessor, OnInit {
 
     this.loadingMode = false;
     this.model = obj ?? null;
-    this._ch.detectChanges()
+    this._ch.detectChanges();
   }
 
   public registerOnChange(fn: any): void {
@@ -96,13 +112,11 @@ export class MoInputTextComponent implements ControlValueAccessor, OnInit {
   private errorConfigInit(): void {
     this.errorConfig = {
       control: this.control,
-      errors: this.config?.errors
-    }
+      errors: this.config?.errors,
+    };
   }
 
   get control(): AbstractControl {
     return this.ngControl.control;
   }
-
-
 }

@@ -1,9 +1,3 @@
-// import { inject } from '@angular/core';
-// import { TranslateService } from '@ngx-translate/core';
-
-// export const  breadcrumbTranslate = (key: string = ''): ()=> string =>
-//   ()=> inject(TranslateService).instant(key);
-
 import { inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { TranslocoModule } from '@ngneat/transloco';
 
 @Component({
   selector: 'mo-navbar-menu',
@@ -13,7 +12,6 @@ import { TranslocoModule } from '@ngneat/transloco';
   imports: [
     CommonModule,
     MenubarModule,
-    TranslocoModule
   ],
   
 })

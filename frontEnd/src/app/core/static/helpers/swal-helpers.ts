@@ -2,7 +2,7 @@ import { EMPTY, Observable, tap } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import swal from 'sweetalert2';
 
-import { IMoTable } from 'core/components/dynamics/mo-table/mo-table.interface';
+// import { IMoTable } from 'core/components/dynamics/mo-table/mo-table.interface';
 
 export const pipedPreConfirmObs$ = <T = any>(obs$: Observable<T>): Observable<T> =>
  obs$
@@ -16,7 +16,7 @@ export const pipedPreConfirmObs$ = <T = any>(obs$: Observable<T>): Observable<T>
       )
     );
 
-export const pipedPreConfirmDelete$ =<T = any>( config: IMoTable ,obs$: Observable<T> ): Observable<T> =>
+export const pipedPreConfirmDelete$ =<T = any>( config: any ,obs$: Observable<T> ): Observable<T> =>
   pipedPreConfirmObs$<T>(obs$)
     .pipe(
       tap(

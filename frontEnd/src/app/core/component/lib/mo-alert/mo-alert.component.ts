@@ -2,18 +2,20 @@ import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef } fro
 import { CommonModule } from '@angular/common';
 import { TooltipModule } from 'primeng/tooltip';
 import { IMoAlert } from './mo-alert.interface';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component(
   {
     selector: 'mo-alert[alertId]',
+    templateUrl: './mo-alert.component.html',
+    styleUrls: ['./mo-alert.component.css'],
     standalone: true,
     imports: [
       CommonModule,
-      TooltipModule
+      TooltipModule,
+      TranslateModule
     ],
-    templateUrl: './mo-alert.component.html',
-    styleUrls: ['./mo-alert.component.css']
   }
 )
 export class MoAlertComponent

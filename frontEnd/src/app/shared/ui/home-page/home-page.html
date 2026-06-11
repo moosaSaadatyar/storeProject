@@ -1,7 +1,9 @@
 <div class="product-grid">
-    @for (p of products; track $index) {
-    <app-product-card [product]="p" 
-    (proudactDetailes)="detailes($event)">
+    @for (product of products; track $index) {
+    <app-product-card 
+    [product]="product"
+    (detailsClick)="openDetails($event)"
+    (addToCartClick)="addToCart($event)">
     </app-product-card>
     }
 </div>

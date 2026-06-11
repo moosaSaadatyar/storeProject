@@ -16,7 +16,7 @@
     [readonly]='readonly'
   />
   <label class="fs-12 order" [class]="config?.labelClass" [for]="config?.inputId">
-    {{ config.floatLabel ?? config.label }}
+    {{ (config.floatLabel|translate) ?? (config.label|translate) }}
   </label>
 </span>
 

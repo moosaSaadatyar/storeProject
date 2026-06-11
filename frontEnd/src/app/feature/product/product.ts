@@ -8,18 +8,19 @@ import {
   Validators,
 } from '@angular/forms';
 import { MoInputTextComponent } from '../../core/component/lib/mo-input-text/mo-input-text.component';
-import {
-  IInputTextFloatLabelRequired,
-} from '../../core/component/lib/mo-input-text/mo-input-text.interface';
-import { FA_TRANSLATIONS } from '../../core/static/constants/persian-context.constant';
+import { IInputTextFloatLabelRequired } from '../../core/component/lib/mo-input-text/mo-input-text.interface';
 import { MoInputNumberComponent } from '../../core/component/lib/mo-input-number/mo-input-number.component';
 import { IInputNumberFloatLabelRequired } from '../../core/component/lib/mo-input-number/mo-input-number.interface';
 import { MoButtonComponent } from '../../core/component/lib/mo-button/mo-button.component';
-import { TranslocoModule } from '@ngneat/transloco';
 import { CreateProductService } from './create-product.service';
 import { NotifyService } from '../../core/service/notif/notif.service';
 import { RequierdFiledService } from '../../core/service/RequierdFiled/RequierdFiled.service';
-
+import {
+  TranslatePipe,
+  TranslateDirective,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
 @Component({
   selector: 'app-product',
   imports: [
@@ -29,14 +30,13 @@ import { RequierdFiledService } from '../../core/service/RequierdFiled/RequierdF
     MoInputTextComponent,
     MoInputNumberComponent,
     MoButtonComponent,
-    TranslocoModule,
+    TranslateModule,
   ],
   templateUrl: './product.html',
   styleUrl: './product.css',
 })
 export class Product implements OnInit {
   public form: FormGroup;
-  public persianContext = FA_TRANSLATIONS;
 
   public titleConfig: IInputTextFloatLabelRequired;
   public priceConfig: IInputNumberFloatLabelRequired;
@@ -47,6 +47,7 @@ export class Product implements OnInit {
   private productService = inject(CreateProductService);
   private notifyService = inject(NotifyService);
   private requierdFeild = inject(RequierdFiledService);
+  private translateService = inject(TranslateService);
 
   ngOnInit(): void {
     this.formInIt();
@@ -64,28 +65,28 @@ export class Product implements OnInit {
 
   formConfigInit() {
     this.titleConfig = {
-      floatLabel: this.persianContext.TITLE,
+      floatLabel: this.translateService.instant('TITLE'),
       maxLength: 254,
       inputId: 'title',
       containerClass: 'p-float-label',
     };
 
     this.discriptionConfig = {
-      floatLabel: this.persianContext.DISCRIPTION,
+      floatLabel: this.translateService.instant('DISCRIPTION'),
       maxLength: 254,
       inputId: 'title',
       containerClass: 'p-float-label',
     };
 
     this.urlConfig = {
-      floatLabel: this.persianContext.URL,
+      floatLabel: this.translateService.instant('URL'),
       maxLength: 254,
       inputId: 'title',
       containerClass: 'p-float-label',
     };
-
+    
     this.priceConfig = {
-      floatLabel: this.persianContext.PRICE,
+      floatLabel: this.translateService.instant('PRICE'),
       maxLength: 254,
       inputId: 'title',
       containerClass: 'p-float-label',
@@ -94,13 +95,13 @@ export class Product implements OnInit {
 
   public submit() {
     if (this.form.invalid) {
-      this.requierdFeild.showErrorMessages(this.form)
-    } else{
+      this.requierdFeild.showErrorMessages(this.form);
+    } else {
       this.productService.create(this.form.value).subscribe({
-        next:(data)=>{          
-          this.notifyService.success(data.message)
-        }
-      })
+        next: (data) => {
+          this.notifyService.success(data.message);
+        },
+      });
     }
   }
 }

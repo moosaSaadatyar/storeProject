@@ -1,7 +1,10 @@
-export interface ProductCard {
-  id: number;
-  name: string;
-  price: number;
-  imageUrl: string;
+export interface IProductCard {
+  id?: number;
+  title: string;
   description: string;
+  imageUrl: string;
+  price: number;
+  oldPrice?: number;
+  discount?: number;
+  inStock?: boolean;
 }

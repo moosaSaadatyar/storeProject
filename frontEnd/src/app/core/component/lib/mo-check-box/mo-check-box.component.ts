@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'mo-check-box',
@@ -9,7 +10,8 @@ import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ],
   providers: [
     {

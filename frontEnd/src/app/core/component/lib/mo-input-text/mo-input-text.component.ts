@@ -8,6 +8,7 @@ import { FormErrorsComponent } from '../form-errors/form-errors.component';
 import { IFormErrorConfig } from '../form-errors/form-errors.interface';
 import { RequierdFiledService } from '../../../service/RequierdFiled/RequierdFiled.service';
 import { IInputTextConfig } from './mo-input-text.interface';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component(
   {
@@ -21,6 +22,7 @@ import { IInputTextConfig } from './mo-input-text.interface';
       FormsModule,
       FormErrorsComponent,
       SkeletonModule,
+      TranslateModule
     ],
   }
 )

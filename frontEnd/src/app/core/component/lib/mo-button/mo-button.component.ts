@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { SpinOnDirective } from '../../../directives/spin-on-directive/spin-on.directive';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component(
   {
@@ -14,7 +15,8 @@ import { SpinOnDirective } from '../../../directives/spin-on-directive/spin-on.d
       CommonModule,
       SpinOnDirective,
       ButtonModule,
-      RippleModule
+      RippleModule,
+      TranslateModule,
     ],
   }
 )

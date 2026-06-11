@@ -1,6 +1,6 @@
 import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { IBodyResult } from '../../../interface/body-result/body-result.interface';
 
-import { IBodyResult } from 'interfaces/body-result/body-result.interface';
 
 export interface IMoSelect {
   reloadData$?: Subject<unknown>;

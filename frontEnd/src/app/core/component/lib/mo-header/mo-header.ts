@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { TranslocoModule } from '@ngneat/transloco';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'mo-header',
-  imports: [CommonModule,TranslocoModule],
+  imports: [CommonModule,TranslateModule],
   templateUrl: './mo-header.html',
   styleUrl: './mo-header.css',
 })

@@ -1,19 +1,16 @@
 <ng-container *ngIf='config'>
-  <div
-    *ngFor='let error of (config?.errors | keyvalue) ?? []; trackBy: identifyError'
-    class='ps-2 cmp-error-container'>
-    <small
-      class='text-danger'
-      *ngIf='
-    config.control?.errors?.[error.key] &&
+  <div *ngFor='let error of (config?.errors | keyvalue) ?? []; trackBy: identifyError' class='ps-2 cmp-error-container'>
+    @if( config.control?.errors?.[error.key] &&
     (!(config.dirtyCheck ?? true) ||
-     (config?.dirtyAndTouchedCheckControl?.dirty ??
-      config.control.dirty)) &&
-     (!(config.touchedCheck ?? true) ||
-      (config?.dirtyAndTouchedCheckControl?.touched ??
-       config.control.touched))'>
+    (config?.dirtyAndTouchedCheckControl?.dirty ??
+    config.control.dirty)) &&
+    (!(config.touchedCheck ?? true) ||
+    (config?.dirtyAndTouchedCheckControl?.touched ??
+    config.control.touched))){
+    <small class='text-danger'>
       {{error.value}}
     </small>
+    }
   </div>
 
 </ng-container>

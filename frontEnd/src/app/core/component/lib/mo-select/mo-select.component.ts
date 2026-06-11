@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, inject, Input, OnDestroy, OnInit, Optional, Self, ViewChild } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NgControl } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, FormsModule, NgControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { SelectModule } from 'primeng/select';
 
@@ -9,10 +9,10 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { TooltipModule } from 'primeng/tooltip';
 import { FormErrorsComponent } from '../form-errors/form-errors.component';
 import { IFormErrorConfig } from '../form-errors/form-errors.interface';
-import { RequierdFiledService } from 'mo-ui/core/service/RequierdFiled/RequierdFiled.service';
-import { GLOBAL_WORDS } from 'mo-ui/core/static/constants/persian-context.constant';
 import { LoadingComponent } from '../loading/loading.component';
-import { Unsubscriber } from 'mo-ui/core/static/helpers/unsubscriber';
+import { RequierdFiledService } from '../../../service/RequierdFiled/RequierdFiled.service';
+import { GLOBAL_WORDS } from '../../../static/constants/persian-context.constant';
+import { Unsubscriber } from '../../../static/helpers/unsubscriber';
 
 const events = [
   'onChange'
@@ -29,7 +29,8 @@ const events = [
     TooltipModule,
     TranslateModule,
     SkeletonModule,
-    SelectModule
+    SelectModule,
+    FormsModule
   ],
 })
 export class MoSelectComponent extends Unsubscriber implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
@@ -74,7 +75,7 @@ export class MoSelectComponent extends Unsubscriber implements OnInit, OnDestroy
     this.handleEvents();
   }
 
-  ngOnDestroy(): void {
+  override ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 

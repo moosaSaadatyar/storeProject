@@ -1,18 +1,31 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ProductCard } from './prodactes.interface';
+import { Component, EventEmitter, inject, input, output } from '@angular/core';
+import { IProductCard } from './prodactes.interface';
 import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-card',
   templateUrl: './prodact-card.html',
   styleUrl: './prodact-card.css',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
 })
 export class ProdactCard {
-  @Input() product!: ProductCard;
-  @Output() proudactDetailes = new EventEmitter<any>();
+  product = input.required<IProductCard>();
 
-  clickProduct(product: ProductCard) {
-    this.proudactDetailes.emit(product);
+  detailsClick = output<IProductCard>();
+  addToCartClick = output<IProductCard>();
+translate = inject(TranslateService)
+
+  onDetails() {
+
+
+    this.detailsClick.emit(this.product());
   }
+
+  onAddToCart() {
+    this.addToCartClick.emit(this.product());
+ 
+  }
+
+  
 }

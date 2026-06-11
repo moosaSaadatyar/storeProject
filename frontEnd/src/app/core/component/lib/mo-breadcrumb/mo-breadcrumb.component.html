@@ -9,16 +9,16 @@
         @if(item?.canClick){
         <a [routerLink]="[item.path]" [ngClass]="{'text-muted': !item.canClick}"
           (click)="item?.canClick ? null : $event.preventDefault()">
-          {{ item?.titleItem }}
+          {{ item?.titleItem |translate}}
         </a>
         }@else {
         <span class="text-muted">
-          {{ item?.titleItem }}
+          {{ item?.titleItem |translate}}
         </span>
         }
         } @else {
         <span class="text-primary">
-          {{ item?.titleItem }}
+          {{ item?.titleItem |translate}}
         </span>
         }
       </li>

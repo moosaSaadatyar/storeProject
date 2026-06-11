@@ -1,24 +1,11 @@
 <span class="d-flex flex-column h-35" [class]="config.containerClass ?? ''">
-  <input
-    class="w-100 h-35"
-    [id]="config.inputId"
-    [class]="config.inputClass ?? ''"
-    [ngModel]="model"
-    [placeholder]="config.placeholder ?? ''"
-    [disabled]="config.disabled ?? disabled"
-    (ngModelChange)="changeHandler($event)"
-    (blur)="onTouched()"
-    OnlyNumber
-    [maxlength]="config.maxLength"
-    [minlength]="config.minLength"
-    [readonly]='readonly'
-    type="text"
-    pInputText
-    [CostFormatter]="config.moneySplitter"
-    [MaxNumber]="config.maxValue"
-  />
+  <input class="w-100 h-35" [id]="config.inputId" [class]="config.inputClass ?? ''" [ngModel]="model"
+    [placeholder]="config.placeholder ?? ''" [disabled]="config.disabled ?? disabled"
+    (ngModelChange)="changeHandler($event)" (blur)="onTouched()" OnlyNumber [maxlength]="config.maxLength"
+    [minlength]="config.minLength" [readonly]='readonly' type="text" pInputText [CostFormatter]="config.moneySplitter"
+    [MaxNumber]="config.maxValue" />
   <label [class]="config.labelClass + ' fs-12'" [for]="config.inputId">
-    {{ config.floatLabel ?? config.label }}
+    {{ (config.floatLabel |translate) ?? (config.label|translate) }}
   </label>
 </span>
 

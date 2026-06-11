@@ -1,4 +1,4 @@
-const porductModel = require("../../models/product");
+const productModel = require("../../models/product");
 
 exports.getIndex = async (req, res, next) => {
   try {
@@ -15,3 +15,5 @@ exports.getIndex = async (req, res, next) => {
     });
   }
 };
+ 
+

@@ -1,15 +1,20 @@
 import {
   ApplicationConfig,
-  isDevMode,
+  importProvidersFrom,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 import { routes } from './app.routes';
-import { provideTransloco } from '@ngneat/transloco';
-import { TranslocoHttpLoader } from './transloco-loader';
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { registerLocaleData } from '@angular/common';
+import localeFa from '@angular/common/locales/fa';
+import { LOCALE_ID } from '@angular/core';
+
+registerLocaleData(localeFa);
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,14 +29,21 @@ export const appConfig: ApplicationConfig = {
       tapToDismiss: true,
       newestOnTop: true,
     }),
-    provideTransloco({
-      config: {
-        availableLangs: ['en', 'fa'],
-        defaultLang: 'fa',
-        reRenderOnLangChange: true,
-        prodMode: !isDevMode(),
-      },
-      loader: TranslocoHttpLoader,
-    }),
+
+    importProvidersFrom(
+      TranslateModule.forRoot({
+        defaultLanguage: 'fa',
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient],
+        },
+      }),
+    ),
+    { provide: LOCALE_ID, useValue: 'fa-IR' },
   ],
 };
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+}

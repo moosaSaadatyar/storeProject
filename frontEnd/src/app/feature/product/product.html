@@ -1,6 +1,6 @@
 <div class="card-body">
     <div class="">
-        <mo-header [title]="'ADD_PRODUCT'" [subTitle]="'ADD_PRODUCT_SUB'">
+        <mo-header [title]="'ADD_PRODUCT'| translate" [subTitle]="'ADD_PRODUCT_SUB'| translate">
         </mo-header>
 
         <form [formGroup]="form">
@@ -22,7 +22,8 @@
 
             </div>
             <div class="d-flex my-3">
-                <mo-button class="btn btn-success" [btnTitle]="'SUBMIT'|transloco" [btnType]="'submit'" (btnClick)="submit()" ></mo-button>
+                <mo-button class="btn btn-success" [btnTitle]="'SUBMIT'|translate" [btnType]="'submit'"
+                    (btnClick)="submit()"></mo-button>
             </div>
         </form>
     </div>

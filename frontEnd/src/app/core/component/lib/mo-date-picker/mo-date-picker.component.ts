@@ -18,6 +18,7 @@ import { IFormErrorConfig } from '../form-errors/form-errors.interface';
 import { RequierdFiledService } from '../../../service/RequierdFiled/RequierdFiled.service';
 import { MoIconButtonComponent } from '../mo-icon-button/mo-icon-button.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 
 const moment = (_moment as any).default || _moment;
 @Component({
@@ -33,9 +34,9 @@ const moment = (_moment as any).default || _moment;
     MoIconButtonComponent,
     FormErrorsComponent,
     TooltipModule,
-    TooltipModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    TranslateModule
   ],
 })
 export class MoDatePickerComponent implements ControlValueAccessor, OnInit {

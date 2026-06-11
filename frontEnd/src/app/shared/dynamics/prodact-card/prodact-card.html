@@ -1,6 +1,77 @@
-<div class="card">
-      <img [src]="product.imageUrl" [alt]="product.name">
-      <h3>{{ product.name }}</h3>
-      <p>{{ product.price | currency:'IRR' }}</p>
-      <button (click)="clickProduct(product)"> جزییات </button>
+<div class="product-card">
+
+  @if (product().discount) {
+    <div class="discount-badge">
+      {{ product().discount }}%
     </div>
+  }
+
+  <div class="product-image">
+    <img
+      [src]="product().imageUrl"
+      [alt]="product().title">
+  </div>
+
+  <div class="product-content">
+
+    <h5 class="product-title">
+      {{ product().title }}
+    </h5>
+
+    <p class="product-description">
+      {{ product().description }}
+    </p>
+
+    <div class="stock-section">
+
+      @if (product().inStock) {
+        <span class="stock-badge available">
+          <i class="fa fa-check-circle"></i>
+          {{'VALID'|translate}}
+        </span>
+      } @else {
+        <span class="stock-badge unavailable">
+          <i class="fa fa-times-circle"></i>
+          {{'INVALID'|translate}}
+        </span>
+      }
+
+    </div>
+
+    <div class="price-section">
+
+      @if (product().oldPrice) {
+        <span class="old-price">
+          {{ product().oldPrice | number }}
+        </span>
+      }
+
+      <span class="current-price">
+        {{ product().price | number:'1.0-0' }}
+      </span>
+      {{'TOMAN'|translate}}
+    </div>
+
+    <div class="product-actions">
+
+      <button
+        class="btn btn-outline-primary"
+        (click)="onDetails()">
+
+        <i class="fa fa-eye"></i>
+        جزئیات
+      </button>
+
+      <button
+        class="btn btn-primary"
+        (click)="onAddToCart()">
+
+        <i class="fa fa-shopping-cart"></i>
+        {{'ADD'|translate}}
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

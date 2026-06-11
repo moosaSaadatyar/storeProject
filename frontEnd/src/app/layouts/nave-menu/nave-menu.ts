@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { TranslocoService } from '@ngneat/transloco';
 import { MenuItem } from 'primeng/api';
-import { FA_TRANSLATIONS } from '../../core/static/constants/persian-context.constant';
 import { CommonModule } from '@angular/common';
 import { MoNavbarMenuComponent } from '../../core/component/lib/mo-navbar-menu/mo-navbar-menu.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'nave-menu',
@@ -16,12 +15,11 @@ import { MoNavbarMenuComponent } from '../../core/component/lib/mo-navbar-menu/m
 export class NaveMenu implements OnInit {
   menuItem!: MenuItem[];
 
-  public persianContense = FA_TRANSLATIONS;
   constructor(
-    private translocal: TranslocoService,
     private router: Router,
-    private ActivatedRout: ActivatedRoute,
+    private translate: TranslateService,
   ) {}
+
 
   ngOnInit(): void {
     this.menuInIt();
@@ -30,32 +28,32 @@ export class NaveMenu implements OnInit {
   private menuInIt() {
     this.menuItem = [
       {
-        label: this.persianContense.HOME,
+        label: this.translate.instant('HOME'),
         styleClass: 'text-white-50 px-2',
         command: () => {
           this.router.navigate(['/home']);
         },
       },
       {
-        label: this.persianContense.PRODUCTS_MANAGMENT,
+        label: this.translate.instant('PRODUCTS_MANAGMENT'),
         styleClass: 'text-white-50 px-2',
         items: [
           {
-            label: this.persianContense.PRODUCTS_ADD,
+            label: this.translate.instant('PRODUCTS_ADD'),
             styleClass: 'text-white-50 px-2',
             command: () => {
               this.router.navigate(['/products']);
             },
           },
           {
-            label: this.persianContense.PRODUCTS_REPORT,
+            label: this.translate.instant('PRODUCTS_REPORT'),
             styleClass: 'text-white-50 px-2',
             command: () => {
               this.router.navigate(['/products']);
             },
           },
           {
-            label: this.persianContense.USER_INFORMATION,
+            label: this.translate.instant('USER_INFORMATION'),
             styleClass: 'text-white-50 px-2',
             command: () => {
               this.router.navigate(['/']);
@@ -64,28 +62,28 @@ export class NaveMenu implements OnInit {
         ],
       },
       {
-        label: this.persianContense.PRODUCTS_TYPE,
+        label: this.translate.instant('PRODUCTS_TYPE'),
         styleClass: 'text-white-50 px-2',
         items: [
           {
-            label: this.persianContense.PRODUCTS_TYPE,
+            label: this.translate.instant('PRODUCTS_TYPE'),
             styleClass: 'text-white-50 px-2',
             command: () => {},
           },
           {
-            label: this.persianContense.PRODUCTS_TYPE,
+            label: this.translate.instant('PRODUCTS_TYPE'),
             styleClass: 'text-white-50 px-2',
             command: () => {},
           },
           {
-            label: this.persianContense.PRODUCTS_TYPE,
+            label: this.translate.instant('PRODUCTS_TYPE'),
             styleClass: 'text-white-50 px-2',
             command: () => {},
           },
         ],
       },
       {
-        label: this.persianContense.ABOUT,
+        label: this.translate.instant('ABOUT'),
         styleClass: 'text-white-50 px-2',
 
         command: () => {
@@ -93,7 +91,7 @@ export class NaveMenu implements OnInit {
         },
       },
       {
-        label: this.persianContense.CONTACT,
+        label: this.translate.instant('CONTACT'),
         styleClass: 'text-white-50 px-2',
         command: () => {
           this.router.navigate(['/contact']);

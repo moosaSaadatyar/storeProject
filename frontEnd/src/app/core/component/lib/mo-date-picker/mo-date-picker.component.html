@@ -21,12 +21,12 @@
       <label
         [class]='otherOptions.labelClass + " fs-12"'
         [for]="'datepicker-input'+ customFloatLabel">
-        {{customFloatLabel}}
+        {{customFloatLabel |translate}}
       </label>  
 
     <mo-icon-button
       type='button'
-      tooltip='انتخاب تاریخ'
+      [tooltip]='"SELECT_DATE"|translate'
       icon='las la-calendar fs-24'
       buttonClass='border-left-0 border-right-0 rounded-0'
       [disabled]='disabled'
@@ -36,7 +36,7 @@
 
     <mo-icon-button
       type='button'
-      tooltip='پاک کردن'
+      [tooltip]='"CLEAN"|translate'
       icon='las la-calendar-times fs-24'
       buttonClass='border-right-0'
       [disabled]='disabled'

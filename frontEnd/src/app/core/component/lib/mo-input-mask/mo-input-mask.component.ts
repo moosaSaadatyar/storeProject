@@ -6,7 +6,8 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { FormErrorsComponent } from '../form-errors/form-errors.component';
 import { IFormErrorConfig } from '../form-errors/form-errors.interface';
 import { IInputMaskConfig } from './mo-input-mask.interface';
-import { RequierdFiledService } from 'mo-ui/core/service/RequierdFiled/RequierdFiled.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { RequierdFiledService } from '../../../service/RequierdFiled/RequierdFiled.service';
 
 @Component(
   {
@@ -19,7 +20,8 @@ import { RequierdFiledService } from 'mo-ui/core/service/RequierdFiled/RequierdF
         CommonModule,
         FormsModule,
         FormErrorsComponent,
-        InputMaskModule
+        InputMaskModule,
+        TranslateModule
       ]
   }
 )

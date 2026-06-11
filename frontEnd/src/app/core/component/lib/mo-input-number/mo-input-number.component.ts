@@ -11,6 +11,7 @@ import { CostFormatterDirective } from '../../../directives/cost(Rile)/costNumbe
 import { MaxNumberDirective } from '../../../directives/cost(Rile)/maxNumber';
 import { OnlyNumber } from '../../../directives/only-number/only-number.directive';
 import { RequierdFiledService } from '../../../service/RequierdFiled/RequierdFiled.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component(
@@ -26,7 +27,8 @@ import { RequierdFiledService } from '../../../service/RequierdFiled/RequierdFil
       OnlyNumber,
       FormErrorsComponent,
       CostFormatterDirective,
-      MaxNumberDirective
+      MaxNumberDirective,
+      TranslateModule
     ],
   }
 )

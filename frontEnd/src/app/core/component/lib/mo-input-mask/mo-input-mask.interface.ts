@@ -1,4 +1,4 @@
-import { XOR } from "mo-ui";
+import { XOR } from "../mo-input-text/mo-input-text.interface";
 
 export interface IInputMaskConfigParent
 {
