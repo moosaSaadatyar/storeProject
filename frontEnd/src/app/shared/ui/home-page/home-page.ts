@@ -21,7 +21,6 @@ export class HomePage implements OnInit {
   getProduct() {
     this.getProductService.read().subscribe({
       next: (data:any) => {
-        console.log(data);
         this.products = data.products
       },
     });

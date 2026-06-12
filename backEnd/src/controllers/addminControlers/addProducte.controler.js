@@ -14,16 +14,13 @@ exports.postAddProduct = async (req, res, next) => {
 
     const result = await product.save();
 
-    console.log("Product Created Successfully!");
 
     return res.status(201).json({
       message: "محصول با موفقیت ذخیره شد",
       productId: result._id
     });
 
-  } catch (err) {
-    console.log("Error saving product:", err);
-    
+  } catch (err) {    
     return res.status(500).json({
       message: "خطایی در سمت سرور رخ داد",
       error: err.message

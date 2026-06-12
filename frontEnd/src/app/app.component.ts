@@ -4,6 +4,7 @@ import { ApiService } from './service-api.service';
 import { Footer } from './layouts/footer/footer';
 import { HeaderComponent } from './layouts/header/header.component';
 import { NaveMenu } from './layouts/nave-menu/nave-menu';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -16,10 +17,14 @@ export class AppComponent {
   message: string = '';
 
   private api = inject(ApiService);
+  translate = inject(TranslateService);
+
+  constructor() {
+    this.translate.setDefaultLang('fa');
+    this.translate.use('fa');
+  }
 
   ngOnInit() {
-    // this.api.getHello().subscribe(res => {
-    //   this.message = res.message;
-    // });
+
   }
 }

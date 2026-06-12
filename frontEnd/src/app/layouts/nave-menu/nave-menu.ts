@@ -20,9 +20,10 @@ export class NaveMenu implements OnInit {
     private translate: TranslateService,
   ) {}
 
-
   ngOnInit(): void {
-    this.menuInIt();
+    this.translate.onLangChange.subscribe(() => {
+      this.menuInIt();
+    });
   }
 
   private menuInIt() {

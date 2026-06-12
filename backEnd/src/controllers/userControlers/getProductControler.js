@@ -2,9 +2,7 @@ const productModel = require("../../models/product");
 
 exports.getIndex = async (req, res, next) => {
   try {
-    const products = await productModel.find();
-    console.log(products);
-    
+    const products = await productModel.find();    
     res.status(200).json({
       products,
     });
