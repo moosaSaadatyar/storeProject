@@ -13,7 +13,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { registerLocaleData } from '@angular/common';
 import localeFa from '@angular/common/locales/fa';
 import { LOCALE_ID } from '@angular/core';
-
+import { providePrimeNG } from 'primeng/config';
+import Nora from '@primeng/themes/nora';
+import Aura from '@primeng/themes/aura';
 registerLocaleData(localeFa);
 
 export const appConfig: ApplicationConfig = {
@@ -41,6 +43,14 @@ export const appConfig: ApplicationConfig = {
       }),
     ),
     { provide: LOCALE_ID, useValue: 'fa-IR' },
+     providePrimeNG({
+      theme: {
+        preset: Aura,
+        options: {
+          darkModeSelector: '.dark'
+        }
+      }
+    })
   ],
 };
 

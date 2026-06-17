@@ -4,10 +4,7 @@ const productSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
+    trim: true,
   },
   description: {
     type: String,
@@ -16,6 +13,25 @@ const productSchema = new mongoose.Schema({
   imageUrl: {
     type: String,
     required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  oldPrice: {
+    type: Number,
+    default: null,
+  },
+  discount: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 100,
+  },
+  inStock: {
+    type: Boolean,
+    default: true,
   },
 });
 

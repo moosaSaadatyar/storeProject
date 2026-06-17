@@ -1,0 +1,46 @@
+.mo-table {
+  width: 100%;
+}
+
+.mo-table__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2rem;
+}
+
+.mo-table__header--right,
+.mo-table__cell--right {
+  justify-content: flex-start;
+  text-align: right;
+}
+
+.mo-table__header--center,
+.mo-table__cell--center {
+  justify-content: center;
+  text-align: center;
+}
+
+.mo-table__header--left,
+.mo-table__cell--left {
+  justify-content: flex-end;
+  text-align: left;
+}
+
+.mo-table__cell {
+  vertical-align: middle;
+}
+
+.mo-table__message {
+  padding: 1rem;
+  color: #64748b;
+  text-align: center;
+}
+
+.mo-table__message--error {
+  margin-bottom: 0.75rem;
+  border: 1px solid #fecaca;
+  border-radius: 0.5rem;
+  background: #fef2f2;
+  color: #b91c1c;
+}

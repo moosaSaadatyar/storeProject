@@ -2,12 +2,17 @@ import { Component, EventEmitter, inject, input, output } from '@angular/core';
 import { IProductCard } from './prodactes.interface';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { TagModule } from 'primeng/tag';
 @Component({
   selector: 'app-product-card',
   templateUrl: './prodact-card.html',
   styleUrl: './prodact-card.css',
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule,  CardModule,
+  ButtonModule,
+  TagModule,
+  TranslateModule],
 })
 export class ProdactCard {
   product = input.required<IProductCard>();

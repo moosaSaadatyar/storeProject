@@ -1,0 +1,64 @@
+<div class="mo-table">
+  @if (error) {
+  <div class="mo-table__message mo-table__message--error">
+    {{ error }}
+  </div>
+  }
+
+  <p-table
+    [columns]="columns"
+    [value]="rows"
+    [dataKey]="config?.dataKey"
+    [loading]="loading"
+    [paginator]="paginator"
+    [rows]="pageRows"
+    [rowsPerPageOptions]="rowsPerPageOptions"
+    [totalRecords]="totalRecords"
+    [tableStyle]="tableStyle"
+    [styleClass]="styleClass"
+    [showGridlines]="config?.showGridlines ?? false"
+    [stripedRows]="config?.stripedRows ?? true"
+    [responsiveLayout]="config?.responsiveLayout ?? 'scroll'"
+  >
+    <ng-template #header let-columns>
+      <tr>
+        @for (col of columns; track trackColumn($index, col)) {
+        @if (col.sortable) {
+        <th [style.width]="col.width" [pSortableColumn]="col.field">
+          <div class="mo-table__header" [class]="'mo-table__header--' + (col.align ?? 'right')">
+            <span>{{ col.header }}</span>
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </div>
+        </th>
+        } @else {
+        <th [style.width]="col.width">
+          <div class="mo-table__header" [class]="'mo-table__header--' + (col.align ?? 'right')">
+            <span>{{ col.header }}</span>
+          </div>
+        </th>
+        }
+        }
+      </tr>
+    </ng-template>
+
+    <ng-template #body let-rowData let-columns="columns">
+      <tr (click)="onRowClick(rowData)">
+        @for (col of columns; track trackColumn($index, col)) {
+        <td [class]="'mo-table__cell mo-table__cell--' + (col.align ?? 'right')">
+          {{ cellValue(rowData, col) }}
+        </td>
+        }
+      </tr>
+    </ng-template>
+
+    <ng-template #emptymessage>
+      <tr>
+        <td [attr.colspan]="columns.length || 1">
+          <div class="mo-table__message">
+            {{ loading ? loadingMessage : emptyMessage }}
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

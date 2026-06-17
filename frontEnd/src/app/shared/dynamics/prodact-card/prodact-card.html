@@ -1,77 +1,77 @@
-<div class="product-card">
+<p-card styleClass="product-card">
 
-  @if (product().discount) {
-    <div class="discount-badge">
-      {{ product().discount }}%
-    </div>
-  }
+    <ng-template pTemplate="header">
+        <img
+            [src]="product().imageUrl"
+            [alt]="product().title"
+            class="product-image">
+    </ng-template>
 
-  <div class="product-image">
-    <img
-      [src]="product().imageUrl"
-      [alt]="product().title">
-  </div>
+    <div class="product-body">
 
-  <div class="product-content">
+        <h3 class="product-title">
+            {{ product().title }}
+        </h3>
 
-    <h5 class="product-title">
-      {{ product().title }}
-    </h5>
+        <p class="product-description">
+            {{ product().description }}
+        </p>
 
-    <p class="product-description">
-      {{ product().description }}
-    </p>
+        <div class="price-wrapper">
 
-    <div class="stock-section">
+            @if(product().oldPrice){
+                <span class="old-price">
+                    {{ product().oldPrice | number }}
+                </span>
+            }
 
-      @if (product().inStock) {
-        <span class="stock-badge available">
-          <i class="fa fa-check-circle"></i>
-          {{'VALID'|translate}}
-        </span>
-      } @else {
-        <span class="stock-badge unavailable">
-          <i class="fa fa-times-circle"></i>
-          {{'INVALID'|translate}}
-        </span>
-      }
+            <span class="current-price">
+                {{ product().price | number }}
+                {{ 'TOMAN' | translate }}
+            </span>
 
-    </div>
+        </div>
 
-    <div class="price-section">
+        @if(product().discount){
+            <p-tag
+                severity="danger"
+                [value]="product().discount + '%'">
+            </p-tag>
+        }
 
-      @if (product().oldPrice) {
-        <span class="old-price">
-          {{ product().oldPrice | number }}
-        </span>
-      }
-
-      <span class="current-price">
-        {{ product().price | number:'1.0-0' }}
-      </span>
-      {{'TOMAN'|translate}}
-    </div>
-
-    <div class="product-actions">
-
-      <button
-        class="btn btn-outline-primary"
-        (click)="onDetails()">
-
-        <i class="fa fa-eye"></i>
-        جزئیات
-      </button>
-
-      <button
-        class="btn btn-primary"
-        (click)="onAddToCart()">
-
-        <i class="fa fa-shopping-cart"></i>
-        {{'ADD'|translate}}
-      </button>
+        @if(product().inStock){
+            <p-tag
+                severity="success"
+                value="موجود">
+            </p-tag>
+        } @else {
+            <p-tag
+                severity="danger"
+                value="ناموجود">
+            </p-tag>
+        }
 
     </div>
 
-  </div>
+    <ng-template pTemplate="footer">
 
-</div>
+        <div class="actions">
+
+            <p-button
+                icon="pi pi-eye"
+                label="جزئیات"
+                severity="secondary"
+                (onClick)="onDetails()">
+            </p-button>
+
+            <p-button
+                icon="pi pi-shopping-cart"
+                label="افزودن"
+                (onClick)="onAddToCart()">
+            </p-button>
+
+        </div>
+
+    </ng-template>
+
+</p-card>

@@ -9,7 +9,7 @@
     [emptyFilterMessage]="selectionConfig.emptyFilterMessage || ('NOT_FOUND_FILTER' | translate)"
     [placeholder]="selectionConfig.placeholder ?? (selectionConfig.floatLabel ? ' ' : '')" (onBlur)='onTouched($event)'
     (ngModelChange)='onChange($event)' [style]="{'width': '100%'}" [panelStyle]="{'width': 'auto', 'max-width': '100%'}"
-    [styleClass]="selectionConfig.panelStyleClass" class="h-35">
+    [styleClass]="selectionConfig.panelStyleClass" class="h-35" [size]="'small'">
 
 
     <ng-template let-option pTemplate='value'>
