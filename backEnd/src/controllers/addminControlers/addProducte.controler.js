@@ -40,6 +40,7 @@ exports.postAddProduct = async (req, res) => {
     return res.status(201).json({
       message: "محصول با موفقیت ذخیره شد",
       productId: result._id,
+      product: result,
     });
   } catch (err) {
     return res.status(500).json({
