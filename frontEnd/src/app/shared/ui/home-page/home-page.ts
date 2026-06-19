@@ -1,7 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ProdactCard } from '../../dynamics/prodact-card/prodact-card';
-import { GetProductService } from '../../services/get-product.service';
 import { IProductCard } from '../../dynamics/prodact-card/prodactes.interface';
+import { GetProductService } from '../../services/get-product.service';
 
 @Component({
   selector: 'app-home-page',
@@ -13,15 +13,15 @@ export class HomePage implements OnInit {
   private getProductService = inject(GetProductService);
 
   products: IProductCard[] = [];
+
   ngOnInit(): void {
     this.getProduct();
   }
 
-
   getProduct() {
     this.getProductService.read().subscribe({
-      next: (data:any) => {
-        this.products = data.products
+      next: (data: any) => {
+        this.products = data.products;
       },
     });
   }

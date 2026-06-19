@@ -11,61 +11,35 @@ import {
 } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { finalize } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 import { environment } from '../../../../../public/envierments/envierments';
+import {
+  MoTableActionEvent,
+  MoTableActionType,
+  MoTableApiConfig,
+  MoTableColumn,
+  MoTableConfig,
+} from './mo-table-interFace';
 
-export type MoTableAlign = 'left' | 'center' | 'right';
 
-export interface MoTableColumn {
-  field: string;
-  header: string;
-  width?: string;
-  align?: MoTableAlign;
-  sortable?: boolean;
-  valueGetter?: (row: any, column: MoTableColumn) => unknown;
-  formatter?: (value: unknown, row: any, column: MoTableColumn) => string | number;
-}
 
-export interface MoTableApiConfig {
-  url: string;
-  method?: 'GET';
-  params?: Record<string, string | number | boolean>;
-  dataPath?: string;
-  totalPath?: string;
-  useEnvironmentApiUrl?: boolean;
-  autoLoad?: boolean;
-}
 
-export interface MoTableConfig {
-  columns: MoTableColumn[];
-  api?: string | MoTableApiConfig;
-  data?: any[];
-  tableStyle?: Record<string, string>;
-  styleClass?: string;
-  dataKey?: string;
-  paginator?: boolean;
-  rows?: number;
-  rowsPerPageOptions?: number[];
-  emptyMessage?: string;
-  loadingMessage?: string;
-  errorMessage?: string;
-  showGridlines?: boolean;
-  stripedRows?: boolean;
-  responsiveLayout?: 'scroll' | 'stack';
-}
 
 @Component({
   selector: 'mo-table',
-  imports: [CommonModule, TableModule],
+  imports: [CommonModule, TableModule, TranslateModule],
   templateUrl: './mo-table.component.html',
   styleUrl: './mo-table.component.css',
 })
 export class MoTableComponent implements OnChanges {
   @Input() config: MoTableConfig;
   @Input() data: any[] | null = null;
+  @Input() reloadData: unknown;
 
   @Output() rowClick = new EventEmitter<any>();
   @Output() dataLoaded = new EventEmitter<any[]>();
   @Output() loadError = new EventEmitter<unknown>();
+  @Output() actionClick = new EventEmitter<MoTableActionEvent>();
 
   private http = inject(HttpClient);
 
@@ -83,10 +57,32 @@ export class MoTableComponent implements OnChanges {
     if (changes['config']) {
       this.initTable();
     }
+
+    if (changes['reloadData'] && !changes['reloadData'].firstChange) {
+      this.reload();
+    }
   }
 
   public reload(): void {
     this.loadFromApi();
+  }
+
+  public addRow(row: any, position: 'start' | 'end' = 'start'): void {
+    if (!row) {
+      return;
+    }
+
+    const dataKey = this.config?.dataKey;
+    const rowKey = dataKey ? this.getByPath(row, dataKey) : undefined;
+    const currentRows = rowKey
+      ? this.rows.filter((item) => this.getByPath(item, dataKey) !== rowKey)
+      : this.rows;
+    const wasExists = rowKey ? currentRows.length !== this.rows.length : false;
+
+    this.rows = position === 'start' ? [row, ...currentRows] : [...currentRows, row];
+    this.totalRecords = wasExists ? this.totalRecords : this.totalRecords + 1;
+    this.error = null;
+    this.dataLoaded.emit(this.rows);
   }
 
   public get columns(): MoTableColumn[] {
@@ -114,15 +110,39 @@ export class MoTableComponent implements OnChanges {
   }
 
   public get emptyMessage(): string {
-    return this.config?.emptyMessage ?? 'داده ای برای نمایش وجود ندارد';
+    return this.config?.emptyMessage ?? 'NO_CONTENT';
   }
 
   public get loadingMessage(): string {
-    return this.config?.loadingMessage ?? 'در حال دریافت اطلاعات...';
+    return this.config?.loadingMessage ?? 'MO_TABLE_LOADING';
   }
 
   public get errorMessage(): string {
-    return this.config?.errorMessage ?? 'خطا در دریافت اطلاعات';
+    return this.config?.errorMessage ?? 'MO_TABLE_LOAD_ERROR';
+  }
+
+  public get actionsVisible(): boolean {
+    return this.config?.actions?.show ?? false;
+  }
+
+  public get actionsHeader(): string {
+    return this.config?.actions?.header ?? 'ACTIONS';
+  }
+
+  public get actionsWidth(): string {
+    return this.config?.actions?.width ?? '10rem';
+  }
+
+  public get showViewAction(): boolean {
+    return this.config?.actions?.view ?? true;
+  }
+
+  public get showEditAction(): boolean {
+    return this.config?.actions?.edit ?? true;
+  }
+
+  public get showDeleteAction(): boolean {
+    return this.config?.actions?.delete ?? true;
   }
 
   public cellValue(row: any, column: MoTableColumn): string | number {
@@ -133,8 +153,17 @@ export class MoTableComponent implements OnChanges {
     return column.formatter ? column.formatter(value, row, column) : (value ?? '');
   }
 
+  public cellTranslateKey(row: any, column: MoTableColumn): string {
+    return String(this.cellValue(row, column));
+  }
+
   public onRowClick(row: any): void {
     this.rowClick.emit(row);
+  }
+
+  public onActionClick(event: MouseEvent, action: MoTableActionType, row: any, rowIndex: number): void {
+    event.stopPropagation();
+    this.actionClick.emit({ action, row, rowIndex });
   }
 
   public trackColumn(_index: number, column: MoTableColumn): string {
@@ -183,21 +212,21 @@ export class MoTableComponent implements OnChanges {
       .subscribe({
         next: (response) => {
           const loadedRows = this.extractRows(response, api.dataPath);
-          this.totalRecords = this.extractTotal(response, api.totalPath, loadedRows.length);
-          this.setRows(loadedRows);
+          const totalRecords = this.extractTotal(response, api.totalPath, loadedRows.length);
+          this.setRows(loadedRows, totalRecords);
           this.dataLoaded.emit(loadedRows);
         },
         error: (error) => {
           this.error = this.errorMessage;
-          this.setRows([]);
+          this.setRows([], 0);
           this.loadError.emit(error);
         },
       });
   }
 
-  private setRows(rows: any[]): void {
+  private setRows(rows: any[], totalRecords?: number): void {
     this.rows = Array.isArray(rows) ? rows : [];
-    this.totalRecords = this.totalRecords || this.rows.length;
+    this.totalRecords = totalRecords ?? this.rows.length;
   }
 
   private normalizeApiConfig(api?: string | MoTableApiConfig): MoTableApiConfig | null {

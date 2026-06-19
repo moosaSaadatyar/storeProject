@@ -1,3 +1,22 @@
 {
-  "TEST": "Test"
+  "TEST": "Test",
+  "NO_CONTENT": "No content to display.",
+  "TITLE": "Title",
+  "PRICE": "Price",
+  "DISCRIPTION": "Description",
+  "OLD_PRICE": "Old price",
+  "DISCOUNT": "Discount",
+  "IN_STOCK": "In stock",
+  "VALID": "Available",
+  "INVALID": "Unavailable",
+  "TOMAN": "Toman",
+  "EDIT": "Edit",
+  "DELETE": "Delete",
+  "VIEW": "View",
+  "ACTIONS": "Actions",
+  "IMAGE": "Image",
+  "MO_TABLE_LOADING": "Loading data...",
+  "MO_TABLE_LOAD_ERROR": "Failed to load data",
+  "BHR_TABLE_LOADING": "Loading data...",
+  "BHR_TABLE_LOAD_ERROR": "Failed to load data"
 }

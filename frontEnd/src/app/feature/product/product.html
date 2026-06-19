@@ -41,5 +41,11 @@
                     (btnClick)="submit()"></mo-button>
             </div>
         </form>
+
+        <mo-table
+            [config]="tableConfig"
+            [reloadData]="tableReloadData"
+            (actionClick)="onTableAction($event)">
+        </mo-table>
     </div>
 </div>
