@@ -1,4 +1,4 @@
-<p-card styleClass="product-card">
+<!-- <p-card styleClass="product-card">
 
     <ng-template pTemplate="header">
         <img
@@ -68,6 +68,88 @@
                 icon="pi pi-shopping-cart"
                 label="افزودن"
                 (onClick)="onAddToCart()">
+            </p-button>
+
+        </div>
+
+    </ng-template>
+
+</p-card> -->
+
+<p-card styleClass="product-card">
+
+    <!-- Discount -->
+    @if(getDiscount(product().oldPrice, product().price) > 0){
+    <p-tag severity="danger" [value]="getDiscount(product().oldPrice, product().price) + '%'">
+    </p-tag>
+    }
+
+    <!-- Favorite -->
+    <button class="favorite-btn">
+        <i class="pi pi-heart"></i>
+    </button>
+
+    <ng-template pTemplate="header">
+        <div class="image-wrapper">
+            <img [src]="product().imageUrl" [alt]="product().title" class="product-image">
+        </div>
+    </ng-template>
+
+    <div class="product-body">
+
+        <span class="product-category">
+            موبایل
+        </span>
+
+        <h3 class="product-title">
+            {{ product().title }}
+        </h3>
+
+        <div class="rating">
+            <i class="pi pi-star-fill"></i>
+            <span>4.8</span>
+            <small>(125 نظر)</small>
+        </div>
+
+        <p class="product-description">
+            {{ product().description }}
+        </p>
+
+        <div class="price-section">
+
+            @if(product().oldPrice){
+            <span class="old-price">
+                {{ product().oldPrice | number }}
+            </span>
+            }
+
+            <span class="current-price">
+                {{ product().price | number }}
+                تومان
+            </span>
+
+        </div>
+
+        @if(product().inStock){
+        <span class="stock success">
+            موجود در انبار: {{product().discount}}
+        </span>
+        } @else {
+        <span class="stock danger">
+            ناموجود
+        </span>
+        }
+
+    </div>
+
+    <ng-template pTemplate="footer">
+
+        <div class="actions">
+
+            <p-button icon="pi pi-eye" severity="secondary" [outlined]="true">
+            </p-button>
+
+            <p-button icon="pi pi-shopping-cart" severity="success" [outlined]="true">
             </p-button>
 
         </div>
