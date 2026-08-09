@@ -1,8 +1,13 @@
 import { MenubarModule } from 'primeng/menubar';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import {
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'mo-navbar-menu',
@@ -12,43 +17,15 @@ import { MenuItem } from 'primeng/api';
   imports: [
     CommonModule,
     MenubarModule,
+    TranslateModule,
+    RouterLinkActive,
+    RouterLink,
   ],
-  
 })
-
-export class MoNavbarMenuComponent implements OnInit, OnChanges {
+export class MoNavbarMenuComponent implements OnInit {
   @Input()
   public items!: MenuItem[];
+  constructor(private router: Router) {}
 
-  highlightedItems: MenuItem[] = [];
-  activeMenuLabel: string | null = null;
-
-  private _ch = inject(ChangeDetectorRef)
-
-  private router = inject(Router)
-
-  ngOnInit(): void {
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['items'] && this.items?.length) {
-      this.highlightedItems = this.items.map(item => {
-        const newItem = { ...item };
-        const originalCommand = item.command;
-        newItem.command = (event: { item: MenuItem }) => {
-          if (originalCommand) {
-            if (event?.item) {
-              delete (event.item as any).routerLink;
-            }
-            originalCommand(event);
-            this._ch.detectChanges();
-          }
-        };
-
-        delete newItem.routerLink;
-        return newItem;
-      });
-    }
-  }
-
+  ngOnInit(): void {}
 }

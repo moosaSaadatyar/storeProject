@@ -1,7 +1,7 @@
 .hf-nav {
   background: #0f1115;
-  border-top: 1px solid rgba(255,255,255,.08);
-  border-bottom: 1px solid rgba(255,255,255,.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 
   display: flex;
   justify-content: center;
@@ -20,13 +20,13 @@
 }
 
 ::ng-deep .p-menubar-item-link {
-  color: #e5e7eb !important;
+  color: #27282b !important;
 
-  padding: .75rem 1rem !important;
+  padding: 0rem 0.5rem !important;
 
   border-radius: 10px;
 
-  transition: all .25s ease;
+  transition: all 0.25s ease;
 
   font-weight: 500;
 
@@ -34,14 +34,11 @@
 }
 
 ::ng-deep .p-menubar-item-link:hover {
-  background: rgba(255, 179, 0, .12) !important;
-
-  color: #ffb300 !important;
-
+  color: #daa86b !important;
   transform: translateY(-2px);
 }
 ::ng-deep .menu-active .p-menubar-item-link {
-  background: #ffb300 !important;
+  background: #daa86b !important;
 
   color: #111 !important;
 
@@ -50,7 +47,7 @@
 ::ng-deep .p-menubar-submenu {
   background: #181c23 !important;
 
-  border: 1px solid rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
 
   border-radius: 14px !important;
 
@@ -58,12 +55,19 @@
 
   min-width: 220px !important;
 
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 ::ng-deep .p-menubar-submenu .p-menubar-item-link:hover {
-  background: rgba(255,179,0,.15) !important;
+  background: rgba(255, 179, 0, 0.15) !important;
 
-  color: #ffb300 !important;
+  color: #daa86b !important;
+}
+
+::ng-deep .p-menubar-item.p-focus > .p-menubar-item-content {
+  color: #daa86b !important;
+  background: transparent !important;
+}
+::ng-deep .p-menubar-item.p-focus > .p-menubar-item-content > a {
+  color: #daa86b !important;
 }
