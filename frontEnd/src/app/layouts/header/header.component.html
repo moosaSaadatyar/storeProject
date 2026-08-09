@@ -1,24 +1,15 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm mo-main-navbar">
-  <div class="px-4 w-100">
-    <!-- Flex wrapper -->
-    <div class="header-flex w-100">
-
-      <!-- logo -->
-      <div id="logo" class="hf-logo">
-        <a class="navbar-brand fw-bold text-warning m-0" href="/">Golden Touch</a>
-      </div>
-
-
-      <!-- search -->
-      <div id="search" class="d-flex search-box">
-        <input class="form-control" type="search" [placeholder]="'SEARCH_PRODUCT'|translate" aria-label="Search" />
-        <p-button class="search-btn text-white" icon="pi pi-search" />
-
-      </div>
-
-      <!-- users info -->
-      <user-info></user-info>
-
-    </div>
+<div class="align-items-center bg-white border-0 d-flex h-80p justify-content-around w-100">
+  <div class="d-flex justify-content-center w-25">
+    <request-btn></request-btn>
   </div>
-</nav>
+  <div class="d-flex justify-content-between w-50">
+    <mo-navbar-menu [items]="menuItem"></mo-navbar-menu>
+  </div>
+
+  <div class="d-flex justify-content-end w-25">
+    <a routerLink="/home" class="logo">
+      <img src="/logo/2.png">
+    </a>
+  </div>
+  <div></div>
+</div>

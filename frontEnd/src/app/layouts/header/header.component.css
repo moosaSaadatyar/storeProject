@@ -1,142 +1,22 @@
-/* .header-banner {
-  background-color: #1a1a1a;
-  color: #d4af37;
-
-  h1 {
-    font-family: "Playfair Display", serif;
-    margin-bottom: 0.5rem;
-  }
-
-  p {
-    font-size: 1.25rem;
-    color: #f0d88f;
-  }
-
-  .btn {
-    font-weight: 600;
-    color: #1a1a1a;
-    background-color: #d4af37;
-    border: none;
-
-    &:hover {
-      background-color: #b9972e;
-      color: #fff;
-    }
-  }
-} */
-
-.mo-main-navbar {
-  direction: rtl;
+.h-80p {
+  height: 80px !important;
 }
 
-/* ردیف اصلی: فلکس */
-.header-flex {
+.logo {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap; /* در موبایل می‌شکنه */
-}
+  gap: 10px;
 
-/* هر بخش */
-.hf-logo {
-  flex: 0 0 auto;
-  min-width: 170px;
-}
-
-.hf-nav {
-  flex: 1 1 360px; 
-  display: flex;
-  justify-content: right ;
-  align-items: center;
-  min-width: 260px;
-}
-
-.hf-search {
-  flex: 0 1 360px;   
-  min-width: 240px;
-}
-
-.hf-user {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  min-width: 170px;
-  justify-content: flex-end;
-}
-
-.search-box {
-  position: relative;
-}
-
-.search-box .form-control {
-  border-radius: 0px 14px 14px 0;
-  padding: 0.7rem 1rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #fff;
-  box-shadow: none;
-}
-
-.search-box .form-control::placeholder {
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.search-btn {
-  border: 0;
-  border-radius: 14px 0 0 14px;
-  background: linear-gradient(135deg, #ffc107, #ff9800);
-  color: #111827;
-  font-weight: 700;
-}
-
-.user-link,
-.cart-link {
-  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
-  font-weight: 600;
+  color: #222;
+
+  min-width: 220px;
 }
 
-.user-link:hover,
-.cart-link:hover {
-  color: #ffc107;
-}
-
-.cart-badge {
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  background: #ef4444;
-  color: #fff;
-  font-size: 0.72rem;
-  min-width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 5px;
-  font-weight: 800;
-}
-
-/* ریسپانسیو: در موبایل چینش ستونی و مرتب */
-@media (max-width: 991.98px) {
-  .header-flex {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .hf-logo,
-  .hf-nav,
-  .hf-search,
-  .hf-user {
-    min-width: 0;
-    width: 100%;
-    justify-content: center;
-  }
-
-  .hf-user {
-    justify-content: center;
-  }
+.logo img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  transform: scale(2.8);
+  cursor: pointer;
 }
