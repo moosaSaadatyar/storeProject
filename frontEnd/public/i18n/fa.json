@@ -52,5 +52,7 @@
   "OLD_PRICE": "قیمت قدیمی",
   "DISCOUNT": "تعداد",
   "IN_STOCK": "موجود",
-  "CANCEL": "انصراف"
+  "CANCEL": "انصراف",
+  "WORK_SAMPLE": "نمونه کار ها",
+  "REQUEST_DESIGN":"ثبت درخواست طراحی"
 }
