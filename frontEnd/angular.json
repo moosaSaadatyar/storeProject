@@ -7,16 +7,17 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
+          "prefix": "app",
           "skipTests": true,
-           "type": "component"
-          },
-          "@schematics/angular:service": {
-            "skipTests": true,
-            "type": "service"
-          },
-          "@schematics/angular:directive": {
-            "skipTests": true,
-            "type": "directive"
+          "type": "component"
+        },
+        "@schematics/angular:service": {
+          "skipTests": true,
+          "type": "service"
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true,
+          "type": "directive"
         }
       },
       "root": "",

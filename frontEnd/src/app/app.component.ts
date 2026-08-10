@@ -3,12 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { ApiService } from './service-api.service';
 import { Footer } from './layouts/footer/footer';
 import { HeaderComponent } from './layouts/header/header.component';
-import { NaveMenu } from './layouts/nave-menu/nave-menu';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
-  imports: [HeaderComponent, Footer, RouterOutlet, NaveMenu],
+  imports: [HeaderComponent, Footer, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
