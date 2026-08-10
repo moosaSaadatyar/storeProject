@@ -1,0 +1,142 @@
+<section class="portfolio-section py-5" dir="rtl">
+
+  <div class="container py-lg-4">
+
+    <!-- Section Header -->
+    <div class="text-center mb-4">
+
+      <h2 class="portfolio-title">
+        {{ 'OUR_PORTFOLIO' | translate }}
+      </h2>
+
+      <p class="portfolio-subtitle">
+        {{ 'SOME_OF_OUR_COMPLETED_PROJECTS' | translate }}
+      </p>
+
+    </div>
+
+
+    <!-- Portfolio Items -->
+    <div class="row g-3 g-lg-4 justify-content-center">
+
+      <!-- Modern -->
+      <div class="col-12 col-md-6 col-lg-4">
+
+        <a
+          routerLink="/portfolio"
+          class="portfolio-card">
+
+          <img
+            src="/images/a.jpg"
+            alt="کابینت مدرن"
+          >
+
+          <div class="portfolio-overlay">
+
+            <div class="portfolio-info">
+
+              <h3>
+                {{ 'MODERN_KITCHEN' | translate }}
+              </h3>
+
+              <span class="portfolio-arrow">
+                <i class="pi pi-arrow-left"></i>
+              </span>
+
+            </div>
+
+          </div>
+
+        </a>
+
+      </div>
+
+
+      <!-- Neoclassical -->
+      <div class="col-12 col-md-6 col-lg-4">
+
+        <a
+          routerLink="/portfolio"
+          class="portfolio-card">
+
+          <img
+            src="/images/r.jpg"
+            alt="کابینت نئوکلاسیک"
+          >
+
+          <div class="portfolio-overlay">
+
+            <div class="portfolio-info">
+
+              <h3>
+                {{ 'NEOCLASSICAL_KITCHEN' | translate }}
+              </h3>
+
+              <span class="portfolio-arrow">
+                <i class="pi pi-arrow-left"></i>
+              </span>
+
+            </div>
+
+          </div>
+
+        </a>
+
+      </div>
+
+
+      <!-- Classic -->
+      <div class="col-12 col-md-6 col-lg-4">
+
+        <a
+          routerLink="/portfolio"
+          class="portfolio-card">
+
+          <img
+            src="/images/q.jpg"
+            alt="کابینت کلاسیک"
+          >
+
+          <div class="portfolio-overlay">
+
+            <div class="portfolio-info">
+
+              <h3>
+                {{ 'CLASSIC_KITCHEN' | translate }}
+              </h3>
+
+              <span class="portfolio-arrow">
+                <i class="pi pi-arrow-left"></i>
+              </span>
+
+            </div>
+
+          </div>
+
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- View All -->
+    <div class="text-center mt-4">
+
+      <a
+        routerLink="/portfolio"
+        class="portfolio-more">
+
+        <span>
+          {{ 'VIEW_ALL_PORTFOLIO' | translate }}
+        </span>
+
+        <i class="pi pi-angle-left"></i>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>

@@ -1,0 +1,197 @@
+.why-us {
+  background-color: #fff;
+}
+
+
+/* =========================
+   Title
+========================= */
+
+.why-us-title {
+  margin: 0;
+
+  color: #222;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  line-height: 1.5;
+}
+
+.title-line {
+  width: 32px;
+  height: 2px;
+
+  margin: 7px auto 0;
+
+  background-color: #c6924b;
+
+  border-radius: 2px;
+}
+
+
+/* =========================
+   Feature
+========================= */
+
+.feature-item {
+  position: relative;
+
+  height: 100%;
+
+  padding: 0 30px;
+
+  text-align: center;
+}
+
+
+/* Vertical separator */
+
+.feature-item:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+
+  top: 5px;
+  left: 0;
+
+  width: 1px;
+  height: 80%;
+
+  background-color: #eee4d8;
+}
+
+
+/* =========================
+   Icon
+========================= */
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+
+  margin: 0 auto 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #c6924b;
+
+  font-size: 25px;
+}
+
+
+/* =========================
+   Title
+========================= */
+
+.feature-item h3 {
+  margin: 0 0 8px;
+
+  color: #222;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  line-height: 1.8;
+}
+
+
+/* =========================
+   Description
+========================= */
+
+.feature-item p {
+  max-width: 190px;
+
+  margin: 0 auto;
+
+  color: #888;
+
+  font-size: 11px;
+
+  line-height: 2;
+
+  font-weight: 400;
+}
+
+
+/* =========================
+   Hover
+========================= */
+
+.feature-item {
+  transition: transform 0.25s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-4px);
+}
+
+.feature-item:hover .feature-icon {
+  color: #a9793d;
+}
+
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 991px) {
+
+  .feature-item {
+    padding: 25px 20px;
+  }
+
+  .feature-item:nth-child(2)::after {
+    display: none;
+  }
+
+  .feature-item:nth-child(1)::after {
+    display: block;
+  }
+
+  .feature-item:nth-child(3)::after {
+    display: block;
+  }
+
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 767px) {
+
+  .why-us {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+
+  .why-us-title {
+    font-size: 19px;
+  }
+
+  .feature-item {
+    padding: 25px 15px;
+  }
+
+  .feature-item::after {
+    display: none !important;
+  }
+
+  .feature-icon {
+    margin-bottom: 8px;
+  }
+
+  .feature-item h3 {
+    font-size: 14px;
+  }
+
+  .feature-item p {
+    font-size: 11px;
+  }
+
+}

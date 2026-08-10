@@ -1,11 +1,6 @@
-<div class="row g-3 py-3">
-  @for (product of products; track product.id) {
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2">
-      <app-product-card
-        [product]="product"
-        (detailsClick)="openDetails($event)"
-        (addToCartClick)="addToCart($event)">
-      </app-product-card>
-    </div>
-  }
-</div>
+<app-hero></app-hero>
+<app-about-section></app-about-section>
+<div class="separator"></div>
+<app-sample-work></app-sample-work>
+<div class="separator"></div>
+<app-request-inter></app-request-inter>

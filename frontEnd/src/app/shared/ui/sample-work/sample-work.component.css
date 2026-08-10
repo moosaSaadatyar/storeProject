@@ -1,0 +1,232 @@
+.portfolio-section {
+  background-color: #fff;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+.portfolio-title {
+  margin: 0 0 6px;
+
+  color: #222;
+
+  font-size: 22px;
+  font-weight: 700;
+
+  line-height: 1.6;
+}
+
+.portfolio-subtitle {
+  margin: 0;
+
+  color: #888;
+
+  font-size: 12px;
+
+  line-height: 2;
+}
+
+
+/* =========================
+   Portfolio Card
+========================= */
+
+.portfolio-card {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+  height: 210px;
+
+  overflow: hidden;
+
+  border-radius: 9px;
+
+  text-decoration: none;
+
+  background-color: #eee;
+}
+
+
+/* Image */
+
+.portfolio-card img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.5s ease;
+}
+
+
+/* =========================
+   Overlay
+========================= */
+
+.portfolio-overlay {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 70px;
+
+  display: flex;
+  align-items: flex-end;
+
+  padding: 0 18px 14px;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+
+/* =========================
+   Info
+========================= */
+
+.portfolio-info {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.portfolio-info h3 {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   Arrow
+========================= */
+
+.portfolio-arrow {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #fff;
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   Hover
+========================= */
+
+.portfolio-card:hover img {
+  transform: scale(1.06);
+}
+
+.portfolio-card:hover .portfolio-arrow {
+  color: #c6924b;
+}
+
+
+/* =========================
+   View All Button
+========================= */
+
+.portfolio-more {
+  min-width: 155px;
+  height: 38px;
+
+  padding: 0 18px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  border: 1px solid #e5d7c7;
+
+  border-radius: 8px;
+
+  color: #555;
+
+  background-color: #fff;
+
+  text-decoration: none;
+
+  font-size: 11px;
+
+  transition:
+    all 0.25s ease;
+}
+
+.portfolio-more i {
+  color: #c6924b;
+
+  font-size: 12px;
+}
+
+.portfolio-more:hover {
+  color: #c6924b;
+
+  border-color: #c6924b;
+
+  background-color: #fffaf5;
+}
+
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 991px) {
+
+  .portfolio-card {
+    height: 220px;
+  }
+
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 767px) {
+
+  .portfolio-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+
+  .portfolio-title {
+    font-size: 20px;
+  }
+
+  .portfolio-card {
+    height: 230px;
+  }
+
+}

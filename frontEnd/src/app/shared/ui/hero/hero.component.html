@@ -1,0 +1,44 @@
+<section class="hero position-relative overflow-hidden">
+
+    <img src="/images/bg-Home.jpg" [alt]="'SHELTER_DESIGN'|translate"
+        class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover">
+
+    <div class="hero-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+
+    <div class="container position-relative h-100">
+        <div class="row h-100 align-items-center">
+
+            <div class="col-lg-6 text-white text-end">
+
+                <div class="hero-subtitle mb-3">
+                    {{'SHELTER_DESIGN_AND_MAKE'|translate}}
+                </div>
+
+                <h1 class="display-3 fw-bold">
+                    {{'SHELTER_DESIGN'|translate}},
+                    <br>
+                    <span>{{'BY_YOUR_INTEREST'|translate}}</span>
+                </h1>
+
+                <p class="lead mt-4 mb-4">
+                    {{'WITH_A_COMBINATION_OF_ART_QUALITY_AND_MODERN_MATERIALS'|translate}},
+                    {{'DESIGN_AND_IMPLEMENT_KITCHENS_TAILORED_TO_YOUR_HOME_AND_LIFESTYLE'|translate}}.
+                </p>
+
+                <div class="d-flex gap-3 justify-content-end">
+
+                    <p-button [label]="'REQUEST_DESIGN'|translate" icon="pi pi-arrow-left" [routerLink]="['/request']">
+                    </p-button>
+
+                    <p-button [label]="'VIEW_OUR_PORTFOLIO'|translate" icon="pi pi-images" severity="secondary"
+                        [outlined]="true" [routerLink]="['/portfolio']">
+                    </p-button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
