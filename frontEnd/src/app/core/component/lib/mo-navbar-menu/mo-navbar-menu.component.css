@@ -1,18 +1,276 @@
-.hf-nav {
-  background: #0f1115;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  min-height: 56px;
+:host {
+  display: block;
+  width: 100%;
 }
 
 ::ng-deep .p-menubar {
+  width: 100%;
+  padding: 0 !important;
+
   background: transparent !important;
   border: none !important;
+  border-radius: 0 !important;
+}
+
+
+/* =========================
+   Desktop
+========================= */
+
+::ng-deep .p-menubar-root-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+::ng-deep .p-menubar-item-link {
+  min-height: 40px;
+
+  padding: 8px 12px !important;
+
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  border-radius: 6px !important;
+
+  color: #272727 !important;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  text-decoration: none !important;
+
+  white-space: nowrap;
+
+  transition: all 0.2s ease;
+}
+
+::ng-deep .p-menubar-item-link:hover {
+  color: #b98543 !important;
+
+  background: #faf7f2 !important;
+}
+
+
+/* Active */
+
+::ng-deep .active-menu {
+  color: #b98543 !important;
+}
+
+
+/* =========================
+   Dropdown Desktop
+========================= */
+
+::ng-deep .p-menubar-submenu {
+  min-width: 190px !important;
+
+  padding: 6px !important;
+
+  background: #fff !important;
+
+  border: 1px solid #eee4d8 !important;
+
+  border-radius: 8px !important;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+::ng-deep .p-menubar-submenu .p-menubar-item-link {
+  width: 100%;
+
+  padding: 10px 12px !important;
+
+  color: #444 !important;
+
+  white-space: nowrap;
+}
+
+::ng-deep .p-menubar-submenu .p-menubar-item-link:hover {
+  color: #b98543 !important;
+
+  background: #faf5ee !important;
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 768px) {
+
+  ::ng-deep .p-menubar {
+    position: relative;
+  }
+
+
+  /* Hamburger */
+
+  ::ng-deep .p-menubar-button {
+    width: 42px !important;
+    height: 42px !important;
+
+    margin: 0 !important;
+
+    display: flex !important;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50% !important;
+
+    color: #46556a !important;
+
+    background: #f3f6fa !important;
+
+    border: none !important;
+  }
+
+
+  ::ng-deep .p-menubar-button:hover {
+    background: #eceff3 !important;
+
+    color: #b98543 !important;
+  }
+
+
+  /* Mobile Menu */
+
+  ::ng-deep .p-menubar-root-list {
+    position: absolute !important;
+
+    top: calc(100% + 8px) !important;
+    right: 0 !important;
+    left: auto !important;
+
+    width: min(280px, calc(100vw - 30px)) !important;
+
+    max-width: calc(100vw - 30px) !important;
+
+    padding: 8px !important;
+
+    margin: 0 !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    align-items: stretch !important;
+
+    justify-content: flex-start !important;
+
+    gap: 3px !important;
+
+    background: #ffffff !important;
+
+    border: 1px solid #eee4d8 !important;
+
+    border-radius: 12px !important;
+
+    box-shadow:
+      0 15px 40px rgba(0, 0, 0, 0.12) !important;
+
+    z-index: 9999 !important;
+  }
+
+
+  /* Items */
+
+  ::ng-deep .p-menubar-root-list > .p-menubar-item {
+    width: 100% !important;
+  }
+
+
+  /* Links */
+
+  ::ng-deep .p-menubar-root-list .p-menubar-item-link {
+    width: 100% !important;
+
+    min-height: 44px !important;
+
+    padding: 10px 14px !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: flex-start !important;
+
+    color: #272727 !important;
+
+    font-size: 14px !important;
+
+    font-weight: 500 !important;
+
+    white-space: nowrap !important;
+
+    border-radius: 8px !important;
+
+    box-sizing: border-box !important;
+  }
+
+
+  ::ng-deep .p-menubar-root-list .p-menubar-item-link:hover {
+    color: #b98543 !important;
+
+    background: #faf6f0 !important;
+  }
+
+
+  /* Active */
+
+  ::ng-deep .p-menubar-root-list .active-menu {
+    color: #b98543 !important;
+
+    background: #faf6f0 !important;
+
+    font-weight: 600 !important;
+  }
+
+
+  /* =========================
+     Mobile Submenu
+  ========================= */
+
+  ::ng-deep .p-menubar-root-list .p-menubar-submenu {
+    position: static !important;
+
+    width: 100% !important;
+    min-width: 100% !important;
+
+    margin: 0 !important;
+
+    padding: 4px !important;
+
+    background: #fafafa !important;
+
+    border: none !important;
+
+    border-radius: 8px !important;
+
+    box-shadow: none !important;
+  }
+
+
+  ::ng-deep .p-menubar-root-list
+    .p-menubar-submenu
+    .p-menubar-item-link {
+
+    min-height: 40px !important;
+
+    padding: 8px 12px !important;
+
+    font-size: 13px !important;
+  }
+
 }
 
 ::ng-deep .p-menubar-root-list {
@@ -20,54 +278,5 @@
 }
 
 ::ng-deep .p-menubar-item-link {
-  color: #27282b !important;
-
   padding: 0rem 0.5rem !important;
-
-  border-radius: 10px;
-
-  transition: all 0.25s ease;
-
-  font-weight: 500;
-
-  text-decoration: none !important;
-}
-
-::ng-deep .p-menubar-item-link:hover {
-  color: #daa86b !important;
-  transform: translateY(-2px);
-}
-::ng-deep .menu-active .p-menubar-item-link {
-  background: #daa86b !important;
-
-  color: #111 !important;
-
-  font-weight: 700;
-}
-::ng-deep .p-menubar-submenu {
-  background: #181c23 !important;
-
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-
-  border-radius: 14px !important;
-
-  padding: 8px !important;
-
-  min-width: 220px !important;
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-
-::ng-deep .p-menubar-submenu .p-menubar-item-link:hover {
-  background: rgba(255, 179, 0, 0.15) !important;
-
-  color: #daa86b !important;
-}
-
-::ng-deep .p-menubar-item.p-focus > .p-menubar-item-content {
-  color: #daa86b !important;
-  background: transparent !important;
-}
-::ng-deep .p-menubar-item.p-focus > .p-menubar-item-content > a {
-  color: #daa86b !important;
 }

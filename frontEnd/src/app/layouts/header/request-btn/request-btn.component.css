@@ -1,3 +1,44 @@
-.request-btn{
-    background: #e4b621;
+:host {
+  display: block;
+}
+
+::ng-deep .request-btn {
+  height: 40px !important;
+
+  padding: 0 20px !important;
+
+  border: none !important;
+
+  border-radius: 22px !important;
+
+  background: #c6924b !important;
+
+  color: #fff !important;
+
+  font-size: 12px !important;
+
+  font-weight: 600 !important;
+
+  box-shadow: none !important;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+::ng-deep .request-btn:hover {
+  background: #ae7d3e !important;
+
+  transform: translateY(-1px);
+}
+
+
+::ng-deep .request-btn .p-button-icon {
+  font-size: 13px !important;
+}
+
+
+::ng-deep .request-btn .p-button-label {
+  font-weight: 600 !important;
 }

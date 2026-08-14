@@ -1,4 +1,4 @@
-<div class="align-items-center bg-white border-0 d-flex h-80p justify-content-around w-100">
+<!-- <div class="align-items-center bg-white border-0 d-flex h-80p justify-content-around w-100">
   <div class="d-flex justify-content-center">
     <request-btn></request-btn>
   </div>
@@ -12,4 +12,42 @@
     </a>
   </div>
   <div></div>
-</div>
+</div> -->
+
+<header class="main-header" dir="rtl">
+
+  <div class="header-container">
+
+    <!-- Logo -->
+    <div class="header-logo">
+
+      <a routerLink="/home">
+        <img
+          src="/logo/2.png"
+          alt="عزیزی کابینت"
+        >
+      </a>
+
+    </div>
+
+
+    <!-- Navigation -->
+    <nav class="header-navigation">
+
+      <mo-navbar-menu
+        [items]="menuItem">
+      </mo-navbar-menu>
+
+    </nav>
+
+
+    <!-- Request Button -->
+    <div class="header-action">
+
+      <request-btn></request-btn>
+
+    </div>
+
+  </div>
+
+</header>
