@@ -1,14 +1,53 @@
-<span class="d-flex flex-column h-35" [class]="config.containerClass ?? ''">
-  <input class="w-100 h-35" [id]="config.inputId" [class]="config.inputClass ?? ''" [ngModel]="model"
-    [placeholder]="config.placeholder ?? ''" [disabled]="config.disabled ?? disabled"
-    (ngModelChange)="changeHandler($event)" (blur)="onTouched()" OnlyNumber [maxlength]="config.maxLength"
-    [minlength]="config.minLength" [readonly]='readonly' type="text" pInputText [CostFormatter]="config.moneySplitter"
-    [MaxNumber]="config.maxValue" />
-  <label [class]="config.labelClass + ' fs-12'" [for]="config.inputId">
-    {{ (config.floatLabel |translate) ?? (config.label|translate) }}
-  </label>
-</span>
+<div
+  class="mo-number-wrapper"
+  [class]="config.containerClass ?? ''"
+  [class.is-disabled]="disabled || config.disabled"
+  [class.is-readonly]="readonly"
+  [class.has-error]="control?.invalid && (control?.touched || control?.dirty)"
+>
 
-<div class="mt-1">
-  <app-form-errors [config]="errorConfig"> </app-form-errors>
+  <div class="mo-number-field">
+
+    <input
+      class="mo-number-input"
+      [id]="config.inputId"
+      [class]="config.inputClass ?? ''"
+      [ngModel]="model"
+      placeholder=" "
+      [disabled]="config.disabled ?? disabled"
+      [readonly]="readonly"
+
+      (ngModelChange)="changeHandler($event)"
+      (blur)="onTouched()"
+
+      OnlyNumber
+
+      [maxlength]="config.maxLength"
+      [minlength]="config.minLength"
+
+      type="text"
+      pInputText
+
+      [CostFormatter]="config.moneySplitter"
+      [MaxNumber]="config.maxValue"
+    />
+
+    <label
+      class="mo-number-label"
+      [class]="config.labelClass ?? ''"
+      [for]="config.inputId"
+    >
+      {{ (config.floatLabel | translate) ?? (config.label | translate) }}
+
+      @if (isRequired) {
+        <span class="required-star">*</span>
+      }
+    </label>
+
+  </div>
+
+  <div class="mo-number-error">
+    <app-form-errors [config]="errorConfig"></app-form-errors>
+  </div>
+
 </div>

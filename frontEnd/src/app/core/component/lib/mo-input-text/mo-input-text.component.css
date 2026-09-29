@@ -1,6 +1,255 @@
-input[readonly] {
-    background-color: #fff !important;
-    cursor: default;
-    opacity: 1 !important;
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* ================================
+   Main Wrapper
+================================ */
+
+.mo-input-wrapper {
+  width: 100%;
+}
+
+/* ================================
+   Input Container
+================================ */
+
+.mo-input-field {
+  position: relative;
+  width: 100%;
+}
+
+/* ================================
+   Input
+================================ */
+
+.mo-input {
+  width: 100%;
+  height: 52px;
+
+  padding: 15px 14px 5px;
+
+  border: 1px solid #dfe3e8;
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  color: #252a31;
+  font-size: 14px;
+  font-weight: 400;
+
+  outline: none;
+
+  box-shadow:
+    0 1px 2px rgba(16, 24, 40, 0.03);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+
+  direction: inherit;
+}
+
+/* Placeholder hidden until focus */
+
+.mo-input::placeholder {
+  color: transparent;
+}
+
+/* ================================
+   Label
+================================ */
+
+.mo-input-label {
+  position: absolute;
+
+  top: 50%;
+  inset-inline-start: 14px;
+
+  transform: translateY(-50%);
+
+  padding: 0 4px;
+
+  background: #ffffff;
+
+  color: #8a94a6;
+
+  font-size: 13px;
+  font-weight: 400;
+
+  pointer-events: none;
+
+  transition:
+    top 0.18s ease,
+    transform 0.18s ease,
+    font-size 0.18s ease,
+    color 0.18s ease;
+
+  z-index: 1;
+}
+
+/* ================================
+   Floating Label
+================================ */
+
+.mo-input:focus ~ .mo-input-label,
+.mo-input:not(:placeholder-shown) ~ .mo-input-label {
+  top: 0;
+
+  transform: translateY(-50%);
+
+  font-size: 11px;
+  font-weight: 500;
+
+  color: #3b82f6;
+}
+
+/* ================================
+   Focus
+================================ */
+
+.mo-input:focus {
+  border-color: #3b82f6;
+
+  box-shadow:
+    0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+/* ================================
+   Required Star
+================================ */
+
+.required-star {
+  display: inline-block;
+
+  margin-inline-start: 3px;
+
+  color: #ef4444;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  vertical-align: middle;
+}
+
+/* ================================
+   Error State
+================================ */
+
+.mo-input-wrapper.has-error .mo-input {
+  border-color: #ef4444;
+
+  box-shadow:
+    0 0 0 3px rgba(239, 68, 68, 0.08);
+}
+
+.mo-input-wrapper.has-error .mo-input-label {
+  color: #ef4444;
+}
+
+.mo-input-wrapper.has-error .mo-input:focus {
+  border-color: #ef4444;
+
+  box-shadow:
+    0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+/* ================================
+   Disabled
+================================ */
+
+.mo-input-wrapper.is-disabled .mo-input {
+  background: #f5f7fa;
+
+  border-color: #e5e7eb;
+
+  color: #98a2b3;
+
+  cursor: not-allowed;
+
+  box-shadow: none;
+}
+
+.mo-input-wrapper.is-disabled .mo-input-label {
+  background: #f5f7fa;
+
+  color: #a0a8b5;
+}
+
+/* ================================
+   Readonly
+================================ */
+
+.mo-input-wrapper.is-readonly .mo-input {
+  background: #fafafa;
+
+  border-color: #e5e7eb;
+
+  color: #344054;
+
+  cursor: default;
+}
+
+.mo-input-wrapper.is-readonly .mo-input-label {
+  background: #fafafa;
+
+  color: #667085;
+}
+
+/* ================================
+   Autofill
+================================ */
+
+.mo-input:-webkit-autofill,
+.mo-input:-webkit-autofill:hover,
+.mo-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #252a31;
+
+  box-shadow: 0 0 0 1000px #ffffff inset;
+
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* ================================
+   Error Container
+================================ */
+
+.mo-input-error {
+  margin-top: 4px;
+
+  min-height: 18px;
+}
+
+/* ================================
+   Skeleton
+================================ */
+
+.mo-skeleton-wrapper {
+  width: 100%;
+}
+
+#skeleton-loader {
+  width: 100%;
+}
+
+/* ================================
+   Mobile
+================================ */
+
+@media (max-width: 576px) {
+
+  .mo-input {
+    height: 50px;
+
+    font-size: 13px;
   }
-  
+
+  .mo-input-label {
+    font-size: 12px;
+  }
+
+}

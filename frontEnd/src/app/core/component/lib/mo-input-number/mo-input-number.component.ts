@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input, OnInit, Optional, Self } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, FormsModule, NgControl } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, FormsModule, NgControl, Validators } from '@angular/forms';
 
 
 import { FormErrorsComponent } from '../form-errors/form-errors.component';
@@ -96,8 +96,12 @@ export class MoInputNumberComponent implements OnInit, ControlValueAccessor {
   }
 
   get control(): AbstractControl {
-    return this.ngControl.control;
-  }
+  return this.ngControl.control;
+}
+
+get isRequired(): boolean {
+  return !!this.control?.hasValidator?.(Validators.required);
+}
 
 
 }

@@ -1,0 +1,219 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.mo-number-wrapper {
+  width: 100%;
+}
+
+/* =========================
+   Input Field
+========================= */
+
+.mo-number-field {
+  position: relative;
+  width: 100%;
+}
+
+.mo-number-input {
+  width: 100%;
+  height: 52px;
+
+  padding: 14px 14px 4px;
+
+  border: 1px solid #dfe3e8;
+  border-radius: 12px;
+
+  background: #fff;
+
+  color: #252a31;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  outline: none;
+
+  box-shadow:
+    0 1px 2px rgba(16, 24, 40, 0.03);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* Placeholder برای Floating Label */
+.mo-number-input::placeholder {
+  color: transparent;
+}
+
+/* =========================
+   Label
+========================= */
+
+.mo-number-label {
+  position: absolute;
+
+  top: 50%;
+  inset-inline-start: 14px;
+
+  transform: translateY(-50%);
+
+  padding: 0 4px;
+
+  background: #fff;
+
+  color: #8a94a6;
+
+  font-size: 13px;
+  font-weight: 400;
+
+  pointer-events: none;
+
+  transition:
+    top 0.18s ease,
+    transform 0.18s ease,
+    font-size 0.18s ease,
+    color 0.18s ease;
+
+  z-index: 2;
+}
+
+/* =========================
+   Floating Label
+========================= */
+
+.mo-number-input:focus ~ .mo-number-label,
+.mo-number-input:not(:placeholder-shown) ~ .mo-number-label {
+
+  top: 0;
+
+  transform: translateY(-50%);
+
+  font-size: 11px;
+  font-weight: 600;
+
+  color: #3b82f6;
+}
+
+/* =========================
+   Focus
+========================= */
+
+.mo-number-input:focus {
+  border-color: #3b82f6;
+
+  box-shadow:
+    0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+/* =========================
+   Required
+========================= */
+
+.required-star {
+  display: inline-block;
+
+  margin-inline-start: 3px;
+
+  color: #ef4444;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+/* =========================
+   Error
+========================= */
+
+.mo-number-wrapper.has-error .mo-number-input {
+  border-color: #ef4444;
+
+  box-shadow:
+    0 0 0 3px rgba(239, 68, 68, 0.08);
+}
+
+.mo-number-wrapper.has-error .mo-number-label {
+  color: #ef4444;
+}
+
+.mo-number-wrapper.has-error
+.mo-number-input:focus {
+  border-color: #ef4444;
+
+  box-shadow:
+    0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+/* =========================
+   Disabled
+========================= */
+
+.mo-number-wrapper.is-disabled .mo-number-input {
+  background: #f5f7fa;
+
+  border-color: #e5e7eb;
+
+  color: #98a2b3;
+
+  cursor: not-allowed;
+
+  box-shadow: none;
+}
+
+.mo-number-wrapper.is-disabled .mo-number-label {
+  background: #f5f7fa;
+
+  color: #a0a8b5;
+}
+
+/* =========================
+   Readonly
+========================= */
+
+.mo-number-wrapper.is-readonly .mo-number-input {
+  background: #fafafa;
+
+  border-color: #e5e7eb;
+
+  color: #344054;
+
+  cursor: default;
+}
+
+.mo-number-wrapper.is-readonly .mo-number-label {
+  background: #fafafa;
+
+  color: #667085;
+}
+
+/* =========================
+   Error Message
+========================= */
+
+.mo-number-error {
+  min-height: 18px;
+
+  margin-top: 4px;
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 576px) {
+
+  .mo-number-input {
+    height: 50px;
+
+    font-size: 13px;
+  }
+
+  .mo-number-label {
+    font-size: 12px;
+  }
+
+}
