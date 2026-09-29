@@ -11,8 +11,8 @@ export const HomeRoutes: Routes = [
     loadComponent: () => import('./home-page').then((m) => m.HomePage),
   },
   {
-    path: 'products',
-    loadChildren: () =>
-      import('../../../feature/product/product.route').then((m) => m.ProductRoutes),
+    path: 'request',
+    loadComponent: () =>
+      import('../../../feature/user-request-form/user-request-form.component').then((m) => m.UserRequestFormComponent),
   },
 ];

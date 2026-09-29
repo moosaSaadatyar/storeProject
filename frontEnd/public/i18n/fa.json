@@ -80,14 +80,47 @@
   "CLASSIC_KITCHEN": "کابینت کلاسیک",
   "VIEW_ALL_PORTFOLIO": "مشاهده همه نمونه‌کارها",
   "CHOOSE_YOUR_FAVORITE_STYLE": "سبک مورد علاقه خود را انتخاب کنید",
-  "MODERN": "مدرن",
-  "NEOCLASSICAL": "نئوکلاسیک",
-  "CLASSIC": "کلاسیک",
+ 
   "START_REQUEST": "شروع سفارش",
   "CONTACT_US_FOR_CONSULTATION": "برای مشاوره و ثبت درخواست با ما در تماس باشید",
   "ADDRESS": "آدرس",
   "TEHRAN_EXAMPLE_ADDRESS": "تهران، خیابان نمونه، پلاک ۱۲",
-  "PHONE_NUMBER": "شماره تماس",
   "INSTAGRAM": "اینستاگرام",
-  "ALL_RIGHTS_RESERVED": "تمامی حقوق این وب‌سایت محفوظ است."
+  "ALL_RIGHTS_RESERVED": "تمامی حقوق این وب‌سایت محفوظ است.",
+  "REQUEST_DESIGN_TITLE": "ثبت درخواست طراحی کابینت",
+  "REQUEST_DESIGN_DESCRIPTION": "اطلاعات خود را وارد کنید تا برای مشاوره و طراحی با شما تماس بگیریم",
+
+  "CONTACT_INFORMATION": "اطلاعات تماس",
+  "ENTER_YOUR_CONTACT_INFORMATION": "لطفاً اطلاعات تماس خود را وارد کنید",
+
+  "FULL_NAME_PLACEHOLDER": "نام و نام خانوادگی خود را وارد کنید",
+
+  "PHONE_NUMBER": "شماره تماس",
+
+  "CHOOSE_KITCHEN_STYLE": "انتخاب سبک مورد علاقه",
+  "SELECT_YOUR_FAVORITE_STYLE": "سبک دلخواه خود را انتخاب کنید",
+
+  "MODERN": "مدرن",
+  "NEOCLASSICAL": "نئوکلاسیک",
+  "CLASSIC": "کلاسیک",
+
+  "CHOOSE_COLOR": "انتخاب رنگ مورد علاقه",
+  "SELECT_YOUR_PREFERRED_COLOR": "رنگ مورد نظر خود را انتخاب کنید",
+
+  "WHITE": "سفید",
+  "CREAM": "کرم",
+  "GRAY": "طوسی",
+  "BLACK": "مشکی",
+  "WOOD": "چوبی",
+
+  "MORE_DETAILS": "توضیحات بیشتر",
+  "DESCRIBE_YOUR_REQUEST": "در صورت داشتن توضیح یا درخواست خاص، لطفاً بنویسید",
+  "DESCRIPTION_PLACEHOLDER": "توضیحات خود را اینجا وارد کنید...",
+
+  "SUBMIT_REQUEST": "ارسال درخواست",
+
+  "FULL_NAME_REQUIRED": "وارد کردن نام الزامی است",
+  "PHONE_INVALID": "شماره موبایل معتبر وارد کنید",
+  "STYLE_REQUIRED": "لطفاً سبک کابینت را انتخاب کنید",
+  "COLOR_REQUIRED": "لطفاً رنگ کابینت را انتخاب کنید"
 }

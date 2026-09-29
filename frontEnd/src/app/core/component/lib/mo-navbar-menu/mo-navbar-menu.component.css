@@ -105,12 +105,16 @@
    Mobile
 ========================= */
 
+/* =========================
+   Mobile
+========================= */
+
 @media (max-width: 768px) {
 
   ::ng-deep .p-menubar {
     position: relative;
+    width: auto !important;
   }
-
 
   /* Hamburger */
 
@@ -132,26 +136,30 @@
     background: #f3f6fa !important;
 
     border: none !important;
+
+    cursor: pointer;
   }
 
 
   ::ng-deep .p-menubar-button:hover {
     background: #eceff3 !important;
-
     color: #b98543 !important;
   }
 
 
-  /* Mobile Menu */
+  /* =========================
+     Mobile Menu
+  ========================= */
 
   ::ng-deep .p-menubar-root-list {
     position: absolute !important;
 
     top: calc(100% + 8px) !important;
+
     right: 0 !important;
     left: auto !important;
 
-    width: min(280px, calc(100vw - 30px)) !important;
+    width: 280px !important;
 
     max-width: calc(100vw - 30px) !important;
 
@@ -159,17 +167,13 @@
 
     margin: 0 !important;
 
-    display: flex !important;
-
     flex-direction: column !important;
 
     align-items: stretch !important;
 
-    justify-content: flex-start !important;
-
     gap: 3px !important;
 
-    background: #ffffff !important;
+    background: #fff !important;
 
     border: 1px solid #eee4d8 !important;
 
@@ -182,16 +186,17 @@
   }
 
 
-  /* Items */
+  /* =========================
+     Items
+  ========================= */
 
   ::ng-deep .p-menubar-root-list > .p-menubar-item {
     width: 100% !important;
   }
 
 
-  /* Links */
-
   ::ng-deep .p-menubar-root-list .p-menubar-item-link {
+
     width: 100% !important;
 
     min-height: 44px !important;
@@ -218,16 +223,21 @@
   }
 
 
-  ::ng-deep .p-menubar-root-list .p-menubar-item-link:hover {
+  ::ng-deep .p-menubar-root-list
+    .p-menubar-item-link:hover {
+
     color: #b98543 !important;
 
     background: #faf6f0 !important;
   }
 
 
-  /* Active */
+  /* =========================
+     Active
+  ========================= */
 
   ::ng-deep .p-menubar-root-list .active-menu {
+
     color: #b98543 !important;
 
     background: #faf6f0 !important;
@@ -240,10 +250,14 @@
      Mobile Submenu
   ========================= */
 
-  ::ng-deep .p-menubar-root-list .p-menubar-submenu {
+  ::ng-deep
+  .p-menubar-root-list
+  .p-menubar-submenu {
+
     position: static !important;
 
     width: 100% !important;
+
     min-width: 100% !important;
 
     margin: 0 !important;
@@ -260,9 +274,10 @@
   }
 
 
-  ::ng-deep .p-menubar-root-list
-    .p-menubar-submenu
-    .p-menubar-item-link {
+  ::ng-deep
+  .p-menubar-root-list
+  .p-menubar-submenu
+  .p-menubar-item-link {
 
     min-height: 40px !important;
 
@@ -271,12 +286,4 @@
     font-size: 13px !important;
   }
 
-}
-
-::ng-deep .p-menubar-root-list {
-  gap: 12px;
-}
-
-::ng-deep .p-menubar-item-link {
-  padding: 0rem 0.5rem !important;
 }

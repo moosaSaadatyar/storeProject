@@ -1,0 +1,324 @@
+<section class="request-page" dir="rtl">
+
+    <div class="container py-5">
+
+
+        <!-- =========================
+         Page Header
+    ========================== -->
+
+        <div class="request-header text-center mb-5">
+
+            <h1>
+                {{ 'REQUEST_DESIGN_TITLE' | translate }}
+            </h1>
+
+            <p>
+                {{ 'REQUEST_DESIGN_DESCRIPTION' | translate }}
+            </p>
+
+            <div class="request-title-line"></div>
+
+        </div>
+
+
+
+        <!-- =========================
+         Form
+    ========================== -->
+
+        <div class="request-card">
+
+            <form [formGroup]="requestForm">
+
+
+                <!-- =========================
+             Contact Information
+        ========================== -->
+
+                <div class="form-section">
+
+                    <div class="section-title">
+
+                        <div class="section-icon">
+                            <i class="pi pi-user"></i>
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                {{ 'CONTACT_INFORMATION' | translate }}
+                            </h2>
+
+                            <p>
+                                {{ 'ENTER_YOUR_CONTACT_INFORMATION' | translate }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row g-4">
+
+
+                        <!-- Full Name -->
+
+                        <div class="col-12 col-md-6">
+
+
+                        </div>
+
+
+
+                        <!-- Phone -->
+
+                        <div class="col-12 col-md-6">
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-divider"></div>
+
+
+
+                <!-- =========================
+             Style
+        ========================== -->
+
+                <div class="form-section">
+
+
+                    <div class="section-title">
+
+                        <div class="section-icon">
+                            <i class="pi pi-home"></i>
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                {{ 'CHOOSE_KITCHEN_STYLE' | translate }}
+                            </h2>
+
+                            <p>
+                                {{ 'SELECT_YOUR_FAVORITE_STYLE' | translate }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- <div class="style-options">
+
+                        @for (style of styles; track style.value) {
+
+                        <button type="button" class="style-option" [class.selected]="
+                  requestForm.get('style')?.value === style.value
+                " (click)="selectStyle(style.value)">
+
+                            <div class="style-check">
+
+                                @if (
+                                requestForm.get('style')?.value === style.value
+                                ) {
+
+                                <i class="pi pi-check"></i>
+
+                                }
+
+                            </div>
+
+
+                            <i [class]="style.icon"></i>
+
+
+                            <span>
+                                {{ style.label | translate }}
+                            </span>
+
+                        </button>
+
+                        }
+
+                    </div> -->
+
+
+                    <!-- @if (
+                    f['style'].touched &&
+                    f['style'].invalid
+                    ) {
+
+                    <small class="error-message">
+
+                        {{ 'STYLE_REQUIRED' | translate }}
+
+                    </small>
+
+                    } -->
+
+                </div>
+
+
+
+                <div class="form-divider"></div>
+
+
+
+                <!-- =========================
+             Color
+        ========================== -->
+
+                <div class="form-section">
+
+
+                    <div class="section-title">
+
+                        <div class="section-icon">
+                            <i class="pi pi-palette"></i>
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                {{ 'CHOOSE_COLOR' | translate }}
+                            </h2>
+
+                            <p>
+                                {{ 'SELECT_YOUR_PREFERRED_COLOR' | translate }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- <div class="color-options">
+
+                        @for (color of colors; track color.value) {
+
+                        <button type="button" class="color-option" [class.selected]="
+                  requestForm.get('color')?.value === color.value
+                " (click)="selectColor(color.value)">
+
+                            <span class="color-circle" [class]="color.class"></span>
+
+
+                            <span class="color-name">
+
+                                {{ color.label | translate }}
+
+                            </span>
+
+
+                            @if (
+                            requestForm.get('color')?.value === color.value
+                            ) {
+
+                            <span class="color-check">
+
+                                <i class="pi pi-check"></i>
+
+                            </span>
+
+                            }
+
+                        </button>
+
+                        }
+
+                    </div> -->
+
+
+                    <!-- @if (
+            f['color'].touched &&
+            f['color'].invalid
+          ) {
+
+            <small class="error-message">
+
+              {{ 'COLOR_REQUIRED' | translate }}
+
+            </small>
+
+          } -->
+
+                </div>
+
+
+
+                <div class="form-divider"></div>
+
+
+
+                <!-- =========================
+             Description
+        ========================== -->
+
+                <div class="form-section">
+
+
+                    <div class="section-title">
+
+                        <div class="section-icon">
+                            <i class="pi pi-comment"></i>
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                {{ 'MORE_DETAILS' | translate }}
+                            </h2>
+
+                            <p>
+                                {{ 'DESCRIBE_YOUR_REQUEST' | translate }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <textarea pTextarea formControlName="description" rows="5" class="w-100"
+                        [placeholder]="'DESCRIPTION_PLACEHOLDER' | translate"></textarea>
+
+                </div>
+
+
+
+                <!-- =========================
+             Submit
+        ========================== -->
+
+                <div class="submit-section">
+
+                    <!-- <p-button
+            type="submit"
+            [label]="'SUBMIT_REQUEST' | translate"
+            icon="pi pi-send"
+            iconPos="right"
+            severity="warn"
+            [rounded]="true"
+            styleClass="submit-request"
+          /> -->
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>

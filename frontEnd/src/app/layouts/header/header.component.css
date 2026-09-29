@@ -154,7 +154,7 @@
   }
 
   .header-navigation {
-    flex: 0 0 auto;
+    /* flex: 0 0 auto; */
 
     margin-right: auto;
 
