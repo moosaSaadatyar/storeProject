@@ -1,0 +1,164 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.card-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+  direction: rtl;
+}
+
+.selector-card {
+  position: relative;
+
+  height: 90px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: #fff;
+
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+
+  user-select: none;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:hover {
+    border-color: #c9a063;
+  }
+
+  &.selected {
+    border-color: #c9a063;
+    background-color: #fff;
+
+    box-shadow: 0 0 0 1px rgba(201, 160, 99, 0.08);
+
+    .radio-circle {
+      border-color: #c9a063;
+    }
+
+    .radio-dot {
+      opacity: 1;
+      transform: scale(1);
+      background-color: #c9a063;
+    }
+
+    .selector-icon {
+      color: #a87532;
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+
+/* =========================
+   Radio
+========================= */
+
+.radio-circle {
+  position: absolute;
+
+  top: 7px;
+  right: 8px;
+
+  width: 12px;
+  height: 12px;
+
+  border: 1px solid #d8d8d8;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: border-color 0.2s ease;
+}
+
+.radio-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  opacity: 0;
+  transform: scale(0.4);
+
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+
+/* =========================
+   Icon
+========================= */
+
+.selector-icon {
+  margin-bottom: 7px;
+
+  font-size: 23px;
+
+  color: #a87532;
+
+  transition: color 0.2s ease;
+}
+
+
+/* =========================
+   Label
+========================= */
+
+.selector-label {
+  font-size: 12px;
+  font-weight: 500;
+
+  color: #333;
+
+  line-height: 1;
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 576px) {
+
+  .card-selector {
+    gap: 6px;
+  }
+
+  .selector-card {
+    height: 80px;
+  }
+
+  .selector-icon {
+    font-size: 20px;
+  }
+
+  .selector-label {
+    font-size: 11px;
+  }
+}

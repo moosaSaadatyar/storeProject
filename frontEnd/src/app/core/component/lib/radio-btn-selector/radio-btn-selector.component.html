@@ -1,0 +1,37 @@
+<div class="card-selector">
+
+  <label
+    *ngFor="let option of options"
+    class="selector-card"
+    [class.selected]="isSelected(option)"
+    [class.disabled]="disabled"
+  >
+
+    <input
+      type="radio"
+      [name]="name"
+      [value]="option.value"
+      [checked]="isSelected(option)"
+      [disabled]="disabled"
+      (change)="selectOption(option)"
+    />
+
+    <!-- Radio -->
+    <span class="radio-circle">
+      <span class="radio-dot"></span>
+    </span>
+
+    <!-- Icon -->
+    <i
+      [class]="option.icon"
+      class="selector-icon"
+    ></i>
+
+    <!-- Label -->
+    <span class="selector-label">
+      {{ option.label }}
+    </span>
+
+  </label>
+
+</div>

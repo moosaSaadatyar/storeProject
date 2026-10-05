@@ -57,16 +57,13 @@
                         </div>
 
                     </div>
-
-
                     <div class="row g-4">
 
 
                         <!-- Full Name -->
 
                         <div class="col-12 col-md-6">
-
-
+                            <mo-input-text [config]="fullNameConfig" formControlName="fullName"></mo-input-text>
                         </div>
 
 
@@ -74,9 +71,8 @@
                         <!-- Phone -->
 
                         <div class="col-12 col-md-6">
-
-
-
+                            <mo-input-number [config]="numberPhoneConfig"
+                                formControlName="phoneNumber"></mo-input-number>
                         </div>
 
                     </div>
@@ -118,65 +114,18 @@
 
 
 
-                    <!-- <div class="style-options">
 
-                        @for (style of styles; track style.value) {
-
-                        <button type="button" class="style-option" [class.selected]="
-                  requestForm.get('style')?.value === style.value
-                " (click)="selectStyle(style.value)">
-
-                            <div class="style-check">
-
-                                @if (
-                                requestForm.get('style')?.value === style.value
-                                ) {
-
-                                <i class="pi pi-check"></i>
-
-                                }
-
-                            </div>
-
-
-                            <i [class]="style.icon"></i>
-
-
-                            <span>
-                                {{ style.label | translate }}
-                            </span>
-
-                        </button>
-
-                        }
-
-                    </div> -->
-
-
-                    <!-- @if (
-                    f['style'].touched &&
-                    f['style'].invalid
-                    ) {
-
-                    <small class="error-message">
-
-                        {{ 'STYLE_REQUIRED' | translate }}
-
-                    </small>
-
-                    } -->
-
+                    <app-radio-btn-selector [options]="cabinetStyle"
+                        formControlName="cabinetStyle"></app-radio-btn-selector>
+                    <div *ngIf="
+                            requestForm.get('cabinetStyle')?.invalid &&
+                            requestForm.get('cabinetStyle')?.touched
+                        " class="text-danger small mt-2">
+                        لطفاً سبک کابینت را انتخاب کنید.
+                    </div>
                 </div>
 
 
-
-                <div class="form-divider"></div>
-
-
-
-                <!-- =========================
-             Color
-        ========================== -->
 
                 <div class="form-section">
 
@@ -201,9 +150,19 @@
 
                     </div>
 
+                    <app-radio-btn-selector [options]="cabinetCalor"
+                        formControlName="cabinetColor"></app-radio-btn-selector>
+                    <div *ngIf="
+                            requestForm.get('cabinetColor')?.invalid &&
+                            requestForm.get('cabinetColor')?.touched
+                        " class="text-danger small mt-2">
+                        لطفاً رنگ کابینت را انتخاب کنید.
+                    </div>
+                </div>
 
 
-                    <!-- <div class="color-options">
+
+                <!-- <div class="color-options">
 
                         @for (color of colors; track color.value) {
 
@@ -240,7 +199,7 @@
                     </div> -->
 
 
-                    <!-- @if (
+                <!-- @if (
             f['color'].touched &&
             f['color'].invalid
           ) {
@@ -253,56 +212,56 @@
 
           } -->
 
-                </div>
+        <!-- </div> -->
 
 
 
-                <div class="form-divider"></div>
+        <div class="form-divider"></div>
 
 
 
-                <!-- =========================
+        <!-- =========================
              Description
         ========================== -->
 
-                <div class="form-section">
+        <div class="form-section">
 
 
-                    <div class="section-title">
+            <div class="section-title">
 
-                        <div class="section-icon">
-                            <i class="pi pi-comment"></i>
-                        </div>
+                <div class="section-icon">
+                    <i class="pi pi-comment"></i>
+                </div>
 
-                        <div>
+                <div>
 
-                            <h2>
-                                {{ 'MORE_DETAILS' | translate }}
-                            </h2>
+                    <h2>
+                        {{ 'MORE_DETAILS' | translate }}
+                    </h2>
 
-                            <p>
-                                {{ 'DESCRIBE_YOUR_REQUEST' | translate }}
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <textarea pTextarea formControlName="description" rows="5" class="w-100"
-                        [placeholder]="'DESCRIPTION_PLACEHOLDER' | translate"></textarea>
+                    <p>
+                        {{ 'DESCRIBE_YOUR_REQUEST' | translate }}
+                    </p>
 
                 </div>
 
+            </div>
 
 
-                <!-- =========================
+            <textarea pTextarea formControlName="description" rows="5" class="w-100"
+                [placeholder]="'DESCRIPTION_PLACEHOLDER' | translate"></textarea>
+
+        </div>
+
+
+
+        <!-- =========================
              Submit
         ========================== -->
 
-                <div class="submit-section">
+        <div class="submit-section">
 
-                    <!-- <p-button
+            <!-- <p-button
             type="submit"
             [label]="'SUBMIT_REQUEST' | translate"
             icon="pi pi-send"
@@ -312,12 +271,12 @@
             styleClass="submit-request"
           /> -->
 
-                </div>
-
-
-            </form>
-
         </div>
+
+
+        </form>
+
+    </div>
 
     </div>
 
