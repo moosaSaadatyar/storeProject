@@ -1,0 +1,200 @@
+.dashboard-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Page head */
+
+.page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+
+.page-title {
+  margin: 0;
+  color: #222;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.page-subtitle {
+  margin: 3px 0 0;
+  color: #999;
+  font-size: 12px;
+}
+
+/* Stat cards */
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.1rem 1.2rem;
+  background: #fff;
+  border: 1px solid #ece5da;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.stat-card:hover {
+  border-color: #c6924b;
+  box-shadow: 0 10px 24px rgba(198, 146, 75, 0.14);
+  transform: translateY(-2px);
+}
+
+.stat-icon {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #faf5ee;
+  border: 1px solid #eadac7;
+  color: #c6924b;
+  font-size: 18px;
+}
+
+.stat-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.stat-value {
+  color: #222;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.stat-label {
+  color: #666;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.stat-extra {
+  color: #999;
+  font-size: 10.5px;
+}
+
+/* Mini stats */
+
+.mini-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1rem;
+  background: #fff;
+  border: 1px solid #ece5da;
+  border-radius: 10px;
+  color: #555;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.mini-stat i {
+  color: #c6924b;
+}
+
+.mini-stat:hover {
+  border-color: #c6924b;
+  color: #c6924b;
+}
+
+/* Recent consultations */
+
+.recent-card {
+  margin-top: 1.2rem;
+  padding: 1.2rem 1.3rem;
+  background: #fff;
+  border: 1px solid #ece5da;
+  border-radius: 12px;
+}
+
+.recent-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.9rem;
+}
+
+.recent-head h2 {
+  margin: 0;
+  color: #222;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.recent-link {
+  color: #c6924b;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.recent-empty {
+  margin: 0;
+  color: #999;
+  font-size: 12px;
+  text-align: center;
+  padding: 1.2rem 0;
+}
+
+.recent-table-wrap {
+  overflow-x: auto;
+}
+
+.recent-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.recent-table th {
+  padding: 0.6rem 0.8rem;
+  color: #999;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-align: right;
+  border-bottom: 1px solid #f0e8dd;
+}
+
+.recent-table td {
+  padding: 0.7rem 0.8rem;
+  color: #444;
+  font-size: 12px;
+  border-bottom: 1px solid #f6f1ea;
+}
+
+.recent-table tr:last-child td {
+  border-bottom: none;
+}
+
+.td-name {
+  font-weight: 700;
+  color: #222;
+}
+
+.td-phone {
+  font-size: 11px;
+  color: #666;
+}
+
+.td-date {
+  color: #888;
+  font-size: 11px;
+}
+
+@media (max-width: 767px) {
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}

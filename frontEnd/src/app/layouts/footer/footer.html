@@ -11,35 +11,50 @@
 
         <a routerLink="/home" class="footer-logo-link">
           <img
-            src="/logo/2.png"
-            alt="عزیزی کابینت‌سازی"
+            [src]="logo"
+            [alt]="siteName || 'عزیزی کابینت‌سازی'"
             class="footer-logo"
           >
         </a>
 
         <p class="footer-about">
-          {{ 'ABOUT_US_SHORT' | translate }}
+          {{ aboutText || ('ABOUT_US_SHORT' | translate) }}
         </p>
 
         <div class="footer-socials">
 
-          <a
-            href="https://instagram.com/cabinet.sazan"
-            target="_blank"
-            rel="noopener"
-            aria-label="اینستاگرام"
-          >
-            <i class="fa-brands fa-instagram"></i>
-          </a>
+          @if (instagram) {
+            <a
+              [href]="instagram"
+              target="_blank"
+              rel="noopener"
+              aria-label="اینستاگرام"
+            >
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+          }
 
-          <a
-            href="https://wa.me/989121234567"
-            target="_blank"
-            rel="noopener"
-            aria-label="واتساپ"
-          >
-            <i class="fa-brands fa-whatsapp"></i>
-          </a>
+          @if (whatsappLink) {
+            <a
+              [href]="whatsappLink"
+              target="_blank"
+              rel="noopener"
+              aria-label="واتساپ"
+            >
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          }
+
+          @if (telegram) {
+            <a
+              [href]="telegram"
+              target="_blank"
+              rel="noopener"
+              aria-label="تلگرام"
+            >
+              <i class="fa-brands fa-telegram"></i>
+            </a>
+          }
 
         </div>
 
@@ -98,32 +113,38 @@
 
         <ul class="footer-links">
 
-          <li>
-            <i class="fa-solid fa-phone"></i>
-            <a href="tel:09121234567" dir="ltr">0912 123 4567</a>
-          </li>
+          @if (phone) {
+            <li>
+              <i class="fa-solid fa-phone"></i>
+              <a [href]="'tel:' + phone" dir="ltr">{{ phone }}</a>
+            </li>
+          }
 
-          <li>
-            <i class="fa-solid fa-whatsapp"></i>
-            <a
-              href="https://wa.me/989121234567"
-              target="_blank"
-              rel="noopener"
-            >
-              {{ 'WHATSAPP' | translate }}
-            </a>
-          </li>
+          @if (whatsappLink) {
+            <li>
+              <i class="fa-solid fa-whatsapp"></i>
+              <a
+                [href]="whatsappLink"
+                target="_blank"
+                rel="noopener"
+              >
+                {{ 'WHATSAPP' | translate }}
+              </a>
+            </li>
+          }
 
-          <li>
-            <i class="fa-solid fa-instagram"></i>
-            <a
-              href="https://instagram.com/cabinet.sazan"
-              target="_blank"
-              rel="noopener"
-            >
-              @cabinet.sazan
-            </a>
-          </li>
+          @if (instagram) {
+            <li>
+              <i class="fa-solid fa-instagram"></i>
+              <a
+                [href]="instagram"
+                target="_blank"
+                rel="noopener"
+              >
+                {{ instagramHandle }}
+              </a>
+            </li>
+          }
 
         </ul>
 
@@ -143,12 +164,12 @@
 
           <li>
             <i class="fa-solid fa-location-dot"></i>
-            <span>{{ 'TEHRAN_EXAMPLE_ADDRESS' | translate }}</span>
+            <span>{{ address || ('TEHRAN_EXAMPLE_ADDRESS' | translate) }}</span>
           </li>
 
           <li>
             <i class="fa-solid fa-clock"></i>
-            <span>{{ 'WORK_HOURS_VALUE' | translate }}</span>
+            <span>{{ workHours || ('WORK_HOURS_VALUE' | translate) }}</span>
           </li>
 
         </ul>

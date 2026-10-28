@@ -1,0 +1,289 @@
+<div class="project-form-page" dir="rtl">
+
+  <!-- Loading -->
+  @if (loading) {
+    <p-skeleton height="480px" borderRadius="12px"></p-skeleton>
+  }
+
+  @if (!loading) {
+
+    <!-- Header -->
+    <div class="page-head">
+      <div class="head-start">
+        <a routerLink="/admin/projects" class="back-btn" [title]="'بازگشت'">
+          <i class="pi pi-arrow-right"></i>
+        </a>
+        <div>
+          <h1 class="page-title">
+            @if (isEdit) { ویرایش پروژه } @else { افزودن پروژه جدید }
+          </h1>
+          <p class="page-subtitle">
+            @if (isEdit) { تغییرات پروژه را اعمال کنید } @else { نمونه‌کار جدید ثبت کنید }
+          </p>
+        </div>
+      </div>
+      <button pButton [label]="'ذخیره‌ی پروژه'" icon="pi pi-check" [loading]="saving" [disabled]="saving" (click)="save()"></button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="save()">
+
+      <div class="row g-4">
+
+        <!-- =========================
+             اطلاعات پایه
+        ========================== -->
+        <div class="col-12 col-xl-8">
+
+          <div class="form-card">
+            <h2 class="card-title">اطلاعات پایه</h2>
+
+            <div class="row g-3">
+
+              <div class="col-12">
+                <label class="field-label">عنوان پروژه <span class="required">*</span></label>
+                <input pInputText type="text" formControlName="title" placeholder="مثلاً: کابینت آشپزخانه مدرن — کرج">
+                @if (form.controls['title'].touched && form.controls['title'].invalid) {
+                  <small class="field-error">عنوان الزامی است.</small>
+                }
+              </div>
+
+              <div class="col-12">
+                <label class="field-label">توضیحات کوتاه</label>
+                <textarea pTextarea formControlName="shortDescription" rows="2" placeholder="یک یا دو خط معرفی پروژه (روی کارت نمایش داده می‌شود)"></textarea>
+              </div>
+
+              <div class="col-12">
+                <label class="field-label">توضیحات کامل</label>
+                <textarea pTextarea formControlName="fullDescription" rows="4" placeholder="توضیحات کامل پروژه برای صفحه‌ی جزئیات"></textarea>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <label class="field-label">دسته‌بندی <span class="required">*</span></label>
+                <p-select
+                  formControlName="category"
+                  [options]="categories"
+                  optionLabel="name"
+                  [placeholder]="'انتخاب دسته‌بندی'"
+                  [showClear]="false"
+                  class="w-100"
+                ></p-select>
+                @if (form.controls['category'].touched && form.controls['category'].invalid) {
+                  <small class="field-error">دسته‌بندی الزامی است.</small>
+                }
+              </div>
+
+              <div class="col-12 col-md-4">
+                <label class="field-label">سبک</label>
+                <p-select
+                  formControlName="style"
+                  [options]="styleOptions"
+                  [placeholder]="'انتخاب سبک'"
+                  [showClear]="true"
+                  class="w-100"
+                ></p-select>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <label class="field-label">فضای اجرا</label>
+                <p-select
+                  formControlName="space"
+                  [options]="spaceOptions"
+                  [placeholder]="'انتخاب فضای اجرا'"
+                  [showClear]="true"
+                  class="w-100"
+                ></p-select>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- =========================
+             مشخصات فنی
+        ========================== -->
+          <div class="form-card">
+            <h2 class="card-title">مشخصات فنی</h2>
+
+            <div class="row g-3">
+
+              <div class="col-12 col-md-6">
+                <label class="field-label">جنس بدنه</label>
+                <input pInputText type="text" formControlName="bodyMaterial" placeholder="مثلاً: MDF">
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="field-label">جنس درب</label>
+                <input pInputText type="text" formControlName="doorMaterial" placeholder="مثلاً: لمینت">
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="field-label">صفحه کابینت</label>
+                <input pInputText type="text" formControlName="countertop" placeholder="مثلاً: کوارتز">
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="field-label">یراق‌آلات</label>
+                <input pInputText type="text" formControlName="hardware" placeholder="مثلاً: هتلر">
+              </div>
+
+              <div class="col-12 col-md-4">
+                <label class="field-label">متراژ</label>
+                <input pInputText type="number" formControlName="areaValue" placeholder="0" min="0">
+              </div>
+
+              <div class="col-12 col-md-4">
+                <label class="field-label">واحد متراژ</label>
+                <input pInputText type="text" formControlName="areaUnit" placeholder="متر مربع">
+              </div>
+
+              <div class="col-12 col-md-4">
+                <label class="field-label">مدت اجرا</label>
+                <input pInputText type="text" formControlName="duration" placeholder="مثلاً: ۳۰ روز">
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="field-label">محل اجرا</label>
+                <input pInputText type="text" formControlName="location" placeholder="مثلاً: کرج، شهرک غرب">
+              </div>
+
+              <div class="col-12">
+                <label class="field-label">ویژگی‌ها <span class="hint">(هر خط یک ویژگی)</span></label>
+                <textarea pTextarea formControlName="features" rows="4" placeholder="مثلاً:&#10;تجهیزات هتلر&#10;نورپردازی داخلی"></textarea>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- =========================
+             تصاویر
+        ========================== -->
+          <div class="form-card">
+            <h2 class="card-title">تصاویر</h2>
+
+            <!-- تصاویر فعلی (حالت ویرایش) -->
+            @if (isEdit && project) {
+              <div class="current-images">
+                <span class="current-images-label">تصاویر فعلی:</span>
+                <div class="thumb-row">
+                  <div class="thumb-box">
+                    <img [src]="resolveUrl(project.coverImage)" [alt]="project.title">
+                    <span class="thumb-caption">کاور</span>
+                  </div>
+                  @for (image of project.images; track image) {
+                    <div class="thumb-box">
+                      <img [src]="resolveUrl(image)" alt="گالری">
+                      <span class="thumb-caption">گالری</span>
+                    </div>
+                  }
+                  @if (project.beforeImage) {
+                    <div class="thumb-box">
+                      <img [src]="resolveUrl(project.beforeImage)" alt="قبل">
+                      <span class="thumb-caption before">قبل</span>
+                    </div>
+                  }
+                  @if (project.afterImage) {
+                    <div class="thumb-box">
+                      <img [src]="resolveUrl(project.afterImage)" alt="بعد">
+                      <span class="thumb-caption after">بعد</span>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+
+            <div class="row g-3 mt-2">
+
+              <div class="col-12 col-md-6">
+                <label class="field-label">تصویر کاور (جدید)</label>
+                <label class="file-btn">
+                  <input type="file" accept="image/jpeg,image/png,image/webp" (change)="onCoverSelected($event)">
+                  <i class="pi pi-upload"></i>
+                  <span>@if (coverFile) { {{ coverFile.name }} } @else { انتخاب تصویر کاور }</span>
+                </label>
+                @if (coverFile) {
+                  <small class="field-hint">تصویر کاور فعلی با این تصویر جایگزین می‌شود.</small>
+                }
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="field-label">تصاویر گالری (چندتایی)</label>
+                <label class="file-btn">
+                  <input type="file" multiple accept="image/jpeg,image/png,image/webp" (change)="onGallerySelected($event)">
+                  <i class="pi pi-images"></i>
+                  <span>افزودن تصویر گالری</span>
+                </label>
+                @if (galleryFiles.length > 0) {
+                  <div class="mini-chips">
+                    @for (file of galleryFiles; track $index; let i = $index) {
+                      <span class="mini-chip">
+                        {{ file.name }}
+                        <button type="button" (click)="removeGalleryFile(i)" class="chip-remove"><i class="pi pi-times"></i></button>
+                      </span>
+                    }
+                  </div>
+                }
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="field-label">تصویر «قبل» (اختیاری)</label>
+                <label class="file-btn">
+                  <input type="file" accept="image/jpeg,image/png,image/webp" (change)="onBeforeSelected($event)">
+                  <i class="pi pi-upload"></i>
+                  <span>@if (beforeFile) { {{ beforeFile.name }} } @else { انتخاب تصویر قبل }</span>
+                </label>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="field-label">تصویر «بعد» (اختیاری)</label>
+                <label class="file-btn">
+                  <input type="file" accept="image/jpeg,image/png,image/webp" (change)="onAfterSelected($event)">
+                  <i class="pi pi-upload"></i>
+                  <span>@if (afterFile) { {{ afterFile.name }} } @else { انتخاب تصویر بعد }</span>
+                </label>
+              </div>
+
+            </div>
+
+            <small class="field-hint global-hint">فرمت مجاز: jpg / png / webp — حداکثر ۵ مگابایت برای هر فایل</small>
+          </div>
+
+        </div>
+
+
+        <!-- =========================
+             انتشار
+        ========================== -->
+        <div class="col-12 col-xl-4">
+
+          <div class="form-card">
+            <h2 class="card-title">انتشار</h2>
+
+            <div class="switch-row">
+              <div class="switch-info">
+                <span class="switch-label">منتشرشده</span>
+                <span class="switch-desc">پروژه در سایت قابل مشاهده باشد</span>
+              </div>
+              <p-toggleswitch formControlName="isPublished"></p-toggleswitch>
+            </div>
+
+            <div class="switch-row">
+              <div class="switch-info">
+                <span class="switch-label">پروژه‌ی منتخب</span>
+                <span class="switch-desc">در سکشن «پروژه‌های منتخب» صفحه خانه نمایش داده شود</span>
+              </div>
+              <p-toggleswitch formControlName="isFeatured"></p-toggleswitch>
+            </div>
+          </div>
+
+          <button type="submit" pButton label="ذخیره‌ی پروژه" icon="pi pi-check" [loading]="saving" [disabled]="saving" class="w-100 save-btn"></button>
+
+        </div>
+
+      </div>
+
+    </form>
+
+  }
+
+</div>

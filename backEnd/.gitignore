@@ -1,60 +1,19 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+# Node
+node_modules/
+*.log
+npm-debug.log*
 
-# compiled output
-/dist
-./dist
-/tmp
-/out-tsc
-# Only exists if Bazel was run (Nothing is here)
-/bazel-out
+# محیطی
+.env
 
-# dependencies
-/node_modules
-/vscode
-/angular
+# فایل‌های آپلودشده کاربران
+uploads/
 
-# profiling files
-chrome-profiler-events*.json
-
-# IDEs and editors
-/.idea
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
-
-# IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
-
-# misc
-/.angular/cache
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
-npm-debug.log
-yarn-error.log
-testem.log
-/typings
-
-# System Files
+# سیستم
 .DS_Store
 Thumbs.db
-.vscode/launch.json
-.vs/slnx.sqlite
-.vs/VSWorkspaceState.json
-.vs/Front/FileContentIndex/25cde2f9-2421-4328-86a8-9e00cef5e80d.vsidx
-.vs/Front/FileContentIndex/f756e1d7-f130-4ab1-99dc-dad836095946.vsidx
-.vs/Front/v17/.wsuo
-.vs/Front/v17/DocumentLayout.json
-.vs/Front/v17/workspaceFileList.bin
-/.vs/Front/FileContentIndex
-/src/environments/environment.ts
-./src/environments/environment.ts
+
+# IDE
+.idea/
+.vscode/
+*.swp

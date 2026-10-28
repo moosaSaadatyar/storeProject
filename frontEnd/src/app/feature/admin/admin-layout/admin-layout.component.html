@@ -1,0 +1,105 @@
+<div class="admin-layout" dir="rtl">
+
+  <!-- =========================
+       Sidebar
+  ========================== -->
+  <aside class="admin-sidebar">
+
+    <div class="sidebar-brand">
+      <img [src]="logo" alt="لوگو">
+      <span class="brand-name">{{ siteName }}</span>
+    </div>
+
+    <nav class="sidebar-menu">
+
+      <a routerLink="dashboard" routerLinkActive="active">
+        <i class="pi pi-th-large"></i>
+        <span>داشبورد</span>
+      </a>
+
+      <a routerLink="projects" routerLinkActive="active">
+        <i class="pi pi-briefcase"></i>
+        <span>پروژه‌ها</span>
+      </a>
+
+      <a routerLink="categories" routerLinkActive="active">
+        <i class="pi pi-list"></i>
+        <span>دسته‌بندی‌ها</span>
+      </a>
+
+      <a routerLink="services" routerLinkActive="active">
+        <i class="pi pi-cog"></i>
+        <span>خدمات</span>
+      </a>
+
+      <a routerLink="consultations" routerLinkActive="active">
+        <i class="pi pi-comments"></i>
+        <span>درخواست‌های مشاوره</span>
+      </a>
+
+      <a routerLink="contact" routerLinkActive="active">
+        <i class="pi pi-inbox"></i>
+        <span>پیام‌های تماس</span>
+      </a>
+
+      <a routerLink="testimonials" routerLinkActive="active">
+        <i class="pi pi-star"></i>
+        <span>نظرات مشتریان</span>
+      </a>
+
+      <a routerLink="faqs" routerLinkActive="active">
+        <i class="pi pi-question-circle"></i>
+        <span>سوالات متداول</span>
+      </a>
+
+      <a routerLink="settings" routerLinkActive="active">
+        <i class="pi pi-sliders-h"></i>
+        <span>تنظیمات سایت</span>
+      </a>
+
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="/" target="_blank" class="view-site">
+        <i class="pi pi-external-link"></i>
+        <span>مشاهده سایت</span>
+      </a>
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       Main
+  ========================== -->
+  <div class="admin-main">
+
+    <!-- Topbar -->
+    <header class="admin-topbar">
+
+      <div class="topbar-admin">
+
+        <div class="admin-avatar">
+          {{ (adminName || 'م').charAt(0) }}
+        </div>
+
+        <div class="admin-info">
+          <span class="admin-name">{{ adminName }}</span>
+          <span class="admin-email" dir="ltr">{{ adminEmail }}</span>
+        </div>
+
+      </div>
+
+      <button pButton icon="pi pi-sign-out" severity="secondary" [outlined]="true" (click)="logout()" [title]="'خروج'"></button>
+
+    </header>
+
+
+    <!-- Content -->
+    <main class="admin-content">
+      <router-outlet />
+    </main>
+
+  </div>
+
+</div>

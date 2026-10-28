@@ -1,0 +1,32 @@
+.featured-projects {
+  background-color: #fff;
+}
+
+.section-title {
+  margin: 0;
+  color: #222;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.section-subtitle {
+  margin: 4px 0 0;
+  color: #888;
+  font-size: 12px;
+}
+
+.title-line {
+  width: 32px;
+  height: 2px;
+  margin: 8px auto 0;
+  background-color: #c6924b;
+  border-radius: 2px;
+}
+
+@media (max-width: 767px) {
+  .featured-projects {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+}

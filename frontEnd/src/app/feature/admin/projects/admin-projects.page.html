@@ -1,0 +1,114 @@
+<div class="admin-projects-page" dir="rtl">
+
+  <p-confirmDialog />
+
+  <!-- Header -->
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">مدیریت پروژه‌ها</h1>
+      <p class="page-subtitle">نمایش، ویرایش و حذف نمونه‌کارها</p>
+    </div>
+    <a routerLink="/admin/projects/new" pButton label="افزودن پروژه" icon="pi pi-plus" class="head-action"></a>
+  </div>
+
+
+  <!-- Toolbar -->
+  <div class="toolbar-card">
+    <div class="search-box">
+      <i class="pi pi-search"></i>
+      <input
+        pInputText
+        type="text"
+        [(ngModel)]="q"
+        (ngModelChange)="onSearchChange()"
+        placeholder="جست‌وجو در عنوان، توضیحات و محل اجرا..."
+      >
+    </div>
+  </div>
+
+
+  <!-- Loading -->
+  @if (loading) {
+    <p-skeleton height="420px" borderRadius="12px" class="mt-3"></p-skeleton>
+  }
+
+
+  <!-- Table -->
+  @if (!loading) {
+
+    @if (projects.length === 0) {
+      <div class="empty-state">
+        <i class="pi pi-briefcase empty-icon"></i>
+        <p>پروژه‌ای یافت نشد.</p>
+      </div>
+    } @else {
+      <div class="table-card">
+        <div class="table-wrap">
+          <table class="admin-table">
+
+            <thead>
+              <tr>
+                <th>تصویر</th>
+                <th>عنوان</th>
+                <th>دسته‌بندی</th>
+                <th>سبک</th>
+                <th>وضعیت</th>
+                <th>منتخب</th>
+                <th>تاریخ</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (project of projects; track project._id) {
+                <tr>
+                  <td>
+                    <img
+                      class="cover-thumb"
+                      [src]="resolveUrl(project.coverImage) || '/images/z.jpg'"
+                      [alt]="project.title"
+                      loading="lazy"
+                    >
+                  </td>
+                  <td class="td-title">
+                    {{ project.title }}
+                  </td>
+                  <td>
+                    {{ categoryName(project) }}
+                  </td>
+                  <td>{{ styleLabel(project.style) }}</td>
+                  <td>
+                    <p-tag
+                      [value]="project.isPublished ? 'منتشرشده' : 'پیش‌نویس'"
+                      [severity]="project.isPublished ? 'success' : 'secondary'"
+                      size="small"
+                    ></p-tag>
+                  </td>
+                  <td>
+                    <i class="pi" [class.pi-star-fill]="project.isFeatured" [class.pi-star]="!project.isFeatured" [class.gold]="project.isFeatured"></i>
+                  </td>
+                  <td class="td-date">{{ formatDate(project.createdAt) }}</td>
+                  <td>
+                    <div class="row-actions">
+                      <button type="button" pButton icon="pi pi-eye" severity="secondary" [outlined]="true" (click)="viewInSite(project)" [title]="'نمایش در سایت'"></button>
+                      <a [routerLink]="['/admin/projects', project._id, 'edit']" pButton icon="pi pi-pencil" severity="info" [outlined]="true" [title]="'ویرایش'"></a>
+                      <button type="button" pButton icon="pi pi-trash" severity="danger" [outlined]="true" (click)="confirmDelete(project)" [title]="'حذف'"></button>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+
+      <!-- Paginator -->
+      <div class="paginator-wrap">
+        <p-paginator [rows]="limit" [totalRecords]="total" (onPageChange)="onPageChange($event)"></p-paginator>
+      </div>
+    }
+
+  }
+
+</div>

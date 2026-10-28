@@ -47,6 +47,11 @@ function errorHandler(err, req, res, next) {
     return res.status(400).json({ success: false, message: 'شناسه ارسال‌شده معتبر نیست.', code: 'INVALID_ID' });
   }
 
+  // 404های داخلی (مثلاً فایل استاتیک یافت نشد)
+  if (err.status === 404 || err.statusCode === 404) {
+    return res.status(404).json({ success: false, message: 'منبع موردنظر یافت نشد.', code: 'NOT_FOUND' });
+  }
+
   // مقدار تکراری در فیلد یونیک
   if (err.code === 11000) {
     return res.status(409).json({ success: false, message: 'مقدار تکراری برای فیلد یونیک ارسال شده است.', code: 'DUPLICATE' });

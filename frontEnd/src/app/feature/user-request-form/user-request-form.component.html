@@ -2,7 +2,6 @@
 
     <div class="container py-5">
 
-
         <!-- =========================
          Page Header
     ========================== -->
@@ -21,6 +20,15 @@
 
         </div>
 
+        <!-- ارجاع از صفحه‌ی جزئیات پروژه -->
+        @if (refProjectTitle) {
+            <div class="ref-banner text-center mb-4">
+                <i class="pi pi-arrow-circle-up"></i>
+                <span>
+                    {{ 'REF_PROJECT_LABEL' | translate }}: <strong>{{ refProjectTitle }}</strong>
+                </span>
+            </div>
+        }
 
 
         <!-- =========================
@@ -29,12 +37,11 @@
 
         <div class="request-card">
 
-            <form [formGroup]="requestForm">
-
+            <form [formGroup]="requestForm" (ngSubmit)="submit()">
 
                 <!-- =========================
-             Contact Information
-        ========================== -->
+                 Contact Information
+            ========================== -->
 
                 <div class="form-section">
 
@@ -57,22 +64,23 @@
                         </div>
 
                     </div>
+
                     <div class="row g-4">
 
-
                         <!-- Full Name -->
-
                         <div class="col-12 col-md-6">
                             <mo-input-text [config]="fullNameConfig" formControlName="fullName"></mo-input-text>
+                            @if (requestForm.get('fullName')?.invalid && requestForm.get('fullName')?.touched) {
+                                <small class="error-message">{{ 'VALIDATION_REQUIRED' | translate }}</small>
+                            }
                         </div>
 
-
-
                         <!-- Phone -->
-
                         <div class="col-12 col-md-6">
-                            <mo-input-number [config]="numberPhoneConfig"
-                                formControlName="phoneNumber"></mo-input-number>
+                            <mo-input-number [config]="numberPhoneConfig" formControlName="phoneNumber"></mo-input-number>
+                            @if (requestForm.get('phoneNumber')?.invalid && requestForm.get('phoneNumber')?.touched) {
+                                <small class="error-message">{{ 'VALIDATION_PHONE' | translate }}</small>
+                            }
                         </div>
 
                     </div>
@@ -80,17 +88,56 @@
                 </div>
 
 
+                <div class="form-divider"></div>
+
+
+                <!-- =========================
+                 Cabinet Type
+            ========================== -->
+
+                <div class="form-section">
+
+                    <div class="section-title">
+
+                        <div class="section-icon">
+                            <i class="pi pi-box"></i>
+                        </div>
+
+                        <div>
+                            <h2>
+                                {{ 'CABINET_TYPE_LABEL' | translate }}
+                            </h2>
+                            <p>
+                                {{ 'CABINET_TYPE_SUB' | translate }}
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <p-select
+                        formControlName="cabinetType"
+                        [options]="categories"
+                        optionLabel="name"
+                        [placeholder]="'SELECT_CATEGORY' | translate"
+                        [showClear]="false"
+                        class="w-100"
+                    ></p-select>
+
+                    @if (requestForm.get('cabinetType')?.invalid && requestForm.get('cabinetType')?.touched) {
+                        <small class="error-message">{{ 'VALIDATION_REQUIRED' | translate }}</small>
+                    }
+
+                </div>
+
 
                 <div class="form-divider"></div>
 
 
-
                 <!-- =========================
-             Style
-        ========================== -->
+                 Style
+            ========================== -->
 
                 <div class="form-section">
-
 
                     <div class="section-title">
 
@@ -112,23 +159,16 @@
 
                     </div>
 
+                    <app-radio-btn-selector [options]="cabinetStyle" formControlName="cabinetStyle"></app-radio-btn-selector>
 
+                    @if (requestForm.get('cabinetStyle')?.invalid && requestForm.get('cabinetStyle')?.touched) {
+                        <small class="error-message">{{ 'VALIDATION_REQUIRED' | translate }}</small>
+                    }
 
-
-                    <app-radio-btn-selector [options]="cabinetStyle"
-                        formControlName="cabinetStyle"></app-radio-btn-selector>
-                    <div *ngIf="
-                            requestForm.get('cabinetStyle')?.invalid &&
-                            requestForm.get('cabinetStyle')?.touched
-                        " class="text-danger small mt-2">
-                        لطفاً سبک کابینت را انتخاب کنید.
-                    </div>
                 </div>
 
 
-
                 <div class="form-section">
-
 
                     <div class="section-title">
 
@@ -150,133 +190,166 @@
 
                     </div>
 
-                    <app-radio-btn-selector [options]="cabinetCalor"
-                        formControlName="cabinetColor"></app-radio-btn-selector>
-                    <div *ngIf="
-                            requestForm.get('cabinetColor')?.invalid &&
-                            requestForm.get('cabinetColor')?.touched
-                        " class="text-danger small mt-2">
-                        لطفاً رنگ کابینت را انتخاب کنید.
+                    <app-radio-btn-selector [options]="cabinetCalor" formControlName="cabinetColor"></app-radio-btn-selector>
+
+                    @if (requestForm.get('cabinetColor')?.invalid && requestForm.get('cabinetColor')?.touched) {
+                        <small class="error-message">{{ 'VALIDATION_REQUIRED' | translate }}</small>
+                    }
+
+                </div>
+
+
+                <div class="form-divider"></div>
+
+
+                <!-- =========================
+                 Project Details
+            ========================== -->
+
+                <div class="form-section">
+
+                    <div class="section-title">
+
+                        <div class="section-icon">
+                            <i class="pi pi-comment"></i>
+                        </div>
+
+                        <div>
+                            <h2>
+                                {{ 'MORE_DETAILS' | translate }}
+                            </h2>
+                            <p>
+                                {{ 'DESCRIBE_YOUR_REQUEST' | translate }}
+                            </p>
+                        </div>
+
                     </div>
-                </div>
 
+                    <div class="row g-4">
 
+                        <div class="col-12 col-md-6">
+                            <label class="form-label">
+                                {{ 'DIMENSIONS_LABEL' | translate }}
+                            </label>
+                            <input pInputText type="text" formControlName="dimensions"
+                                [placeholder]="'DIMENSIONS_PLACEHOLDER' | translate">
+                        </div>
 
-                <!-- <div class="color-options">
+                        <div class="col-12 col-md-6">
+                            <label class="form-label">
+                                {{ 'CITY_LABEL' | translate }}
+                            </label>
+                            <input pInputText type="text" formControlName="city"
+                                [placeholder]="'CITY_PLACEHOLDER' | translate">
+                        </div>
 
-                        @for (color of colors; track color.value) {
+                        <div class="col-12 col-md-6">
+                            <label class="form-label">
+                                {{ 'BUDGET_LABEL' | translate }}
+                            </label>
+                            <p-select
+                                formControlName="budget"
+                                [options]="budgetOptions"
+                                [placeholder]="'BUDGET_PLACEHOLDER' | translate"
+                                [showClear]="true"
+                                class="w-100"
+                            ></p-select>
+                        </div>
 
-                        <button type="button" class="color-option" [class.selected]="
-                  requestForm.get('color')?.value === color.value
-                " (click)="selectColor(color.value)">
+                        <div class="col-12">
+                            <label class="form-label">
+                                {{ 'DESCRIPTION_LABEL' | translate }} <span class="required">*</span>
+                            </label>
+                            <textarea pTextarea formControlName="description" rows="5" class="w-100"
+                                [placeholder]="'DESCRIPTION_PLACEHOLDER' | translate"></textarea>
 
-                            <span class="color-circle" [class]="color.class"></span>
-
-
-                            <span class="color-name">
-
-                                {{ color.label | translate }}
-
-                            </span>
-
-
-                            @if (
-                            requestForm.get('color')?.value === color.value
-                            ) {
-
-                            <span class="color-check">
-
-                                <i class="pi pi-check"></i>
-
-                            </span>
-
+                            @if (requestForm.get('description')?.invalid && requestForm.get('description')?.touched) {
+                                <small class="error-message">{{ 'VALIDATION_REQUIRED' | translate }}</small>
                             }
+                        </div>
 
-                        </button>
-
-                        }
-
-                    </div> -->
-
-
-                <!-- @if (
-            f['color'].touched &&
-            f['color'].invalid
-          ) {
-
-            <small class="error-message">
-
-              {{ 'COLOR_REQUIRED' | translate }}
-
-            </small>
-
-          } -->
-
-        <!-- </div> -->
-
-
-
-        <div class="form-divider"></div>
-
-
-
-        <!-- =========================
-             Description
-        ========================== -->
-
-        <div class="form-section">
-
-
-            <div class="section-title">
-
-                <div class="section-icon">
-                    <i class="pi pi-comment"></i>
-                </div>
-
-                <div>
-
-                    <h2>
-                        {{ 'MORE_DETAILS' | translate }}
-                    </h2>
-
-                    <p>
-                        {{ 'DESCRIBE_YOUR_REQUEST' | translate }}
-                    </p>
+                    </div>
 
                 </div>
 
-            </div>
+
+                <div class="form-divider"></div>
 
 
-            <textarea pTextarea formControlName="description" rows="5" class="w-100"
-                [placeholder]="'DESCRIPTION_PLACEHOLDER' | translate"></textarea>
+                <!-- =========================
+                 Images
+            ========================== -->
+
+                <div class="form-section">
+
+                    <div class="section-title">
+
+                        <div class="section-icon">
+                            <i class="pi pi-image"></i>
+                        </div>
+
+                        <div>
+                            <h2>
+                                {{ 'ATTACH_IMAGES' | translate }}
+                            </h2>
+                            <p>
+                                {{ 'ATTACH_IMAGES_SUB' | translate }}
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <label class="file-drop" [class.has-files]="selectedFiles.length > 0">
+                        <input type="file" multiple accept="image/jpeg,image/png,image/webp" (change)="onFilesSelected($event)">
+                        <i class="pi pi-cloud-upload"></i>
+                        <span>{{ 'FILE_BROWSE' | translate }}</span>
+                        <small>{{ 'FILE_HINT' | translate }}</small>
+                    </label>
+
+                    @if (fileError) {
+                        <small class="error-message">{{ fileError }}</small>
+                    }
+
+                    @if (selectedFiles.length > 0) {
+                        <div class="file-list">
+                            @for (file of selectedFiles; track $index; let i = $index) {
+                                <div class="file-chip">
+                                    <i class="pi pi-file-image"></i>
+                                    <span class="file-name">{{ file.name }}</span>
+                                    <button type="button" class="file-remove" (click)="removeFile(i)" [title]="'REMOVE' | translate">
+                                        <i class="pi pi-times"></i>
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    }
+
+                </div>
+
+
+                <!-- =========================
+                 Submit
+            ========================== -->
+
+                <div class="submit-section">
+
+                    <button
+                        type="submit"
+                        pButton
+                        [label]="'SUBMIT_REQUEST' | translate"
+                        icon="pi pi-send"
+                        iconPos="right"
+                        [rounded]="true"
+                        [loading]="submitting"
+                        [disabled]="submitting"
+                        styleClass="submit-request"
+                    ></button>
+
+                </div>
+
+            </form>
 
         </div>
-
-
-
-        <!-- =========================
-             Submit
-        ========================== -->
-
-        <div class="submit-section">
-
-            <!-- <p-button
-            type="submit"
-            [label]="'SUBMIT_REQUEST' | translate"
-            icon="pi pi-send"
-            iconPos="right"
-            severity="warn"
-            [rounded]="true"
-            styleClass="submit-request"
-          /> -->
-
-        </div>
-
-
-        </form>
-
-    </div>
 
     </div>
 

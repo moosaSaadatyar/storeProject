@@ -1,0 +1,7 @@
+const express = require('express');
+const { stats } = require('./dashboard.controller');
+
+const router = express.Router();
+router.get('/stats', stats);
+
+module.exports = router;

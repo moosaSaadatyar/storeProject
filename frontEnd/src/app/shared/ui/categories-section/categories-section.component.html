@@ -1,0 +1,74 @@
+<section class="categories-section py-5" dir="rtl">
+
+  <div class="container">
+
+    <!-- Title -->
+    <div class="text-center mb-4">
+
+      <h2 class="section-title">
+        {{ 'CABINET_TYPES' | translate }}
+      </h2>
+
+      <p class="section-subtitle">
+        {{ 'CABINET_TYPES_SUB' | translate }}
+      </p>
+
+      <div class="title-line"></div>
+
+    </div>
+
+
+    <!-- Loading -->
+    @if (loading) {
+      <div class="row g-3 justify-content-center">
+        @for (i of [1, 2, 3, 4]; track i) {
+          <div class="col-6 col-md-4 col-lg-2">
+            <p-skeleton height="150px" borderRadius="10px"></p-skeleton>
+          </div>
+        }
+      </div>
+    }
+
+
+    <!-- Categories -->
+    @if (!loading && categories.length > 0) {
+      <div class="row g-3 justify-content-center">
+
+        @for (category of categories; track category._id) {
+          <div class="col-6 col-md-4 col-lg-2">
+
+            <a
+              [routerLink]="['/portfolio', { category: category.slug }]"
+              class="category-card"
+            >
+
+              @if (category.image) {
+                <div class="category-media">
+                  <img [src]="resolveUrl(category.image)" [alt]="category.name">
+                </div>
+              } @else {
+                <div class="category-media category-media-icon">
+                  <i [class]="category.icon || 'pi pi-cog'"></i>
+                </div>
+              }
+
+              <h3 class="category-name">
+                {{ category.name }}
+              </h3>
+
+              @if (category.projectCount !== undefined) {
+                <span class="category-count">
+                  {{ category.projectCount }} {{ 'PROJECT_COUNT' | translate }}
+                </span>
+              }
+
+            </a>
+
+          </div>
+        }
+      </div>
+    }
+
+  </div>
+
+</section>

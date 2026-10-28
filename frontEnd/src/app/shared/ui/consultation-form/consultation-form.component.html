@@ -1,0 +1,111 @@
+<section class="consultation-form py-5" dir="rtl">
+
+  <div class="container">
+
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8">
+
+        <!-- Title -->
+        <div class="text-center mb-4">
+
+          <h2 class="section-title">
+            {{ 'FREE_CONSULTATION' | translate }}
+          </h2>
+
+          <p class="section-subtitle">
+            {{ 'FREE_CONSULTATION_SUB' | translate }}
+          </p>
+
+          <div class="title-line"></div>
+
+        </div>
+
+
+        <!-- Form -->
+        <form [formGroup]="form" (ngSubmit)="submit()" class="consult-card">
+
+          <div class="row g-3">
+
+            <div class="col-12 col-md-6">
+              <div class="form-field">
+                <label class="field-label">
+                  {{ 'FULL_NAME' | translate }} <span class="required-star">*</span>
+                </label>
+                <input
+                  pInputText
+                  type="text"
+                  formControlName="fullName"
+                  [placeholder]="'FULL_NAME_PLACEHOLDER' | translate"
+                  [class.p-invalid]="form.controls['fullName'].touched && form.controls['fullName'].invalid"
+                >
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <div class="form-field">
+                <label class="field-label">
+                  {{ 'PHONE_NUMBER' | translate }} <span class="required-star">*</span>
+                </label>
+                <input
+                  pInputText
+                  type="tel"
+                  formControlName="phone"
+                  [placeholder]="'PHONE_PLACEHOLDER' | translate"
+                  [class.p-invalid]="form.controls['phone'].touched && form.controls['phone'].invalid"
+                >
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-field">
+                <label class="field-label">
+                  {{ 'CABINET_TYPE_LABEL' | translate }} <span class="required-star">*</span>
+                </label>
+                <p-select
+                  formControlName="cabinetType"
+                  [options]="categories"
+                  optionLabel="name"
+                  [placeholder]="'SELECT_CATEGORY' | translate"
+                  [showClear]="false"
+                  [class.p-invalid]="form.controls['cabinetType'].touched && form.controls['cabinetType'].invalid"
+                ></p-select>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-field">
+                <label class="field-label">
+                  {{ 'MESSAGE_LABEL' | translate }}
+                </label>
+                <textarea
+                  pTextarea
+                  formControlName="description"
+                  rows="3"
+                  [placeholder]="'MESSAGE_PLACEHOLDER' | translate"
+                ></textarea>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Submit -->
+          <div class="text-center mt-4">
+            <button
+              type="submit"
+              pButton
+              [label]="'SUBMIT_REQUEST' | translate"
+              icon="pi pi-send"
+              [loading]="submitting"
+              [disabled]="submitting"
+              class="consult-submit"
+            ></button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+
+</section>

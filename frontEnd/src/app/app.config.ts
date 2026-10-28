@@ -4,7 +4,7 @@ import {
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -16,6 +16,8 @@ import { LOCALE_ID } from '@angular/core';
 import { providePrimeNG } from 'primeng/config';
 import Nora from '@primeuix/themes/nora';
 import Aura from '@primeuix/themes/aura';
+import { authInterceptor } from './core/interceptors/auth.interceptor';
+import { errorInterceptor } from './core/interceptors/error.interceptor';
 registerLocaleData(localeFa);
 
 /**
@@ -49,7 +51,7 @@ const CabinetTheme = {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([authInterceptor, errorInterceptor])),
     provideRouter(routes),
     provideAnimations(),
     provideToastr({

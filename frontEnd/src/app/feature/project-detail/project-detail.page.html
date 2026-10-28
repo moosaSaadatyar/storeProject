@@ -1,0 +1,242 @@
+<div class="project-detail" dir="rtl">
+
+  <!-- Loading -->
+  @if (loading) {
+    <div class="container py-5">
+      <div class="row g-4">
+        <div class="col-12 col-lg-7">
+          <p-skeleton height="420px" borderRadius="12px"></p-skeleton>
+        </div>
+        <div class="col-12 col-lg-5">
+          <p-skeleton height="420px" borderRadius="12px"></p-skeleton>
+        </div>
+      </div>
+    </div>
+  }
+
+
+  <!-- Not Found -->
+  @if (!loading && notFound) {
+    <div class="container py-5">
+      <div class="empty-state text-center">
+        <i class="pi pi-exclamation-circle empty-icon"></i>
+        <h2>{{ 'NOT_FOUND_TITLE' | translate }}</h2>
+        <p>{{ 'NOT_FOUND_DESC' | translate }}</p>
+        <a routerLink="/portfolio" pButton [label]="'BACK_TO_HOME' | translate" icon="pi pi-arrow-right" class="mt-3"></a>
+      </div>
+    </div>
+  }
+
+
+  <!-- Content -->
+  @if (!loading && !notFound && project) {
+
+    <!-- Breadcrumb -->
+    <div class="container pt-4">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <a routerLink="/home">{{ 'HOME' | translate }}</a>
+        <span class="sep">/</span>
+        <a routerLink="/portfolio">{{ 'WORK_SAMPLE' | translate }}</a>
+        <span class="sep">/</span>
+        <span class="current">{{ project.title }}</span>
+      </nav>
+    </div>
+
+
+    <div class="container pb-5">
+
+      <div class="row g-4">
+
+        <!-- =========================
+             Gallery
+        ========================== -->
+        <div class="col-12 col-lg-7">
+
+          <div class="gallery-main">
+            <img
+              [src]="gallery[selectedIndex] || placeholder"
+              [alt]="project.title"
+            >
+          </div>
+
+          @if (gallery.length > 1) {
+            <div class="gallery-thumbs">
+              @for (image of gallery; track $index; let i = $index) {
+                <button
+                  type="button"
+                  class="thumb"
+                  [class.active]="i === selectedIndex"
+                  (click)="selectedIndex = i"
+                >
+                  <img [src]="image" [alt]="project.title">
+                </button>
+              }
+            </div>
+          }
+
+          <!-- Before / After -->
+          @if (hasBeforeAfter) {
+            <div class="ba-row">
+              <div class="ba-item">
+                <span class="ba-label before">{{ 'BEFORE_LABEL' | translate }}</span>
+                <img [src]="resolveUrl(project.beforeImage)" [alt]="'BEFORE_LABEL' | translate">
+              </div>
+              <div class="ba-item">
+                <span class="ba-label after">{{ 'AFTER_LABEL' | translate }}</span>
+                <img [src]="resolveUrl(project.afterImage)" [alt]="'AFTER_LABEL' | translate">
+              </div>
+            </div>
+          }
+
+        </div>
+
+
+        <!-- =========================
+             Info
+        ========================== -->
+        <div class="col-12 col-lg-5">
+
+          <div class="info-card">
+
+            <div class="info-tags">
+
+              @if (categoryLabel) {
+                <p-tag [value]="categoryLabel" severity="warn"></p-tag>
+              }
+
+              @if (styleLabel) {
+                <p-tag [value]="styleLabel" severity="secondary"></p-tag>
+              }
+
+            </div>
+
+            <h1 class="info-title">
+              {{ project.title }}
+            </h1>
+
+            @if (project.shortDescription) {
+              <p class="info-short">
+                {{ project.shortDescription }}
+              </p>
+            }
+
+            @if (project.fullDescription) {
+              <p class="info-full">
+                {{ project.fullDescription }}
+              </p>
+            }
+
+
+            <!-- Specs -->
+            <div class="specs">
+
+              @if (project.bodyMaterial) {
+                <div class="spec-row">
+                  <span class="spec-label">{{ 'BODY_MATERIAL' | translate }}</span>
+                  <span class="spec-value">{{ project.bodyMaterial }}</span>
+                </div>
+              }
+
+              @if (project.doorMaterial) {
+                <div class="spec-row">
+                  <span class="spec-label">{{ 'DOOR_MATERIAL' | translate }}</span>
+                  <span class="spec-value">{{ project.doorMaterial }}</span>
+                </div>
+              }
+
+              @if (project.countertop) {
+                <div class="spec-row">
+                  <span class="spec-label">{{ 'COUNTERTOP_LABEL' | translate }}</span>
+                  <span class="spec-value">{{ project.countertop }}</span>
+                </div>
+              }
+
+              @if (project.hardware) {
+                <div class="spec-row">
+                  <span class="spec-label">{{ 'HARDWARE_LABEL' | translate }}</span>
+                  <span class="spec-value">{{ project.hardware }}</span>
+                </div>
+              }
+
+              @if (project.area && project.area.value) {
+                <div class="spec-row">
+                  <span class="spec-label">{{ 'AREA_LABEL' | translate }}</span>
+                  <span class="spec-value">{{ project.area.value }} {{ project.area.unit }}</span>
+                </div>
+              }
+
+              @if (project.duration) {
+                <div class="spec-row">
+                  <span class="spec-label">{{ 'DURATION_LABEL' | translate }}</span>
+                  <span class="spec-value">{{ project.duration }}</span>
+                </div>
+              }
+
+              @if (project.location) {
+                <div class="spec-row">
+                  <span class="spec-label">{{ 'LOCATION_LABEL' | translate }}</span>
+                  <span class="spec-value">{{ project.location }}</span>
+                </div>
+              }
+
+            </div>
+
+
+            <!-- Features -->
+            @if (project.features && project.features.length > 0) {
+              <div class="features">
+                <h3 class="features-title">{{ 'FEATURES_LABEL' | translate }}</h3>
+                <ul class="features-list">
+                  @for (feature of project.features; track feature) {
+                    <li>
+                      <i class="pi pi-check-circle"></i>
+                      <span>{{ feature }}</span>
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+
+
+            <!-- CTA -->
+            <a
+              [routerLink]="['/request', { ref: project._id }]"
+              pButton
+              [label]="'ORDER_SIMILAR' | translate"
+              icon="pi pi-arrow-left"
+              class="info-cta mt-3"
+            ></a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           Related Projects
+      ========================== -->
+      @if (project.related && project.related.length > 0) {
+        <div class="related mt-5">
+
+          <div class="text-center mb-4">
+            <h2 class="section-title">{{ 'RELATED_PROJECTS' | translate }}</h2>
+            <div class="title-line"></div>
+          </div>
+
+          <div class="row g-4">
+            @for (related of project.related; track related._id) {
+              <div class="col-6 col-lg-3">
+                <app-project-card [project]="related"></app-project-card>
+              </div>
+            }
+          </div>
+
+        </div>
+      }
+
+    </div>
+  }
+
+</div>

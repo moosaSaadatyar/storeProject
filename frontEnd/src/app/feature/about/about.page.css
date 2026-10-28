@@ -1,0 +1,192 @@
+.about-page {
+  min-height: 60vh;
+}
+
+/* =========================
+   Page Header
+========================= */
+
+.page-header {
+  padding: 45px 0 35px;
+  background: #fbf8f4;
+  text-align: center;
+  border-bottom: 1px solid #f0e8dd;
+}
+
+.page-title {
+  margin: 0;
+  color: #222;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.page-subtitle {
+  margin: 6px 0 0;
+  color: #888;
+  font-size: 12.5px;
+}
+
+.title-line {
+  width: 36px;
+  height: 2px;
+  margin: 10px auto 0;
+  background-color: #c6924b;
+  border-radius: 2px;
+}
+
+/* =========================
+   About text
+========================= */
+
+.about-text-card {
+  height: 100%;
+  padding: 1.8rem;
+  background: #fff;
+  border: 1px solid #f0e8dd;
+  border-radius: 12px;
+}
+
+.about-heading {
+  margin: 0 0 1rem;
+  color: #222;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.about-text {
+  margin: 0;
+  color: #666;
+  font-size: 13px;
+  line-height: 2.3;
+  white-space: pre-line;
+}
+
+.about-actions {
+  margin-top: 1.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+/* =========================
+   Experience
+========================= */
+
+.experience-card {
+  padding: 1.8rem;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(135deg, #c6924b, #a97a3b);
+  border-radius: 12px;
+}
+
+.experience-years {
+  display: block;
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.experience-label {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.experience-text {
+  margin: 0.8rem 0 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 11.5px;
+  line-height: 1.9;
+}
+
+/* =========================
+   Values
+========================= */
+
+.values-card {
+  margin-top: 1rem;
+  padding: 1.4rem 1.5rem;
+  background: #fff;
+  border: 1px solid #f0e8dd;
+  border-radius: 12px;
+}
+
+.values-title {
+  margin: 0 0 0.8rem;
+  color: #222;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.values-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.values-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #555;
+  font-size: 12px;
+  line-height: 2;
+}
+
+.values-list li i {
+  color: #c6924b;
+  font-size: 13px;
+}
+
+/* =========================
+   Strengths
+========================= */
+
+.section-title {
+  margin: 0;
+  color: #222;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.strength-item {
+  height: 100%;
+  padding: 1rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: #fffdfb;
+  border: 1px solid #f0e8dd;
+  border-radius: 0.75rem;
+  transition: all 0.25s ease;
+}
+
+.strength-item:hover {
+  border-color: #c6924b;
+  box-shadow: 0 8px 22px rgba(198, 146, 75, 0.14);
+}
+
+.strength-item i {
+  color: #c6924b;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.strength-item span {
+  color: #444;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+@media (max-width: 767px) {
+  .page-header {
+    padding: 32px 0 26px;
+  }
+
+  .about-text-card {
+    padding: 1.3rem;
+  }
+}

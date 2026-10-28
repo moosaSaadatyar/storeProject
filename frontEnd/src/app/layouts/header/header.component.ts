@@ -4,6 +4,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { RequestBtnComponent } from './request-btn/request-btn.component';
 import { MoNavbarMenuComponent } from '../../core/component/lib/mo-navbar-menu/mo-navbar-menu.component';
+import { SiteSettingsService } from '../../shared/services/site-settings.service';
+import { resolveImageUrl } from '../../core/static/helpers/image.helper';
 
 @Component({
   selector: 'app-header',
@@ -19,10 +21,20 @@ export class HeaderComponent implements OnInit {
   menuItem: MenuItem[] = [];
 
   private translate = inject(TranslateService);
+  private siteSettings = inject(SiteSettingsService);
 
   ngOnInit(): void {
     this.menuInIt();
     this.translate.onLangChange.subscribe(() => this.menuInIt());
+  }
+
+  /** لوگو از تنظیمات سایت (با جایگزین پیش‌فرض) */
+  get logo(): string {
+    return resolveImageUrl(this.siteSettings.s.logo) || '/logo/2.png';
+  }
+
+  get siteName(): string {
+    return this.siteSettings.siteName;
   }
 
   /**
@@ -32,8 +44,6 @@ export class HeaderComponent implements OnInit {
    * نمایش می‌دهد، بنابراین label در اینجا ترجمه می‌شود و با تغییر زبان
    * منو دوباره ساخته می‌شود. ناوبری با خاصیت `routerLink` انجام می‌شود
    * (خاصیت قدیمی `route` در PrimeNG 21 دیگر وجود ندارد).
-   *
-   * مسیرهای /services و /about و /contact در مراحل بعدی پیاده‌سازی می‌شوند.
    */
   private menuInIt() {
     this.menuItem = [

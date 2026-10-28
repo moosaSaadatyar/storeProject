@@ -1,0 +1,156 @@
+<div class="admin-testimonials-page" dir="rtl">
+
+  <p-confirmDialog />
+
+  <!-- Header -->
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">نظرات مشتریان</h1>
+      <p class="page-subtitle">بررسی و تأیید نظرات ثبت‌شده</p>
+    </div>
+  </div>
+
+
+  <!-- =========================
+       Form (add / edit)
+  ========================== -->
+  <div class="form-card">
+
+    <h2 class="card-title">
+      @if (editing) { ویرایش نظر } @else { افزودن نظر جدید }
+    </h2>
+
+    <form [formGroup]="form" (ngSubmit)="save()">
+
+      <div class="row g-3">
+
+        <div class="col-12 col-md-3">
+          <label class="field-label">نام مشتری</label>
+          <input pInputText type="text" formControlName="customerName" placeholder="مثلاً: سارا محمدی">
+        </div>
+
+        <div class="col-12 col-md-3">
+          <label class="field-label">نوع پروژه</label>
+          <input pInputText type="text" formControlName="projectType" placeholder="مثلاً: کابینت آشپزخانه">
+        </div>
+
+        <div class="col-12 col-md-2">
+          <label class="field-label">امتیاز</label>
+          <p-rating [ngModel]="form.controls['rating'].value" (ngModelChange)="form.controls['rating'].setValue($event)" styleClass="rating-star"></p-rating>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <label class="field-label">تأییدشده</label>
+          <div class="approve-row">
+            <p-toggleswitch formControlName="isApproved"></p-toggleswitch>
+            <span class="approve-hint">
+              @if (form.controls['isApproved'].value) { نمایش در سایت } @else { پنهان از سایت }
+            </span>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <label class="field-label">متن نظر <span class="required">*</span></label>
+          <textarea pTextarea formControlName="comment" rows="2" placeholder="متن نظر مشتری"></textarea>
+          @if (form.controls['comment'].touched && form.controls['comment'].invalid) {
+            <small class="field-error">متن نظر الزامی است.</small>
+          }
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+        <div class="actions-btns">
+          @if (editing) {
+            <button type="button" pButton label="انصراف" severity="secondary" [outlined]="true" (click)="resetForm()"></button>
+          }
+          <button type="submit" pButton [label]="editing ? 'ذخیره‌ی تغییرات' : 'افزودن نظر'" icon="pi pi-check" [loading]="saving" [disabled]="saving"></button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <!-- =========================
+       List
+  ========================== -->
+  <div class="toolbar-card">
+    <label class="check-row">
+      <input type="checkbox" [ngModel]="showPendingOnly" (ngModelChange)="showPendingOnly = $event; onFilterToggle()">
+      <span>فقط موارد در انتظار بررسی</span>
+    </label>
+  </div>
+
+  <div class="table-card">
+
+    @if (loading) {
+      <p-skeleton height="200px" borderRadius="10px"></p-skeleton>
+    }
+
+    @if (!loading) {
+
+      @if (testimonials.length === 0) {
+        <div class="empty-state">
+          <i class="pi pi-star empty-icon"></i>
+          <p>نظری یافت نشد.</p>
+        </div>
+      } @else {
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>نام مشتری</th>
+                <th>نظر</th>
+                <th>امتیاز</th>
+                <th>نوع پروژه</th>
+                <th>تاریخ</th>
+                <th>وضعیت</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of testimonials; track item._id) {
+                <tr>
+                  <td class="td-name">{{ item.customerName || 'نامشخص' }}</td>
+                  <td class="td-comment">{{ item.comment }}</td>
+                  <td>
+                    <div class="star-display">
+                      @for (star of [1, 2, 3, 4, 5]; track star) {
+                        <i class="pi" [class.pi-star-fill]="star <= (item.rating || 0)" [class.pi-star]="star > (item.rating || 0)"></i>
+                      }
+                    </div>
+                  </td>
+                  <td>{{ item.projectType || '—' }}</td>
+                  <td class="td-date">{{ formatDate(item.createdAt) }}</td>
+                  <td>
+                    <p-tag [value]="item.isApproved ? 'تأییدشده' : 'در انتظار'" [severity]="item.isApproved ? 'success' : 'warn'" size="small"></p-tag>
+                  </td>
+                  <td>
+                    <div class="row-actions">
+                      <button
+                        type="button"
+                        pButton
+                        icon="pi pi-check-circle"
+                        [severity]="item.isApproved ? 'secondary' : 'success'"
+                        [outlined]="true"
+                        (click)="toggleApprove(item)"
+                        [title]="item.isApproved ? 'رد نظر' : 'تأیید نظر'"
+                      ></button>
+                      <button type="button" pButton icon="pi pi-pencil" severity="info" [outlined]="true" (click)="startEdit(item)" [title]="'ویرایش'"></button>
+                      <button type="button" pButton icon="pi pi-trash" severity="danger" [outlined]="true" (click)="confirmDelete(item)" [title]="'حذف'"></button>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+
+    }
+
+  </div>
+
+</div>

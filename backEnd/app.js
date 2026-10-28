@@ -1,33 +1,85 @@
-const express = require("express");
-const mongo = require("mongoose");
-const cors = require("cors");
-const path = require("path");
-const boodyParser = require("body-parser");
+/**
+ * ساخت Express App — فقط تعریف سرور (اتصال DB و listen در server.js)
+ * همه‌ی endpointها زیر پیشوند /api مانت می‌شوند.
+ */
+require('./src/config/env');
 
-const adminRouter = require("./src/routes/adminRoutes/addProducts");
-const getProductesRouter = require("./src/routes/userRoutes/getProductes");
+const express = require('express');
+const cors = require('cors');
+
+const { UPLOADS_ROOT } = require('./src/middlewares/upload.middleware');
+const verifyAuth = require('./src/middlewares/auth.middleware');
+const { notFoundHandler, errorHandler } = require('./src/middlewares/error.middleware');
+const { ok } = require('./src/utils/api-response');
+
+// ماژول‌ها — هر روتر دو خروجی دارد: router (عمومی) و adminRouter (مدیریتی)
+const projectsRouter = require('./src/modules/projects/project.routes');
+const categoriesRouter = require('./src/modules/categories/categories.routes');
+const cabinetServicesRouter = require('./src/modules/services/services.routes');
+const consultationsRouter = require('./src/modules/consultations/consultations.routes');
+const contactRouter = require('./src/modules/contact/contact.routes');
+const testimonialsRouter = require('./src/modules/testimonials/testimonials.routes');
+const faqsRouter = require('./src/modules/faqs/faqs.routes');
+const settingsRouter = require('./src/modules/settings/settings.routes');
+const adminAuthRouter = require('./src/modules/admins/admin.routes');
+const { me } = require('./src/modules/admins/admin.routes');
+const dashboardRouter = require('./src/modules/dashboard/dashboard.routes');
+const uploadRouter = require('./src/modules/upload/upload.routes');
 
 const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:4200",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: (process.env.CORS_ORIGIN || 'http://localhost:4200').split(',').map((s) => s.trim()),
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   })
 );
 
-app.use(express.json());
-app.use(boodyParser.urlencoded({ extended: false }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: false }));
 
-app.use(getProductesRouter);
+// سرو استاتیک فایل‌های آپلودشده (مسیرهای ناموجود به notFoundHandler می‌رسند)
+app.use('/uploads', express.static(UPLOADS_ROOT));
 
-app.use(adminRouter);
+// ============================ عمومی ============================
 
-mongo
-  .connect("mongodb://localhost/shop")
-  .then((result) => {
-    app.listen(3000, () => {
-      console.log("running on port 3000");
-    });
-  })
-  .catch((err) => console.log(err));
+app.get('/api/health', (req, res) => {
+  ok(res, { status: 'ok', uptime: process.uptime() });
+});
+
+app.use('/api/projects', projectsRouter);
+app.use('/api/categories', categoriesRouter);
+app.use('/api/services', cabinetServicesRouter);
+app.use('/api/consultations', consultationsRouter);
+app.use('/api/contact', contactRouter);
+app.use('/api/testimonials', testimonialsRouter);
+app.use('/api/faqs', faqsRouter);
+app.use('/api/settings', settingsRouter);
+
+// ============================ مدیریتی ============================
+
+// ورود — بدون احراز هویت
+app.use('/api/admin/login', adminAuthRouter);
+
+// بقیه‌ی /api/admin — با احراز هویت
+app.use('/api/admin', verifyAuth);
+app.get('/api/admin/me', me);
+app.use('/api/admin/dashboard', dashboardRouter);
+app.use('/api/admin/projects', projectsRouter.adminRouter);
+app.use('/api/admin/categories', categoriesRouter.adminRouter);
+app.use('/api/admin/services', cabinetServicesRouter.adminRouter);
+app.use('/api/admin/consultations', consultationsRouter.adminRouter);
+app.use('/api/admin/contact', contactRouter.adminRouter);
+app.use('/api/admin/testimonials', testimonialsRouter.adminRouter);
+app.use('/api/admin/faqs', faqsRouter.adminRouter);
+app.use('/api/admin/settings', settingsRouter.adminRouter);
+app.use('/api/admin/upload', uploadRouter);
+
+// ============================ خطاها ============================
+
+// 404 برای مسیرهای ناموجود
+app.use(notFoundHandler);
+// مدیریت خطای متمرکز
+app.use(errorHandler);
+
+module.exports = app;

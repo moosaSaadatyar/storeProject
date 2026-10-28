@@ -1,0 +1,53 @@
+<a
+  [routerLink]="['/projects', project()._id]"
+  class="project-card"
+  dir="rtl"
+>
+
+  <!-- Featured Badge -->
+  @if (project().isFeatured) {
+    <span class="featured-badge">
+      <i class="pi pi-star-fill"></i>
+      <span>منتخب</span>
+    </span>
+  }
+
+  <!-- Cover -->
+  <div class="project-card-media">
+    <img
+      [src]="resolveUrl(project().coverImage) || placeholder"
+      [alt]="project().title"
+      loading="lazy"
+    >
+
+    <div class="project-card-overlay">
+
+      @if (categoryLabel) {
+        <span class="project-card-category">
+          {{ categoryLabel }}
+        </span>
+      }
+
+      <h3 class="project-card-title">
+        {{ project().title }}
+      </h3>
+
+      <div class="project-card-actions">
+
+        @if (project().style) {
+          <span class="project-card-tag">
+            {{ project().style === 'modern' ? 'مدرن' : project().style === 'neoclassical' ? 'نئوکلاسیک' : 'کلاسیک' }}
+          </span>
+        }
+
+        <span class="project-card-view">
+          مشاهده
+          <i class="pi pi-arrow-left"></i>
+        </span>
+
+      </div>
+
+    </div>
+  </div>
+
+</a>

@@ -1,0 +1,176 @@
+<div class="admin-consultations-page" dir="rtl">
+
+  <p-confirmDialog />
+
+  <!-- Header -->
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">درخواست‌های مشاوره</h1>
+      <p class="page-subtitle">پیگیری درخواست‌های مشاوره و برآورد قیمت</p>
+    </div>
+  </div>
+
+
+  <!-- Toolbar -->
+  <div class="toolbar-card">
+    <div class="filter-group">
+      <span class="filter-label">وضعیت:</span>
+      <p-select
+        [ngModel]="statusFilter"
+        (ngModelChange)="statusFilter = $event; onFilterChange()"
+        [options]="statusOptions"
+        [placeholder]="'همه'"
+        [showClear]="true"
+        [filter]="false"
+        styleClass="status-select"
+      ></p-select>
+    </div>
+  </div>
+
+
+  <!-- Loading -->
+  @if (loading) {
+    <p-skeleton height="420px" borderRadius="12px" class="mt-3"></p-skeleton>
+  }
+
+
+  <!-- Table -->
+  @if (!loading) {
+
+    @if (consultations.length === 0) {
+      <div class="empty-state">
+        <i class="pi pi-comments empty-icon"></i>
+        <p>درخواستی یافت نشد.</p>
+      </div>
+    } @else {
+      <div class="table-card">
+        <div class="table-wrap">
+          <table class="admin-table">
+
+            <thead>
+              <tr>
+                <th>نام</th>
+                <th>شماره تماس</th>
+                <th>نوع خدمت</th>
+                <th>شهر</th>
+                <th>تاریخ</th>
+                <th>وضعیت</th>
+                <th>تصاویر</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (item of consultations; track item._id) {
+
+                <tr [class.expanded-row]="expandedId === item._id">
+                  <td class="td-name">{{ item.fullName }}</td>
+                  <td class="td-phone" dir="ltr">{{ item.phone }}</td>
+                  <td>{{ item.serviceType || item.cabinetType || '—' }}</td>
+                  <td>{{ item.city || '—' }}</td>
+                  <td class="td-date">{{ formatDate(item.createdAt) }}</td>
+                  <td>
+                    <p-tag [value]="statusLabel(item.status)" [severity]="statusSeverity(item.status)" size="small"></p-tag>
+                  </td>
+                  <td>
+                    @if (item.files && item.files.length > 0) {
+                      <div class="thumb-row-inline">
+                        @for (file of item.files.slice(0, 3); track file) {
+                          <a [href]="resolveUrl(file)" target="_blank" rel="noopener">
+                            <img class="mini-thumb" [src]="resolveUrl(file)" alt="تصویر" loading="lazy">
+                          </a>
+                        }
+                        @if (item.files.length > 3) {
+                          <span class="more-files">+{{ item.files.length - 3 }}</span>
+                        }
+                      </div>
+                    } @else {
+                      <span class="muted">—</span>
+                    }
+                  </td>
+                  <td>
+                    <div class="row-actions">
+                      <button type="button" pButton icon="pi pi-angle-down" severity="secondary" [outlined]="true" [class.rotated]="expandedId === item._id" (click)="toggleExpand(item)" [title]="'جزئیات'"></button>
+                      <button type="button" pButton icon="pi pi-trash" severity="danger" [outlined]="true" (click)="confirmDelete(item)" [title]="'حذف'"></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- ==================== ردیف جزئیات ==================== -->
+                @if (expandedId === item._id) {
+                  <tr class="detail-row">
+                    <td colspan="8">
+
+                      <div class="detail-grid">
+
+                        <div class="detail-col">
+                          <h3>مشخصات درخواست</h3>
+                          <div class="detail-item"><span>سبک:</span> {{ item.style || '—' }}</div>
+                          <div class="detail-item"><span>رنگ:</span> {{ item.color || '—' }}</div>
+                          <div class="detail-item"><span>ابعاد / متراژ:</span> {{ item.dimensions || '—' }}</div>
+                          <div class="detail-item"><span>بودجه:</span> {{ item.budget || '—' }}</div>
+                          @if (item.description) {
+                            <div class="detail-item full">
+                              <span>توضیحات:</span>
+                              <p class="detail-text">{{ item.description }}</p>
+                            </div>
+                          }
+                        </div>
+
+                        <div class="detail-col">
+                          <h3>پیگیری</h3>
+
+                          <div class="detail-item">
+                            <span>وضعیت:</span>
+                            <p-select
+                              [ngModel]="statusDraft"
+                              (ngModelChange)="saveStatus(item, $event)"
+                              [options]="statusOptions"
+                              [filter]="false"
+                              styleClass="status-select-sm"
+                            ></p-select>
+                          </div>
+
+                          <div class="detail-item">
+                            <span>یادداشت مدیر:</span>
+                            <textarea
+                              [ngModel]="adminNoteDraft"
+                              (ngModelChange)="adminNoteDraft = $event"
+                              rows="3"
+                              class="note-area w-100"
+                              placeholder="یادداشت داخلی درباره‌ی پیگیری..."
+                            ></textarea>
+                          </div>
+
+                          <button
+                            type="button"
+                            pButton
+                            label="ذخیره‌ی یادداشت"
+                            icon="pi pi-check"
+                            severity="secondary"
+                            [outlined]="true"
+                            (click)="saveStatus(item, statusDraft || item.status)"
+                          ></button>
+                        </div>
+
+                      </div>
+
+                    </td>
+                  </tr>
+                }
+
+              }
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+
+      <div class="paginator-wrap">
+        <p-paginator [rows]="limit" [totalRecords]="total" (onPageChange)="onPageChange($event)"></p-paginator>
+      </div>
+    }
+
+  }
+
+</div>

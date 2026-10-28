@@ -1,0 +1,238 @@
+<div class="admin-settings-page" dir="rtl">
+
+  <!-- Header -->
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">تنظیمات سایت</h1>
+      <p class="page-subtitle">مدیریت اطلاعات عمومی، تماس و محتواهای صفحه خانه</p>
+    </div>
+    <button pButton label="ذخیره‌ی تنظیمات" icon="pi pi-check" [loading]="saving" [disabled]="saving || loading" (click)="save()"></button>
+  </div>
+
+
+  @if (loading) {
+    <p-skeleton height="480px" borderRadius="12px"></p-skeleton>
+  }
+
+  @if (!loading) {
+
+    <div class="row g-4">
+
+      <!-- =========================
+           اطلاعات عمومی + تماس
+      ========================== -->
+      <div class="col-12 col-xl-7">
+
+        <div class="form-card">
+          <h2 class="card-title">اطلاعات عمومی</h2>
+
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <label class="field-label">نام سایت</label>
+              <input pInputText type="text" [(ngModel)]="siteName" placeholder="مثلاً: عزیزی کابینت‌سازی">
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="field-label">ساعات کاری</label>
+              <input pInputText type="text" [(ngModel)]="workHours" placeholder="مثلاً: شنبه تا چهارشنبه ۹ تا ۱۸">
+            </div>
+            <div class="col-12">
+              <label class="field-label">معرفی کوتاه (فوتر)</label>
+              <textarea pTextarea [(ngModel)]="shortDescription" rows="2" placeholder="متن کوتاه معرفی در فوتر سایت"></textarea>
+            </div>
+            <div class="col-12">
+              <label class="field-label">لوگو</label>
+              <div class="logo-row">
+                @if (currentLogo) {
+                  <img [src]="resolveUrl(currentLogo)" class="logo-preview" alt="لوگو فعلی">
+                }
+                <label class="file-btn small">
+                  <input type="file" accept="image/jpeg,image/png,webp,image/webp,image/svg+xml" (change)="onLogoSelected($event)">
+                  <i class="pi pi-upload"></i>
+                  <span>@if (logoFile) { {{ logoFile.name }} } @else { تعویض لوگو }</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-card">
+          <h2 class="card-title">اطلاعات تماس</h2>
+
+          <div class="row g-3">
+            <div class="col-12 col-md-4">
+              <label class="field-label">تلفن</label>
+              <input pInputText type="text" [(ngModel)]="phone" placeholder="09121234567" dir="ltr">
+            </div>
+            <div class="col-12 col-md-4">
+              <label class="field-label">واتساپ (شماره با کد کشور)</label>
+              <input pInputText type="text" [(ngModel)]="whatsapp" placeholder="989121234567" dir="ltr">
+            </div>
+            <div class="col-12 col-md-4">
+              <label class="field-label">ایمیل</label>
+              <input pInputText type="email" [(ngModel)]="email" placeholder="info@example.com" dir="ltr">
+            </div>
+            <div class="col-12">
+              <label class="field-label">آدرس</label>
+              <input pInputText type="text" [(ngModel)]="address" placeholder="آدرس کامل نمایشگاه / کارگاه">
+            </div>
+            <div class="col-12">
+              <label class="field-label">لینک نقشه</label>
+              <input pInputText type="url" [(ngModel)]="mapLink" placeholder="https://maps.google.com/..." dir="ltr">
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-card">
+          <h2 class="card-title">شبکه‌های اجتماعی</h2>
+
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <label class="field-label">اینستاگرام (لینک کامل)</label>
+              <input pInputText type="url" [(ngModel)]="instagram" placeholder="https://instagram.com/username" dir="ltr">
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="field-label">تلگرام (لینک کامل)</label>
+              <input pInputText type="url" [(ngModel)]="telegram" placeholder="https://t.me/username" dir="ltr">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           درباره ما + بنر + محتوا
+      ========================== -->
+      <div class="col-12 col-xl-5">
+
+        <div class="form-card">
+          <h2 class="card-title">درباره ما</h2>
+
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="field-label">متن کامل (صفحه‌ی درباره ما)</label>
+              <textarea pTextarea [(ngModel)]="aboutLongText" rows="4" placeholder="معرفی کامل مجموعه..."></textarea>
+            </div>
+            <div class="col-12 col-md-4">
+              <label class="field-label">سال‌های تجربه</label>
+              <p-inputNumber [(ngModel)]="experienceYears" [min]="0" [max]="100" class="w-100" placeholder="0"></p-inputNumber>
+            </div>
+            <div class="col-12 col-md-8">
+              <label class="field-label">نقاط قوت <span class="hint">(هر خط یک مورد)</span></label>
+              <textarea pTextarea [(ngModel)]="strengthsText" rows="3" placeholder="بازدید رایگان&#10;ضمانت کیفیت"></textarea>
+            </div>
+            <div class="col-12">
+              <label class="field-label">ارزش‌های ما <span class="hint">(هر خط یک مورد)</span></label>
+              <textarea pTextarea [(ngModel)]="valuesText" rows="3" placeholder="اعتماد مشتری&#10;تحویل به‌موقع"></textarea>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-card">
+          <h2 class="card-title">بنر صفحه خانه</h2>
+
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="field-label">عنوان اصلی</label>
+              <input pInputText type="text" [(ngModel)]="heroTitle" placeholder="در صورت خالی بودن، متن پیش‌فرض سایت نمایش داده می‌شود">
+            </div>
+            <div class="col-12">
+              <label class="field-label">زیرعنوان</label>
+              <input pInputText type="text" [(ngModel)]="heroSubtitle">
+            </div>
+            <div class="col-12">
+              <label class="field-label">توضیحات</label>
+              <textarea pTextarea [(ngModel)]="heroDescription" rows="2"></textarea>
+            </div>
+            <div class="col-12">
+              <label class="field-label">تصویر بنر (URL)</label>
+              <input pInputText type="text" [(ngModel)]="heroImage" placeholder="/images/bg-Home.jpg یا آدرس تصویر آپلودشده" dir="ltr">
+              <small class="field-hint">پیشوند آدرس API به‌صورت خودکار اضافه می‌شود (برای فایل‌های /uploads/...).</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         چرا ما
+    ========================== -->
+    <div class="form-card">
+      <div class="card-head">
+        <h2 class="card-title">چرا ما؟ (مزیت‌های رقابتی)</h2>
+        <button type="button" pButton label="افزودن مزیت" icon="pi pi-plus" severity="secondary" [outlined]="true" (click)="addWhyUsItem()"></button>
+      </div>
+
+      @if (whyUs.length === 0) {
+        <p class="list-empty">موردی ثبت نشده است.</p>
+      }
+
+      <div class="row g-3">
+        @for (item of whyUs; track $index; let i = $index) {
+          <div class="col-12 col-md-4">
+            <div class="list-item-box">
+              <div class="row g-2">
+                <div class="col-8">
+                  <input pInputText type="text" [ngModel]="item.title" (ngModelChange)="item.title = $event" placeholder="عنوان">
+                </div>
+                <div class="col-4">
+                  <input pInputText type="text" [ngModel]="item.icon" (ngModelChange)="item.icon = $event" placeholder="pi pi-star" dir="ltr">
+                </div>
+                <div class="col-12">
+                  <textarea pTextarea [ngModel]="item.description" (ngModelChange)="item.description = $event" rows="2" placeholder="توضیح کوتاه"></textarea>
+                </div>
+              </div>
+              <button type="button" class="remove-item" (click)="removeWhyUsItem(i)" [title]="'حذف'">
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+
+    <!-- =========================
+         مراحل همکاری
+    ========================== -->
+    <div class="form-card">
+      <div class="card-head">
+        <h2 class="card-title">مراحل همکاری</h2>
+        <button type="button" pButton label="افزودن مرحله" icon="pi pi-plus" severity="secondary" [outlined]="true" (click)="addStep()"></button>
+      </div>
+
+      @if (steps.length === 0) {
+        <p class="list-empty">موردی ثبت نشده است.</p>
+      }
+
+      <div class="row g-3">
+        @for (step of steps; track $index; let i = $index) {
+          <div class="col-12 col-md-3">
+            <div class="list-item-box">
+              <div class="step-num">{{ i + 1 }}</div>
+              <input pInputText type="text" [ngModel]="step.title" (ngModelChange)="step.title = $event" placeholder="عنوان مرحله">
+              <textarea pTextarea [ngModel]="step.description" (ngModelChange)="step.description = $event" rows="2" placeholder="توضیح مرحله"></textarea>
+              <button type="button" class="remove-item" (click)="removeStep(i)" [title]="'حذف'">
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+
+    <!-- Save -->
+    <div class="save-bar">
+      <button pButton label="ذخیره‌ی تنظیمات" icon="pi pi-check" [loading]="saving" [disabled]="saving" (click)="save()"></button>
+    </div>
+
+  }
+
+</div>

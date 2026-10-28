@@ -1,0 +1,47 @@
+<section class="featured-projects py-5" dir="rtl">
+
+  <div class="container">
+
+    <!-- Title -->
+    <div class="text-center mb-4">
+
+      <h2 class="section-title">
+        {{ 'FEATURED_PROJECTS' | translate }}
+      </h2>
+
+      <p class="section-subtitle">
+        {{ 'FEATURED_PROJECTS_SUB' | translate }}
+      </p>
+
+      <div class="title-line"></div>
+
+    </div>
+
+
+    <!-- Loading -->
+    @if (loading) {
+      <div class="row g-4 justify-content-center">
+        @for (i of [1, 2, 3]; track i) {
+          <div class="col-12 col-md-6 col-lg-4">
+            <p-skeleton height="260px" borderRadius="10px"></p-skeleton>
+          </div>
+        }
+      </div>
+    }
+
+
+    <!-- Projects -->
+    @if (!loading && projects.length > 0) {
+      <div class="row g-4 justify-content-center">
+
+        @for (project of projects; track project._id) {
+          <div class="col-12 col-md-6 col-lg-4">
+            <app-project-card [project]="project"></app-project-card>
+          </div>
+        }
+      </div>
+    }
+
+  </div>
+
+</section>

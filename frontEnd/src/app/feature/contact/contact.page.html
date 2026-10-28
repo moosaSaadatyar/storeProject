@@ -1,0 +1,225 @@
+<div class="contact-page" dir="rtl">
+
+  <!-- Page Header -->
+  <section class="page-header">
+
+    <div class="container">
+
+      <h1 class="page-title">
+        {{ 'CONTACT' | translate }}
+      </h1>
+
+      <p class="page-subtitle">
+        {{ 'CONTACT_SUB' | translate }}
+      </p>
+
+      <div class="title-line"></div>
+
+    </div>
+
+  </section>
+
+
+  <div class="container py-4">
+
+    <div class="row g-4">
+
+      <!-- =========================
+           Contact Info
+      ========================== -->
+      <div class="col-12 col-lg-5">
+
+        <div class="info-list">
+
+          @if (phone) {
+            <div class="info-item">
+              <div class="info-icon">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <div>
+                <h3 class="info-title">{{ 'PHONE_NUMBER' | translate }}</h3>
+                <a [href]="'tel:' + phone" class="info-value" dir="ltr">{{ phone }}</a>
+              </div>
+            </div>
+          }
+
+          @if (whatsappLink) {
+            <div class="info-item">
+              <div class="info-icon">
+                <i class="fa-solid fa-whatsapp"></i>
+              </div>
+              <div>
+                <h3 class="info-title">{{ 'WHATSAPP' | translate }}</h3>
+                <a [href]="whatsappLink" target="_blank" rel="noopener" class="info-value">
+                  {{ 'WHATSAPP_LINK' | translate }}
+                </a>
+              </div>
+            </div>
+          }
+
+          @if (email) {
+            <div class="info-item">
+              <div class="info-icon">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <h3 class="info-title">{{ 'EMAIL_LABEL' | translate }}</h3>
+                <a [href]="'mailto:' + email" class="info-value" dir="ltr">{{ email }}</a>
+              </div>
+            </div>
+          }
+
+          @if (address) {
+            <div class="info-item">
+              <div class="info-icon">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div>
+                <h3 class="info-title">{{ 'ADDRESS_LABEL' | translate }}</h3>
+                <p class="info-value">
+                  {{ address }}
+                  @if (mapLink) {
+                    <a [href]="mapLink" target="_blank" rel="noopener" class="map-link">
+                      {{ 'VIEW_MAP' | translate }} <i class="pi pi-external-link"></i>
+                    </a>
+                  }
+                </p>
+              </div>
+            </div>
+          }
+
+          @if (workHours) {
+            <div class="info-item">
+              <div class="info-icon">
+                <i class="fa-solid fa-clock"></i>
+              </div>
+              <div>
+                <h3 class="info-title">{{ 'WORK_HOURS' | translate }}</h3>
+                <p class="info-value">{{ workHours }}</p>
+              </div>
+            </div>
+          }
+
+          <!-- Socials -->
+          @if (instagram || telegram) {
+            <div class="social-row">
+              @if (instagram) {
+                <a [href]="instagram" target="_blank" rel="noopener" class="social-btn" aria-label="اینستاگرام">
+                  <i class="fa-brands fa-instagram"></i>
+                  <span>{{ 'INSTAGRAM' | translate }}</span>
+                </a>
+              }
+              @if (telegram) {
+                <a [href]="telegram" target="_blank" rel="noopener" class="social-btn" aria-label="تلگرام">
+                  <i class="fa-brands fa-telegram"></i>
+                  <span>{{ 'TELEGRAM' | translate }}</span>
+                </a>
+              }
+            </div>
+          }
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           Contact Form
+      ========================== -->
+      <div class="col-12 col-lg-7">
+
+        <form [formGroup]="form" (ngSubmit)="submit()" class="contact-card">
+
+          <h2 class="contact-card-title">
+            {{ 'SEND_MESSAGE' | translate }}
+          </h2>
+
+          <div class="row g-3">
+
+            <div class="col-12 col-md-6">
+              <label class="field-label">
+                {{ 'FULL_NAME' | translate }} <span class="required-star">*</span>
+              </label>
+              <input
+                pInputText
+                type="text"
+                formControlName="fullName"
+                [placeholder]="'FULL_NAME_PLACEHOLDER' | translate"
+                [class.p-invalid]="form.controls['fullName'].touched && form.controls['fullName'].invalid"
+              >
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="field-label">
+                {{ 'PHONE_NUMBER' | translate }} <span class="required-star">*</span>
+              </label>
+              <input
+                pInputText
+                type="tel"
+                formControlName="phone"
+                [placeholder]="'PHONE_PLACEHOLDER' | translate"
+                [class.p-invalid]="form.controls['phone'].touched && form.controls['phone'].invalid"
+              >
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="field-label">
+                {{ 'EMAIL_LABEL' | translate }}
+              </label>
+              <input
+                pInputText
+                type="email"
+                formControlName="email"
+                placeholder="email@example.com"
+                [class.p-invalid]="form.controls['email'].touched && form.controls['email'].invalid"
+              >
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="field-label">
+                {{ 'SUBJECT_LABEL' | translate }}
+              </label>
+              <input
+                pInputText
+                type="text"
+                formControlName="subject"
+                [placeholder]="'SUBJECT_PLACEHOLDER' | translate"
+              >
+            </div>
+
+            <div class="col-12">
+              <label class="field-label">
+                {{ 'MESSAGE_LABEL' | translate }} <span class="required-star">*</span>
+              </label>
+              <textarea
+                pTextarea
+                formControlName="message"
+                rows="5"
+                [placeholder]="'MESSAGE_PLACEHOLDER' | translate"
+                [class.p-invalid]="form.controls['message'].touched && form.controls['message'].invalid"
+              ></textarea>
+            </div>
+
+          </div>
+
+          <div class="text-center mt-4">
+            <button
+              type="submit"
+              pButton
+              [label]="'SEND_MESSAGE_BTN' | translate"
+              icon="pi pi-send"
+              [loading]="submitting"
+              [disabled]="submitting"
+              class="contact-submit"
+            ></button>
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

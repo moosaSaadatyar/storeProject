@@ -1,0 +1,152 @@
+<div class="admin-services-page" dir="rtl">
+
+  <p-confirmDialog />
+
+  <!-- Header -->
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">مدیریت خدمات</h1>
+      <p class="page-subtitle">خدمات ارائه‌شده توسط کابینت‌سازی</p>
+    </div>
+  </div>
+
+
+  <!-- =========================
+       Form (add / edit)
+  ========================== -->
+  <div class="form-card">
+
+    <h2 class="card-title">
+      @if (editing) { ویرایش خدمت: {{ editing.title }} } @else { افزودن خدمت جدید }
+    </h2>
+
+    <form [formGroup]="form" (ngSubmit)="save()">
+
+      <div class="row g-3">
+
+        <div class="col-12 col-md-4">
+          <label class="field-label">عنوان خدمت <span class="required">*</span></label>
+          <input pInputText type="text" formControlName="title" placeholder="مثلاً: طراحی سه‌بعدی کابینت">
+          @if (form.controls['title'].touched && form.controls['title'].invalid) {
+            <small class="field-error">عنوان الزامی است.</small>
+          }
+        </div>
+
+        <div class="col-12 col-md-4">
+          <label class="field-label">تصویر</label>
+          <label class="file-btn">
+            <input type="file" accept="image/jpeg,image/png,image/webp" (change)="onImageSelected($event)">
+            <i class="pi pi-upload"></i>
+            <span>@if (imageFile) { {{ imageFile.name }} } @else { انتخاب تصویر }</span>
+          </label>
+          @if (editing?.image) {
+            <small class="field-hint">تصویر فعلی: <img [src]="resolveUrl(editing.image)" class="inline-thumb"></small>
+          }
+        </div>
+
+        <div class="col-12 col-md-4">
+          <label class="field-label">ترتیب نمایش</label>
+          <p-inputNumber formControlName="sortOrder" [min]="0" class="w-100"></p-inputNumber>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label class="field-label">توضیح کوتاه</label>
+          <textarea pTextarea formControlName="description" rows="2" placeholder="توضیح کوتاه درباره‌ی خدمت"></textarea>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label class="field-label">جزئیات تکمیلی</label>
+          <textarea pTextarea formControlName="details" rows="2" placeholder="توضیحات بیشتر (اختیاری)"></textarea>
+        </div>
+
+        <div class="col-12">
+          <label class="field-label">ویژگی‌ها <span class="hint">(هر خط یک ویژگی)</span></label>
+          <textarea pTextarea formControlName="features" rows="3" placeholder="مثلاً:&#10;بازدید رایگان&#10;ضمانت کیفیت"></textarea>
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+        <div class="switch-row">
+          <span class="switch-label">فعال</span>
+          <p-toggleswitch formControlName="isActive"></p-toggleswitch>
+        </div>
+
+        <div class="actions-btns">
+          @if (editing) {
+            <button type="button" pButton label="انصراف" severity="secondary" [outlined]="true" (click)="resetForm()"></button>
+          }
+          <button type="submit" pButton [label]="editing ? 'ذخیره‌ی تغییرات' : 'افزودن خدمت'" icon="pi pi-check" [loading]="saving" [disabled]="saving"></button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <!-- =========================
+       List
+  ========================== -->
+  <div class="table-card">
+
+    @if (loading) {
+      <p-skeleton height="200px" borderRadius="10px"></p-skeleton>
+    }
+
+    @if (!loading) {
+
+      @if (services.length === 0) {
+        <div class="empty-state">
+          <i class="pi pi-cog empty-icon"></i>
+          <p>خدمتی ثبت نشده است.</p>
+        </div>
+      } @else {
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>تصویر</th>
+                <th>عنوان</th>
+                <th>توضیح کوتاه</th>
+                <th>ویژگی‌ها</th>
+                <th>ترتیب</th>
+                <th>وضعیت</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (service of services; track service._id) {
+                <tr [class.editing-row]="editing?._id === service._id">
+                  <td>
+                    @if (service.image) {
+                      <img class="cover-thumb" [src]="resolveUrl(service.image)" [alt]="service.title" loading="lazy">
+                    } @else {
+                      <span class="no-image"><i class="pi pi-image"></i></span>
+                    }
+                  </td>
+                  <td class="td-title">{{ service.title }}</td>
+                  <td class="td-desc">{{ service.description || '—' }}</td>
+                  <td class="td-count">{{ (service.features || []).length }}</td>
+                  <td>{{ service.sortOrder ?? 0 }}</td>
+                  <td>
+                    <p-tag [value]="service.isActive ? 'فعال' : 'غیرفعال'" [severity]="service.isActive ? 'success' : 'secondary'" size="small"></p-tag>
+                  </td>
+                  <td>
+                    <div class="row-actions">
+                      <button type="button" pButton icon="pi pi-pencil" severity="info" [outlined]="true" (click)="startEdit(service)" [title]="'ویرایش'"></button>
+                      <button type="button" pButton icon="pi pi-trash" severity="danger" [outlined]="true" (click)="confirmDelete(service)" [title]="'حذف'"></button>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+
+    }
+
+  </div>
+
+</div>

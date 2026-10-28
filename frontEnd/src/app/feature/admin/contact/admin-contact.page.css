@@ -1,0 +1,181 @@
+.admin-contact-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-head {
+  margin-bottom: 1.2rem;
+}
+
+.page-title {
+  margin: 0;
+  color: #222;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.page-subtitle {
+  margin: 3px 0 0;
+  color: #999;
+  font-size: 12px;
+}
+
+.toolbar-card {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  background: #fff;
+  border: 1px solid #ece5da;
+  border-radius: 12px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.filter-label {
+  color: #666;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status-select {
+  min-width: 180px;
+}
+
+.table-card {
+  margin-top: 1rem;
+  background: #fff;
+  border: 1px solid #ece5da;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 780px;
+}
+
+.admin-table th {
+  padding: 0.7rem 0.9rem;
+  color: #999;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: right;
+  background: #faf8f5;
+  border-bottom: 1px solid #f0e8dd;
+  white-space: nowrap;
+}
+
+.admin-table td {
+  padding: 0.65rem 0.9rem;
+  color: #444;
+  font-size: 12px;
+  border-bottom: 1px solid #f6f1ea;
+  vertical-align: middle;
+}
+
+.admin-table tbody tr:hover {
+  background: #fdfaf6;
+}
+
+.td-name {
+  font-weight: 700;
+  color: #222;
+}
+
+.td-phone {
+  font-size: 11px;
+  color: #666;
+  white-space: nowrap;
+}
+
+.td-subject {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #555;
+}
+
+.td-date {
+  color: #888;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.row-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.row-actions .pi-angle-down {
+  transition: transform 0.2s ease;
+}
+
+.row-actions .rotated .pi-angle-down {
+  transform: rotate(180deg);
+}
+
+.detail-row td {
+  background: #fdfaf6;
+  border-bottom: 1px solid #f0e8dd;
+}
+
+.detail-box {
+  padding: 0.9rem 1rem;
+  background: #fff;
+  border: 1px solid #f0e8dd;
+  border-radius: 10px;
+}
+
+.detail-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #999;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.detail-text {
+  margin: 0;
+  color: #555;
+  font-size: 12.5px;
+  line-height: 2.1;
+  white-space: pre-line;
+}
+
+.paginator-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.empty-state {
+  margin-top: 1rem;
+  padding: 3rem 1rem;
+  text-align: center;
+  background: #fff;
+  border: 1px dashed #e0d5c5;
+  border-radius: 12px;
+}
+
+.empty-icon {
+  display: block;
+  font-size: 40px;
+  color: #d8c2a5;
+  margin-bottom: 0.8rem;
+}
+
+.empty-state p {
+  color: #999;
+  font-size: 13px;
+}

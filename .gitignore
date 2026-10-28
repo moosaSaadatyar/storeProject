@@ -1,0 +1,26 @@
+# Node
+node_modules/
+
+# Build outputs
+frontEnd/dist/
+frontEnd/.angular/
+
+# Environment
+backEnd/.env
+*.env.local
+
+# Uploads (user-generated files)
+backEnd/uploads/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp

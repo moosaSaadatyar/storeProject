@@ -1,0 +1,123 @@
+<div class="admin-faqs-page" dir="rtl">
+
+  <p-confirmDialog />
+
+  <!-- Header -->
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">سوالات متداول</h1>
+      <p class="page-subtitle">مدیریت سوالات و پاسخ‌های سایت</p>
+    </div>
+  </div>
+
+
+  <!-- =========================
+       Form (add / edit)
+  ========================== -->
+  <div class="form-card">
+
+    <h2 class="card-title">
+      @if (editing) { ویرایش سوال } @else { افزودن سوال جدید }
+    </h2>
+
+    <form [formGroup]="form" (ngSubmit)="save()">
+
+      <div class="row g-3">
+
+        <div class="col-12 col-md-9">
+          <label class="field-label">سوال <span class="required">*</span></label>
+          <textarea pTextarea formControlName="question" rows="1" placeholder="مثلاً: هزینه‌ی ساخت کابینت آشپزخانه چگونه محاسبه می‌شود؟"></textarea>
+          @if (form.controls['question'].touched && form.controls['question'].invalid) {
+            <small class="field-error">سوال الزامی است.</small>
+          }
+        </div>
+
+        <div class="col-12 col-md-3">
+          <label class="field-label">ترتیب نمایش</label>
+          <p-inputNumber formControlName="sortOrder" [min]="0" class="w-100"></p-inputNumber>
+        </div>
+
+        <div class="col-12">
+          <label class="field-label">پاسخ <span class="required">*</span></label>
+          <textarea pTextarea formControlName="answer" rows="3" placeholder="پاسخ کامل سوال"></textarea>
+          @if (form.controls['answer'].touched && form.controls['answer'].invalid) {
+            <small class="field-error">پاسخ الزامی است.</small>
+          }
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+        <div class="switch-row">
+          <span class="switch-label">فعال</span>
+          <p-toggleswitch formControlName="isActive"></p-toggleswitch>
+        </div>
+
+        <div class="actions-btns">
+          @if (editing) {
+            <button type="button" pButton label="انصراف" severity="secondary" [outlined]="true" (click)="resetForm()"></button>
+          }
+          <button type="submit" pButton [label]="editing ? 'ذخیره‌ی تغییرات' : 'افزودن سوال'" icon="pi pi-check" [loading]="saving" [disabled]="saving"></button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <!-- =========================
+       List
+  ========================== -->
+  <div class="table-card">
+
+    @if (loading) {
+      <p-skeleton height="200px" borderRadius="10px"></p-skeleton>
+    }
+
+    @if (!loading) {
+
+      @if (faqs.length === 0) {
+        <div class="empty-state">
+          <i class="pi pi-question-circle empty-icon"></i>
+          <p>سوالی ثبت نشده است.</p>
+        </div>
+      } @else {
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>سوال</th>
+                <th>پاسخ</th>
+                <th>ترتیب</th>
+                <th>وضعیت</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (faq of faqs; track faq._id) {
+                <tr [class.editing-row]="editing?._id === faq._id">
+                  <td class="td-question">{{ faq.question }}</td>
+                  <td class="td-answer">{{ faq.answer }}</td>
+                  <td>{{ faq.sortOrder ?? 0 }}</td>
+                  <td>
+                    <p-tag [value]="faq.isActive ? 'فعال' : 'غیرفعال'" [severity]="faq.isActive ? 'success' : 'secondary'" size="small"></p-tag>
+                  </td>
+                  <td>
+                    <div class="row-actions">
+                      <button type="button" pButton icon="pi pi-pencil" severity="info" [outlined]="true" (click)="startEdit(faq)" [title]="'ویرایش'"></button>
+                      <button type="button" pButton icon="pi pi-trash" severity="danger" [outlined]="true" (click)="confirmDelete(faq)" [title]="'حذف'"></button>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+
+    }
+
+  </div>
+
+</div>

@@ -1,0 +1,85 @@
+<section class="testimonials-section py-5" dir="rtl">
+
+  <div class="container">
+
+    <!-- Title -->
+    <div class="text-center mb-4">
+
+      <h2 class="section-title">
+        {{ 'TESTIMONIALS' | translate }}
+      </h2>
+
+      <p class="section-subtitle">
+        {{ 'TESTIMONIALS_SUB' | translate }}
+      </p>
+
+      <div class="title-line"></div>
+
+    </div>
+
+
+    <!-- Loading -->
+    @if (loading) {
+      <div class="row g-4 justify-content-center">
+        @for (i of [1, 2, 3]; track i) {
+          <div class="col-12 col-md-6 col-lg-4">
+            <p-skeleton height="180px" borderRadius="10px"></p-skeleton>
+          </div>
+        }
+      </div>
+    }
+
+
+    <!-- Testimonials -->
+    @if (!loading && testimonials.length > 0) {
+      <div class="row g-4 justify-content-center">
+
+        @for (testimonial of testimonials; track testimonial._id) {
+          <div class="col-12 col-md-6 col-lg-4">
+
+            <div class="testimonial-card">
+
+              <!-- Stars -->
+              <div class="testimonial-stars">
+                @for (star of [1, 2, 3, 4, 5]; track star) {
+                  <i
+                    class="pi"
+                    [class.pi-star-fill]="star <= (testimonial.rating || 0)"
+                    [class.pi-star]="star > (testimonial.rating || 0)"
+                  ></i>
+                }
+              </div>
+
+              <p class="testimonial-comment">
+                {{ testimonial.comment }}
+              </p>
+
+              <div class="testimonial-footer">
+
+                <div class="testimonial-avatar">
+                  {{ (testimonial.customerName || '؟').charAt(0) }}
+                </div>
+
+                <div>
+                  <h3 class="testimonial-name">
+                    {{ testimonial.customerName || ('ANONYMOUS' | translate) }}
+                  </h3>
+                  @if (testimonial.projectType) {
+                    <span class="testimonial-type">
+                      {{ testimonial.projectType }}
+                    </span>
+                  }
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        }
+      </div>
+    }
+
+  </div>
+
+</section>

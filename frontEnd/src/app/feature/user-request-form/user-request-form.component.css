@@ -493,6 +493,194 @@
 
 
 /* =================================
+   Ref banner (from project detail)
+================================= */
+
+.ref-banner {
+  max-width: 900px;
+
+  margin: 0 auto 20px;
+
+  padding: 12px 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  color: #8a5f28;
+
+  background: #fff8ef;
+
+  border: 1px dashed #e2bc7c;
+
+  border-radius: 9px;
+
+  font-size: 12px;
+}
+
+
+.ref-banner i {
+  color: #c6924b;
+
+  font-size: 16px;
+}
+
+
+/* =================================
+   File drop
+================================= */
+
+.file-drop {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 26px;
+
+  cursor: pointer;
+
+  text-align: center;
+
+  color: #999;
+
+  background: #faf8f5;
+
+  border: 2px dashed #ded6cc;
+
+  border-radius: 10px;
+
+  transition: all .2s ease;
+}
+
+
+.file-drop:hover,
+.file-drop.has-files {
+  border-color: #c6924b;
+
+  background: #fffaf5;
+
+  color: #b37d3a;
+}
+
+
+.file-drop i {
+  font-size: 26px;
+
+  color: #c6924b;
+}
+
+
+.file-drop input[type='file'] {
+  display: none;
+}
+
+
+.file-drop small {
+  color: #b0a89e;
+
+  font-size: 10px;
+}
+
+
+/* =================================
+   File list
+================================= */
+
+.file-list {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 12px;
+}
+
+
+.file-chip {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 6px 10px;
+
+  color: #555;
+
+  background: #fff;
+
+  border: 1px solid #e0d6ca;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+}
+
+
+.file-chip i {
+  color: #c6924b;
+}
+
+
+.file-chip .file-name {
+  max-width: 160px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+.file-chip .file-remove {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 18px;
+
+  height: 18px;
+
+  padding: 0;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: #f2ece4;
+
+  color: #999;
+
+  font-size: 9px;
+
+  cursor: pointer;
+
+  transition: all .2s ease;
+}
+
+
+.file-chip .file-remove:hover {
+  background: #d64545;
+
+  color: #fff;
+}
+
+
+/* =================================
    Submit
 ================================= */
 

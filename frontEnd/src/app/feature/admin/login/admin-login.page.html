@@ -1,0 +1,62 @@
+<div class="login-page" dir="rtl">
+
+  <div class="login-card">
+
+    <div class="login-brand">
+      <i class="pi pi-home"></i>
+      <h1>پنل مدیریت</h1>
+      <p>ورود به سامانه‌ی مدیریت کابینت‌سازی</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <div class="field">
+        <label class="field-label">ایمیل</label>
+        <input
+          pInputText
+          type="email"
+          formControlName="email"
+          placeholder="admin@cabinet.ir"
+          dir="ltr"
+          [class.p-invalid]="form.controls['email'].touched && form.controls['email'].invalid"
+        >
+        @if (form.controls['email'].touched && form.controls['email'].invalid) {
+          <small class="field-error">ایمیل معتبر وارد کنید.</small>
+        }
+      </div>
+
+      <div class="field">
+        <label class="field-label">رمز عبور</label>
+        <input
+          pInputText
+          type="password"
+          formControlName="password"
+          placeholder="••••••••"
+          dir="ltr"
+          [class.p-invalid]="form.controls['password'].touched && form.controls['password'].invalid"
+        >
+        @if (form.controls['password'].touched && form.controls['password'].invalid) {
+          <small class="field-error">رمز عبور باید حداقل ۶ کاراکتر باشد.</small>
+        }
+      </div>
+
+      <button
+        type="submit"
+        pButton
+        label="ورود"
+        icon="pi pi-sign-in"
+        [loading]="loading"
+        [disabled]="loading"
+        class="login-btn w-100"
+      ></button>
+
+    </form>
+
+    <a href="/" class="back-link">
+      <i class="pi pi-arrow-right"></i>
+      <span>بازگشت به سایت</span>
+    </a>
+
+  </div>
+
+</div>

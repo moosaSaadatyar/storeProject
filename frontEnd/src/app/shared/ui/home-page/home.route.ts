@@ -20,9 +20,4 @@ export const HomeRoutes: Routes = [
     loadComponent: () =>
       import('../../../layouts/terms/terms.component').then((m) => m.TermsComponent),
   },
-  {
-    path: '**',
-    loadComponent: () =>
-      import('../../../layouts/not-found/not-found.component').then((m) => m.NotFoundComponent),
-  },
 ];

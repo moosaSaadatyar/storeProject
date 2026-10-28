@@ -1,0 +1,143 @@
+<div class="portfolio-page" dir="rtl">
+
+  <!-- Page Header -->
+  <section class="page-header">
+
+    <div class="container">
+
+      <h1 class="page-title">
+        {{ 'WORK_SAMPLE' | translate }}
+      </h1>
+
+      <p class="page-subtitle">
+        {{ 'PORTFOLIO_SUB' | translate }}
+      </p>
+
+      <div class="title-line"></div>
+
+    </div>
+
+  </section>
+
+
+  <div class="container py-4">
+
+    <!-- Filters -->
+    <div class="filters-card">
+
+      <div class="row g-3 align-items-end">
+
+        <div class="col-12 col-md-4">
+          <div class="filter-field">
+            <label class="filter-label">
+              {{ 'CATEGORY_LABEL' | translate }}
+            </label>
+            <p-select
+              [ngModel]="categorySlug"
+              (ngModelChange)="categorySlug = $event; onFilterChange()"
+              [options]="categories"
+              optionLabel="name"
+              optionValue="slug"
+              [placeholder]="'ALL' | translate"
+              [showClear]="true"
+              [filter]="false"
+            ></p-select>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="filter-field">
+            <label class="filter-label">
+              {{ 'STYLE_LABEL' | translate }}
+            </label>
+            <p-select
+              [ngModel]="style"
+              (ngModelChange)="style = $event; onFilterChange()"
+              [options]="styleOptions"
+              [placeholder]="'ALL' | translate"
+              [showClear]="true"
+              [filter]="false"
+            ></p-select>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-3">
+          <div class="filter-field">
+            <label class="filter-label">
+              {{ 'SPACE_LABEL' | translate }}
+            </label>
+            <p-select
+              [ngModel]="space"
+              (ngModelChange)="space = $event; onFilterChange()"
+              [options]="spaceOptions"
+              [placeholder]="'ALL' | translate"
+              [showClear]="true"
+              [filter]="false"
+            ></p-select>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-1">
+          <button
+            type="button"
+            pButton
+            icon="pi pi-eraser"
+            severity="secondary"
+            [outlined]="true"
+            [disabled]="!hasActiveFilters()"
+            (click)="clearFilters()"
+            [title]="'CLEAR_FILTERS' | translate"
+            class="w-100"
+          ></button>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Loading -->
+    @if (loading) {
+      <div class="row g-4 mt-2">
+        @for (i of [1, 2, 3, 4, 5, 6]; track i) {
+          <div class="col-12 col-md-6 col-lg-4">
+            <p-skeleton height="260px" borderRadius="10px"></p-skeleton>
+          </div>
+        }
+      </div>
+    }
+
+
+    <!-- Empty -->
+    @if (!loading && projects.length === 0) {
+      <div class="empty-state text-center mt-5">
+        <i class="pi pi-images empty-icon"></i>
+        <p>{{ 'NO_PROJECTS' | translate }}</p>
+      </div>
+    }
+
+
+    <!-- Projects Grid -->
+    @if (!loading && projects.length > 0) {
+      <div class="row g-4 mt-2">
+
+        @for (project of projects; track project._id) {
+          <div class="col-12 col-md-6 col-lg-4">
+            <app-project-card [project]="project"></app-project-card>
+          </div>
+        }
+      </div>
+
+      <!-- Paginator -->
+      <div class="text-center mt-4">
+        <p-paginator
+          [rows]="limit"
+          [totalRecords]="total"
+          (onPageChange)="onPageChange($event)"
+        ></p-paginator>
+      </div>
+    }
+
+  </div>
+
+</div>

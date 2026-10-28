@@ -1,0 +1,156 @@
+<div class="admin-categories-page" dir="rtl">
+
+  <p-confirmDialog />
+
+  <!-- Header -->
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">مدیریت دسته‌بندی‌ها</h1>
+      <p class="page-subtitle">دسته‌های کابینت برای نمونه‌کارها</p>
+    </div>
+  </div>
+
+
+  <!-- =========================
+       Form (add / edit)
+  ========================== -->
+  <div class="form-card">
+
+    <h2 class="card-title">
+      @if (editing) { ویرایش دسته‌بندی: {{ editing.name }} } @else { افزودن دسته‌بندی جدید }
+    </h2>
+
+    <form [formGroup]="form" (ngSubmit)="save()">
+
+      <div class="row g-3">
+
+        <div class="col-12 col-md-4">
+          <label class="field-label">نام دسته‌بندی <span class="required">*</span></label>
+          <input pInputText type="text" formControlName="name" placeholder="مثلاً: کابینت آشپزخانه">
+          @if (form.controls['name'].touched && form.controls['name'].invalid) {
+            <small class="field-error">نام الزامی است.</small>
+          }
+        </div>
+
+        <div class="col-12 col-md-4">
+          <label class="field-label">اسلگ (اختیاری)</label>
+          <input pInputText type="text" formControlName="slug" placeholder="kitchen-cabinet" dir="ltr">
+          <small class="field-hint">در صورت خالی بودن، به‌صورت خودکار ساخته می‌شود.</small>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <label class="field-label">تصویر</label>
+          <label class="file-btn">
+            <input type="file" accept="image/jpeg,image/png,image/webp" (change)="onImageSelected($event)">
+            <i class="pi pi-upload"></i>
+            <span>@if (imageFile) { {{ imageFile.name }} } @else { انتخاب تصویر }</span>
+          </label>
+          @if (editing?.image) {
+            <small class="field-hint">تصویر فعلی: <img [src]="resolveUrl(editing.image)" class="inline-thumb"></small>
+          }
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label class="field-label">توضیحات</label>
+          <textarea pTextarea formControlName="description" rows="2" placeholder="توضیح کوتاه درباره‌ی دسته‌بندی"></textarea>
+        </div>
+
+        <div class="col-12 col-md-3">
+          <label class="field-label">آیکون (کلاس)</label>
+          <input pInputText type="text" formControlName="icon" placeholder="pi pi-home" dir="ltr">
+        </div>
+
+        <div class="col-12 col-md-3">
+          <label class="field-label">ترتیب نمایش</label>
+          <p-inputNumber formControlName="sortOrder" [min]="0" class="w-100"></p-inputNumber>
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+        <div class="switch-row">
+          <span class="switch-label">فعال</span>
+          <p-toggleswitch formControlName="isActive"></p-toggleswitch>
+        </div>
+
+        <div class="actions-btns">
+          @if (editing) {
+            <button type="button" pButton label="انصراف" severity="secondary" [outlined]="true" (click)="resetForm()"></button>
+          }
+          <button type="submit" pButton [label]="editing ? 'ذخیره‌ی تغییرات' : 'افزودن دسته‌بندی'" icon="pi pi-check" [loading]="saving" [disabled]="saving"></button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <!-- =========================
+       List
+  ========================== -->
+  <div class="table-card">
+
+    @if (loading) {
+      <p-skeleton height="200px" borderRadius="10px"></p-skeleton>
+    }
+
+    @if (!loading) {
+
+      @if (categories.length === 0) {
+        <div class="empty-state">
+          <i class="pi pi-list empty-icon"></i>
+          <p>دسته‌بندی‌ای ثبت نشده است.</p>
+        </div>
+      } @else {
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>تصویر</th>
+                <th>نام</th>
+                <th>اسلگ</th>
+                <th>ترتیب</th>
+                <th>وضعیت</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (category of categories; track category._id) {
+                <tr [class.editing-row]="editing?._id === category._id">
+                  <td>
+                    @if (category.image) {
+                      <img class="cover-thumb" [src]="resolveUrl(category.image)" [alt]="category.name" loading="lazy">
+                    } @else {
+                      <span class="no-image"><i class="pi pi-image"></i></span>
+                    }
+                  </td>
+                  <td class="td-title">
+                    @if (category.icon) {
+                      <i [class]="category.icon" class="cat-icon"></i>
+                    }
+                    {{ category.name }}
+                  </td>
+                  <td class="td-slug" dir="ltr">{{ category.slug }}</td>
+                  <td>{{ category.sortOrder ?? 0 }}</td>
+                  <td>
+                    <p-tag [value]="category.isActive ? 'فعال' : 'غیرفعال'" [severity]="category.isActive ? 'success' : 'secondary'" size="small"></p-tag>
+                  </td>
+                  <td>
+                    <div class="row-actions">
+                      <button type="button" pButton icon="pi pi-pencil" severity="info" [outlined]="true" (click)="startEdit(category)" [title]="'ویرایش'"></button>
+                      <button type="button" pButton icon="pi pi-trash" severity="danger" [outlined]="true" (click)="confirmDelete(category)" [title]="'حذف'"></button>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+
+    }
+
+  </div>
+
+</div>
