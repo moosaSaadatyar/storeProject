@@ -28,25 +28,25 @@ export class CabinetApiService {
 
   get<T>(url: string, params?: Record<string, string | number | boolean | undefined>): Observable<T> {
     return this.http
-      .get<IApiResponse<T>>(`${this.baseUrl}${url}`, { params: this.toParams(params) })
+      .get<IApiResponse<T>>(`${this.baseUrl}/api${url}`, { params: this.toParams(params) })
       .pipe(map((res) => res.data));
   }
 
   post<T>(url: string, body?: unknown): Observable<T> {
     return this.http
-      .post<IApiResponse<T>>(`${this.baseUrl}${url}`, body)
+      .post<IApiResponse<T>>(`${this.baseUrl}/api${url}`, body)
       .pipe(map((res) => res.data));
   }
 
   put<T>(url: string, body?: unknown): Observable<T> {
     return this.http
-      .put<IApiResponse<T>>(`${this.baseUrl}${url}`, body)
+      .put<IApiResponse<T>>(`${this.baseUrl}/api${url}`, body)
       .pipe(map((res) => res.data));
   }
 
   delete<T>(url: string): Observable<T> {
     return this.http
-      .delete<IApiResponse<T>>(`${this.baseUrl}${url}`)
+      .delete<IApiResponse<T>>(`${this.baseUrl}/api${url}`)
       .pipe(map((res) => res.data));
   }
 }
