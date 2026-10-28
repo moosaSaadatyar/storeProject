@@ -1,4 +1,78 @@
 @import 'ngx-toastr/toastr';
+
+/* =========================
+   Persian Fonts
+   فایل‌ها در public/css/fonts قرار دارند و به‌صورت asset در build کپی می‌شوند.
+========================= */
+
+@font-face {
+  font-family: "IRANSansfanum";
+  font-style: normal;
+  font-weight: 900;
+  src: url('/css/fonts/iransansfanum/woff2/IRANSansWeb(FaNum)_Black.woff2') format('woff2'),
+    url('/css/fonts/iransansfanum/ttf/IRANSansWeb(FaNum)_Black.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "IRANSansfanum";
+  font-style: normal;
+  font-weight: bold;
+  src: url('/css/fonts/iransansfanum/woff2/IRANSansWeb(FaNum)_Bold.woff2') format('woff2'),
+    url('/css/fonts/iransansfanum/ttf/IRANSansWeb(FaNum)_Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "IRANSansfanum";
+  font-style: normal;
+  font-weight: 500;
+  src: url('/css/fonts/iransansfanum/woff2/IRANSansWeb(FaNum)_Medium.woff2') format('woff2'),
+    url('/css/fonts/iransansfanum/ttf/IRANSansWeb(FaNum)_Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "IRANSansfanum";
+  font-style: normal;
+  font-weight: normal;
+  src: url('/css/fonts/iransansfanum/woff2/IRANSansWeb(FaNum).woff2') format('woff2'),
+    url('/css/fonts/iransansfanum/ttf/IRANSansWeb(FaNum).ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  font-style: normal;
+  font-weight: 500;
+  src: url('/css/fonts/Round-Dots/fonts/webfonts/Vazirmatn-RD-Medium.woff2') format('woff2'),
+    url('/css/fonts/Round-Dots/fonts/ttf/Vazirmatn-RD-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "BTitrBold";
+  font-style: normal;
+  font-weight: 600;
+  src: url('/css/fonts/BTitrBold/BTitrBold.woff') format('woff'),
+    url('/css/fonts/BTitrBold/BTitrBold.ttf') format('truetype');
+}
+
+
+/* =========================
+   Base Typography
+========================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "IRANSansfanum", "Vazirmatn", Tahoma, sans-serif;
+  font-size: 0.9375rem;
+  color: #3f3f3f;
+  background-color: #fff;
+}
+
+[dir="rtl"] body {
+  text-align: right;
+}
+
 .rtl {
   direction: rtl !important;
 }

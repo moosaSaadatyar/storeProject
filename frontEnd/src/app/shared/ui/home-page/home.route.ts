@@ -15,4 +15,14 @@ export const HomeRoutes: Routes = [
     loadComponent: () =>
       import('../../../feature/user-request-form/user-request-form.component').then((m) => m.UserRequestFormComponent),
   },
+  {
+    path: 'terms',
+    loadComponent: () =>
+      import('../../../layouts/terms/terms.component').then((m) => m.TermsComponent),
+  },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('../../../layouts/not-found/not-found.component').then((m) => m.NotFoundComponent),
+  },
 ];

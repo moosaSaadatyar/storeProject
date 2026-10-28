@@ -20,7 +20,9 @@
   border-top: 1px solid #eeeeee;
   border-bottom: 1px solid #eeeeee;
 
-  position: relative;
+  /* ثابت ماندن هدر هنگام اسکرول */
+  position: sticky;
+  top: 0;
 
   z-index: 1000;
 }

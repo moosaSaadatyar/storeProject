@@ -1,0 +1,48 @@
+.not-found {
+  padding: 100px 0 120px;
+
+  background: #faf8f5;
+}
+
+.not-found-inner {
+  max-width: 560px;
+
+  margin: 0 auto;
+}
+
+.not-found-code {
+  color: #c6924b;
+
+  font-size: 110px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.not-found-line {
+  width: 48px;
+  height: 3px;
+
+  margin: 24px auto;
+
+  background-color: #c6924b;
+}
+
+.not-found-title {
+  margin-bottom: 12px;
+
+  color: #292827;
+
+  font-size: 28px;
+
+  font-weight: 700;
+}
+
+.not-found-desc {
+  margin-bottom: 30px;
+
+  color: #777;
+
+  font-size: 15px;
+
+  line-height: 1.9;
+}

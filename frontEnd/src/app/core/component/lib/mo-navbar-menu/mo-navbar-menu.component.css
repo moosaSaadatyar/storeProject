@@ -61,7 +61,7 @@
 
 /* Active */
 
-::ng-deep .active-menu {
+::ng-deep .p-menubar-item-link-active {
   color: #b98543 !important;
 }
 
@@ -103,13 +103,10 @@
 
 /* =========================
    Mobile
+   نقطه‌شکست موبایل Menubar در PrimeNG 21 برابر 960px است
 ========================= */
 
-/* =========================
-   Mobile
-========================= */
-
-@media (max-width: 768px) {
+@media (max-width: 960px) {
 
   ::ng-deep .p-menubar {
     position: relative;
@@ -236,7 +233,7 @@
      Active
   ========================= */
 
-  ::ng-deep .p-menubar-root-list .active-menu {
+  ::ng-deep .p-menubar-root-list .p-menubar-item-link-active {
 
     color: #b98543 !important;
 

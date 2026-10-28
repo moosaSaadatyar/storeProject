@@ -1,88 +1,66 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { UserInfo } from './user-info/user-info';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { RequestBtnComponent } from './request-btn/request-btn.component';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
+import { RequestBtnComponent } from './request-btn/request-btn.component';
 import { MoNavbarMenuComponent } from '../../core/component/lib/mo-navbar-menu/mo-navbar-menu.component';
 
 @Component({
   selector: 'app-header',
   imports: [
-    CommonModule,
-    InputTextModule,
-    ButtonModule,
-    RequestBtnComponent,
-    TranslateModule,
     MoNavbarMenuComponent,
-    RouterLink
+    RequestBtnComponent,
+    RouterLink,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
-  menuItem!: MenuItem[];
+  menuItem: MenuItem[] = [];
 
-  constructor(
-    private router: Router,
-    private translate: TranslateService,
-  ) {}
-  
+  private translate = inject(TranslateService);
+
   ngOnInit(): void {
-    this.translate.onLangChange.subscribe(() => {
-      this.menuInIt();
-    });
+    this.menuInIt();
+    this.translate.onLangChange.subscribe(() => this.menuInIt());
   }
 
+  /**
+   * آیتم‌های منوی اصلی.
+   *
+   * نکته: در PrimeNG 21 قالب آیتم پیش‌فرض، مقدار `label` را به‌صورت خام
+   * نمایش می‌دهد، بنابراین label در اینجا ترجمه می‌شود و با تغییر زبان
+   * منو دوباره ساخته می‌شود. ناوبری با خاصیت `routerLink` انجام می‌شود
+   * (خاصیت قدیمی `route` در PrimeNG 21 دیگر وجود ندارد).
+   *
+   * مسیرهای /services و /about و /contact در مراحل بعدی پیاده‌سازی می‌شوند.
+   */
   private menuInIt() {
     this.menuItem = [
       {
         label: this.translate.instant('HOME'),
-        command: () => {
-          this.router.navigate(['/home']);
-        },
+        routerLink: ['/home'],
+        routerLinkActiveOptions: { exact: true },
       },
       {
-        label: this.translate.instant('PRODUCTS_MANAGMENT'),
-        items: [
-          {
-            label: this.translate.instant('PRODUCTS_ADD'),
-            command: () => {
-              this.router.navigate(['/products']);
-            },
-          },
-          {
-            label: this.translate.instant('PRODUCTS_REPORT'),
-            command: () => {
-              this.router.navigate(['/products']);
-            },
-          },
-          {
-            label: this.translate.instant('USER_INFORMATION'),
-            command: () => {
-              this.router.navigate(['/']);
-            },
-          },
-        ],
+        label: this.translate.instant('SERVICES'),
+        routerLink: ['/services'],
+        routerLinkActiveOptions: { exact: true },
       },
       {
         label: this.translate.instant('WORK_SAMPLE'),
-       
+        routerLink: ['/portfolio'],
+        routerLinkActiveOptions: { exact: true },
       },
       {
         label: this.translate.instant('ABOUT'),
-        command: () => {
-          this.router.navigate(['/about']);
-        },
+        routerLink: ['/about'],
+        routerLinkActiveOptions: { exact: true },
       },
       {
         label: this.translate.instant('CONTACT'),
-        command: () => {
-          this.router.navigate(['/contact']);
-        },
+        routerLink: ['/contact'],
+        routerLinkActiveOptions: { exact: true },
       },
     ];
   }

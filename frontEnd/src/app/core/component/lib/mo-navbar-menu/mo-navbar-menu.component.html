@@ -1,31 +1,7 @@
-<!-- <p-menubar [model]="highlightedItems" class="metismenu-horizontal navbar-border"></p-menubar>   -->
-<p-menubar [model]="items">
-    <ng-template pTemplate="item" let-item>
-
-        <ng-container *ngIf="item.route; else urlRef">
-
-            <a [routerLink]="item.route" routerLinkActive="active-menu" [routerLinkActiveOptions]="{ exact: true }"
-                class="p-menuitem-link">
-                <span [class]="item.icon"></span>
-                <span class="ml-2">{{ item.label | translate }}</span>
-            </a>
-
-        </ng-container>
-
-        <ng-template #urlRef>
-            <a *ngIf="item.url; else noLink" [href]="item.url" class="p-menuitem-link">
-                <span [class]="item.icon"></span>
-                <span class="ml-2">{{ item.label | translate }}</span>
-            </a>
-        </ng-template>
-
-        <ng-template #noLink>
-            <div class="p-menuitem-link">
-                <span [class]="item.icon"></span>
-                <span class="ml-2">{{ item.label | translate }}</span>
-                <span class="pi pi-fw pi-angle-down ml-2"></span>
-            </div>
-        </ng-template>
-
-    </ng-template>
-</p-menubar>
+<!--
+  قالب آیتم سفارشی قدیمی (pTemplate="item") در PrimeNG 21 دیگر پشتیبانی نمی‌شود،
+  بنابراین از قالب پیش‌فرض Menubar استفاده می‌شود که ناوبری (routerLink)،
+  وضعیت فعال، زیرمنو و منوی موبایل را به‌صورت داخلی مدیریت می‌کند.
+  استایل‌ها در mo-navbar-menu.component.css اعمال می‌شوند.
+-->
+<p-menubar [model]="items"></p-menubar>

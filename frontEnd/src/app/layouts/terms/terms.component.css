@@ -1,0 +1,100 @@
+.terms-page {
+  padding: 70px 0 90px;
+
+  background: #faf8f5;
+}
+
+.terms-inner {
+  max-width: 820px;
+
+  margin: 0 auto;
+}
+
+.terms-title {
+  margin-bottom: 0;
+
+  color: #292827;
+
+  font-size: 30px;
+
+  font-weight: 700;
+}
+
+.terms-line {
+  width: 48px;
+  height: 3px;
+
+  margin: 18px auto 40px;
+
+  background-color: #c6924b;
+}
+
+
+/* =========================
+   Card
+========================= */
+
+.terms-card {
+  padding: 40px 45px;
+
+  background: #fff;
+
+  border: 1px solid #eee4d8;
+
+  border-radius: 12px;
+
+  box-shadow: 0 8px 30px rgba(41, 40, 39, 0.05);
+}
+
+.terms-section {
+  padding-bottom: 26px;
+
+  margin-bottom: 26px;
+
+  border-bottom: 1px dashed #eee4d8;
+}
+
+.terms-section:last-child {
+  padding-bottom: 0;
+
+  margin-bottom: 0;
+
+  border-bottom: 0;
+}
+
+.terms-section h2 {
+  margin-bottom: 10px;
+
+  color: #292827;
+
+  font-size: 17px;
+
+  font-weight: 700;
+}
+
+.terms-section p {
+  margin: 0;
+
+  color: #666;
+
+  font-size: 14px;
+
+  line-height: 2.1;
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 575px) {
+
+  .terms-page {
+    padding: 45px 0 60px;
+  }
+
+  .terms-card {
+    padding: 28px 22px;
+  }
+
+}

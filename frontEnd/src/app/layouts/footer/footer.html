@@ -2,59 +2,43 @@
 
   <div class="container">
 
-    <div class="footer-content">
+    <div class="footer-grid">
 
-      <!-- Title -->
-      <div class="footer-title">
+      <!-- =========================
+           Brand & Social
+      ========================== -->
+      <div class="footer-col footer-brand">
 
-        <h2>
-          {{ 'CONTACT_US_FOR_CONSULTATION' | translate }}
-        </h2>
+        <a routerLink="/home" class="footer-logo-link">
+          <img
+            src="/logo/2.png"
+            alt="عزیزی کابینت‌سازی"
+            class="footer-logo"
+          >
+        </a>
 
-        <div class="footer-title-line"></div>
+        <p class="footer-about">
+          {{ 'ABOUT_US_SHORT' | translate }}
+        </p>
 
-      </div>
-
-
-      <!-- Address -->
-      <div class="footer-item">
-
-        <div class="footer-icon">
-          <i class="pi pi-map-marker"></i>
-        </div>
-
-        <div class="footer-info">
-
-          <span class="footer-label">
-            {{ 'ADDRESS' | translate }}
-          </span>
-
-          <span class="footer-value">
-            {{ 'TEHRAN_EXAMPLE_ADDRESS' | translate }}
-          </span>
-
-        </div>
-
-      </div>
-
-
-      <!-- Phone -->
-      <div class="footer-item">
-
-        <div class="footer-icon">
-          <i class="pi pi-phone"></i>
-        </div>
-
-        <div class="footer-info">
-
-          <span class="footer-label">
-            {{ 'PHONE_NUMBER' | translate }}
-          </span>
+        <div class="footer-socials">
 
           <a
-            href="tel:09121234567"
-            class="footer-value">
-            0912 123 4567
+            href="https://instagram.com/cabinet.sazan"
+            target="_blank"
+            rel="noopener"
+            aria-label="اینستاگرام"
+          >
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+
+          <a
+            href="https://wa.me/989121234567"
+            target="_blank"
+            rel="noopener"
+            aria-label="واتساپ"
+          >
+            <i class="fa-brands fa-whatsapp"></i>
           </a>
 
         </div>
@@ -62,26 +46,112 @@
       </div>
 
 
-      <!-- Instagram -->
-      <div class="footer-item">
+      <!-- =========================
+           Quick Links
+      ========================== -->
+      <div class="footer-col">
 
-        <div class="footer-icon instagram-icon">
-          <i class="pi pi-instagram"></i>
-        </div>
+        <h3 class="footer-col-title">
+          {{ 'QUICK_LINKS' | translate }}
+        </h3>
 
-        <div class="footer-info">
+        <ul class="footer-links">
 
-          <span class="footer-label">
-            {{ 'INSTAGRAM' | translate }}
-          </span>
+          <li>
+            <i class="pi pi-angle-left"></i>
+            <a routerLink="/home">{{ 'HOME' | translate }}</a>
+          </li>
 
-          <a
-            href="#"
-            class="footer-value">
-            @cabinet.sazan
-          </a>
+          <li>
+            <i class="pi pi-angle-left"></i>
+            <a routerLink="/services">{{ 'SERVICES' | translate }}</a>
+          </li>
 
-        </div>
+          <li>
+            <i class="pi pi-angle-left"></i>
+            <a routerLink="/portfolio">{{ 'WORK_SAMPLE' | translate }}</a>
+          </li>
+
+          <li>
+            <i class="pi pi-angle-left"></i>
+            <a routerLink="/about">{{ 'ABOUT' | translate }}</a>
+          </li>
+
+          <li>
+            <i class="pi pi-angle-left"></i>
+            <a routerLink="/contact">{{ 'CONTACT' | translate }}</a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <!-- =========================
+           Contact Information
+      ========================== -->
+      <div class="footer-col">
+
+        <h3 class="footer-col-title">
+          {{ 'CONTACT_INFORMATION' | translate }}
+        </h3>
+
+        <ul class="footer-links">
+
+          <li>
+            <i class="fa-solid fa-phone"></i>
+            <a href="tel:09121234567" dir="ltr">0912 123 4567</a>
+          </li>
+
+          <li>
+            <i class="fa-solid fa-whatsapp"></i>
+            <a
+              href="https://wa.me/989121234567"
+              target="_blank"
+              rel="noopener"
+            >
+              {{ 'WHATSAPP' | translate }}
+            </a>
+          </li>
+
+          <li>
+            <i class="fa-solid fa-instagram"></i>
+            <a
+              href="https://instagram.com/cabinet.sazan"
+              target="_blank"
+              rel="noopener"
+            >
+              @cabinet.sazan
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <!-- =========================
+           Address & Working Hours
+      ========================== -->
+      <div class="footer-col">
+
+        <h3 class="footer-col-title">
+          {{ 'VISIT_US' | translate }}
+        </h3>
+
+        <ul class="footer-links">
+
+          <li>
+            <i class="fa-solid fa-location-dot"></i>
+            <span>{{ 'TEHRAN_EXAMPLE_ADDRESS' | translate }}</span>
+          </li>
+
+          <li>
+            <i class="fa-solid fa-clock"></i>
+            <span>{{ 'WORK_HOURS_VALUE' | translate }}</span>
+          </li>
+
+        </ul>
 
       </div>
 
@@ -93,11 +163,15 @@
   <!-- Bottom -->
   <div class="footer-bottom">
 
-    <div class="container">
+    <div class="container footer-bottom-inner">
 
-      <p>
+      <p class="footer-copy">
         {{ 'ALL_RIGHTS_RESERVED' | translate }}
       </p>
+
+      <a routerLink="/terms" class="footer-terms">
+        {{ 'TERMS_PRIVACY' | translate }}
+      </a>
 
     </div>
 
