@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ButtonModule } from 'primeng/button';
 import { MenuItem } from 'primeng/api';
 import { RequestBtnComponent } from './request-btn/request-btn.component';
 import { MoNavbarMenuComponent } from '../../core/component/lib/mo-navbar-menu/mo-navbar-menu.component';
@@ -13,6 +14,8 @@ import { resolveImageUrl } from '../../core/static/helpers/image.helper';
     MoNavbarMenuComponent,
     RequestBtnComponent,
     RouterLink,
+    TranslateModule,
+    ButtonModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',

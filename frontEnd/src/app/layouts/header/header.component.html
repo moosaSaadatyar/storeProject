@@ -30,6 +30,18 @@
     <!-- Request Button -->
     <div class="header-action">
 
+      <a
+        routerLink="/admin/login"
+        pButton
+        [label]="'ADMIN_LOGIN' | translate"
+        severity="secondary"
+        [outlined]="true"
+        [rounded]="true"
+        icon="pi pi-user"
+        iconPos="right"
+        styleClass="admin-login-btn"
+      ></a>
+
       <request-btn></request-btn>
 
     </div>

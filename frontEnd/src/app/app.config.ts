@@ -14,6 +14,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFa from '@angular/common/locales/fa';
 import { LOCALE_ID } from '@angular/core';
 import { providePrimeNG } from 'primeng/config';
+import { ConfirmationService } from 'primeng/api';
 import Nora from '@primeuix/themes/nora';
 import Aura from '@primeuix/themes/aura';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
@@ -54,6 +55,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch(), withInterceptors([authInterceptor, errorInterceptor])),
     provideRouter(routes),
     provideAnimations(),
+    ConfirmationService,
     provideToastr({
       positionClass: 'toast-top-left',
       timeOut: 3000,

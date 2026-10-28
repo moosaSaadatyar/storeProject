@@ -38,7 +38,7 @@ async function seedDatabase() {
   }
 
   /* ================= 2. داده‌های نمونه ================= */
-  const origin = String(process.env.CORS_ORIGIN || 'http://localhost:4200').replace(/\/+$/, '');
+  const origin = String(process.env.CORS_ORIGIN || 'http://localhost:4200').split(',')[0].trim().replace(/\/+$/, '');
   const img = (name) => `${origin}/images/${name}`;
 
   let seededSample = false;

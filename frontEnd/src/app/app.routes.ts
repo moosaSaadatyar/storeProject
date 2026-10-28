@@ -5,51 +5,10 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { BlockAuthGuard } from './core/guards/block-auth.guard';
 
 export const routes: Routes = [
-  /* ============================ صفحات عمومی ============================ */
-  {
-    path: '',
-    component: PublicLayoutComponent,
-    children: [
-      // '', 'home', 'request', 'terms'
-      {
-        path: '',
-        loadChildren: () =>
-          import('./shared/ui/home-page/home.route').then((m) => m.HomeRoutes),
-      },
-      {
-        path: 'portfolio',
-        loadComponent: () =>
-          import('./feature/portfolio/portfolio.page').then((m) => m.PortfolioPage),
-      },
-      {
-        path: 'projects/:id',
-        loadComponent: () =>
-          import('./feature/project-detail/project-detail.page').then((m) => m.ProjectDetailPage),
-      },
-      {
-        path: 'services',
-        loadComponent: () =>
-          import('./feature/services/services.page').then((m) => m.ServicesPage),
-      },
-      {
-        path: 'about',
-        loadComponent: () =>
-          import('./feature/about/about.page').then((m) => m.AboutPage),
-      },
-      {
-        path: 'contact',
-        loadComponent: () =>
-          import('./feature/contact/contact.page').then((m) => m.ContactPage),
-      },
-      {
-        path: '**',
-        loadComponent: () =>
-          import('./layouts/not-found/not-found.component').then((m) => m.NotFoundComponent),
-      },
-    ],
-  },
-
-  /* ============================ پنل مدیریت ============================ */
+  /* ============================ پنل مدیریت ============================
+     نکته: باید قبل از مسیر عمومی '' قرار بگیرد؛ در غیر این صورت
+     catch-all (**) داخل مسیر عمومی، همه‌ی URLها را می‌بلعد.
+  ================================================================== */
 
   // صفحه‌ی ورود — اگر مدیر وارد شده باشد به داشبورد می‌رود
   {
@@ -126,6 +85,50 @@ export const routes: Routes = [
           },
           { path: '**', redirectTo: 'dashboard' },
         ],
+      },
+    ],
+  },
+
+  /* ============================ صفحات عمومی ============================ */
+  {
+    path: '',
+    component: PublicLayoutComponent,
+    children: [
+      // '', 'home', 'request', 'terms'
+      {
+        path: '',
+        loadChildren: () =>
+          import('./shared/ui/home-page/home.route').then((m) => m.HomeRoutes),
+      },
+      {
+        path: 'portfolio',
+        loadComponent: () =>
+          import('./feature/portfolio/portfolio.page').then((m) => m.PortfolioPage),
+      },
+      {
+        path: 'projects/:id',
+        loadComponent: () =>
+          import('./feature/project-detail/project-detail.page').then((m) => m.ProjectDetailPage),
+      },
+      {
+        path: 'services',
+        loadComponent: () =>
+          import('./feature/services/services.page').then((m) => m.ServicesPage),
+      },
+      {
+        path: 'about',
+        loadComponent: () =>
+          import('./feature/about/about.page').then((m) => m.AboutPage),
+      },
+      {
+        path: 'contact',
+        loadComponent: () =>
+          import('./feature/contact/contact.page').then((m) => m.ContactPage),
+      },
+      {
+        path: '**',
+        loadComponent: () =>
+          import('./layouts/not-found/not-found.component').then((m) => m.NotFoundComponent),
       },
     ],
   },
