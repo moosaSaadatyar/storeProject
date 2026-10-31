@@ -6,6 +6,8 @@ require('./src/config/env');
 
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 const { UPLOADS_ROOT } = require('./src/middlewares/upload.middleware');
 const verifyAuth = require('./src/middlewares/auth.middleware');
@@ -35,6 +37,41 @@ app.use(
   })
 );
 
+// هدرهای امنیتی استاندارد
+// cross-origin: تصاویر /uploads و seed برای فرانت‌اند (dev روی پورت جدا) سرو می‌شوند
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+  })
+);
+
+// پاسخ سازگار با قرارداد API برای درخواست‌های محدودشده
+function rateLimitHandler(req, res) {
+  res.status(429).json({
+    success: false,
+    message: 'درخواست‌های شما مکرر است. لطفاً کمی بعد دوباره تلاش کنید.',
+    code: 'RATE_LIMITED',
+  });
+}
+
+// محدودیت تلاش برای ورود مدیر (جلوگیری از brute-force)
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 10,
+  standardHeaders: 'draft-7',
+  legacyHeaders: false,
+  handler: rateLimitHandler,
+});
+
+// محدودیت فرم‌های عمومی (جلوگیری از اسپم)
+const formsLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  limit: 20,
+  standardHeaders: 'draft-7',
+  legacyHeaders: false,
+  handler: rateLimitHandler,
+});
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: false }));
 
@@ -50,16 +87,16 @@ app.get('/api/health', (req, res) => {
 app.use('/api/projects', projectsRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/services', cabinetServicesRouter);
-app.use('/api/consultations', consultationsRouter);
-app.use('/api/contact', contactRouter);
+app.use('/api/consultations', formsLimiter, consultationsRouter);
+app.use('/api/contact', formsLimiter, contactRouter);
 app.use('/api/testimonials', testimonialsRouter);
 app.use('/api/faqs', faqsRouter);
 app.use('/api/settings', settingsRouter);
 
 // ============================ مدیریتی ============================
 
-// ورود — بدون احراز هویت
-app.use('/api/admin/login', adminAuthRouter);
+// ورود — بدون احراز هویت (با محدودیت تعداد تلاش)
+app.use('/api/admin/login', loginLimiter, adminAuthRouter);
 
 // بقیه‌ی /api/admin — با احراز هویت
 app.use('/api/admin', verifyAuth);

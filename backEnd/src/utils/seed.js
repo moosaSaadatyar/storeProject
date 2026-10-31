@@ -38,8 +38,8 @@ async function seedDatabase() {
   }
 
   /* ================= 2. داده‌های نمونه ================= */
-  const origin = String(process.env.CORS_ORIGIN || 'http://localhost:4200').split(',')[0].trim().replace(/\/+$/, '');
-  const img = (name) => `${origin}/images/${name}`;
+  // تصاویر seed با آدرس نسبی ذخیره می‌شوند تا مستقل از دامنه/پورت سایت کار کنند
+  const img = (name) => `/images/${name}`;
 
   let seededSample = false;
   if ((process.env.SEED_SAMPLE_DATA || 'true') !== 'false' && (await Project.countDocuments()) === 0) {
