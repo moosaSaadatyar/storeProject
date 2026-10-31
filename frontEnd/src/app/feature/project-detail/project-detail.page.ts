@@ -8,6 +8,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { TagModule } from 'primeng/tag';
 import { ProjectCard } from '../../shared/dynamics/project-card/project-card';
 import { ProjectService } from '../../shared/services/project.service';
+import { SeoService } from '../../core/seo/seo.service';
 import { IProject } from '../../core/interface/project.interface';
 import {
   PLACEHOLDER_IMAGE,
@@ -35,6 +36,7 @@ import {
 export class ProjectDetailPage implements OnInit, OnDestroy {
   private readonly projectService = inject(ProjectService);
   private readonly route = inject(ActivatedRoute);
+  private readonly seo = inject(SeoService);
 
   private paramSub?: Subscription;
 
@@ -92,12 +94,56 @@ export class ProjectDetailPage implements OnInit, OnDestroy {
           this.gallery = urls.map((url) => resolveImageUrl(url) || this.placeholder);
           this.selectedIndex = 0;
           this.loading = false;
+          this.applySeo(data);
         },
         error: () => {
           this.notFound = true;
           this.loading = false;
+          this.seo.apply({
+            title: 'پروژه یافت نشد | عزیزی کابینت‌سازی',
+            noindex: true,
+          });
+          this.seo.setJsonLd('breadcrumb', null);
+          this.seo.setJsonLd('project', null);
         },
       });
+    });
+  }
+
+  /** سئوی صفحه جزئیات: title/description پویا + داده ساختاریافته */
+  private applySeo(data: IProject): void {
+    const brand = 'عزیزی کابینت‌سازی';
+    const cover = resolveImageUrl(data.coverImage);
+    const description =
+      data.shortDescription || (data.fullDescription || '').slice(0, 160).trim();
+
+    this.seo.apply({
+      title: `${data.title} | ${brand}`,
+      description,
+      image: cover || undefined,
+    });
+
+    // سیر ناوبری برای نتایج غنی گوگل
+    this.seo.setJsonLd('breadcrumb', {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'خانه', item: `${location.origin}/` },
+        { '@type': 'ListItem', position: 2, name: 'نمونه‌کارها', item: `${location.origin}/portfolio` },
+        { '@type': 'ListItem', position: 3, name: data.title },
+      ],
+    });
+
+    // مشخصات پروژه به‌صورت داده ساختاریافته
+    this.seo.setJsonLd('project', {
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      name: data.title,
+      description,
+      image: cover || undefined,
+      author: { '@type': 'Organization', name: brand },
+      about: data.style || undefined,
+      locationCreated: data.location || undefined,
     });
   }
 

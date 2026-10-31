@@ -78,6 +78,10 @@ app.use(express.urlencoded({ extended: false }));
 // سرو استاتیک فایل‌های آپلودشده (مسیرهای ناموجود به notFoundHandler می‌رسند)
 app.use('/uploads', express.static(UPLOADS_ROOT));
 
+// sitemap.xml پویا (صفحات ثابت + پروژه‌های منتشرشده) — برای موتورهای جستجو
+const sitemapRouter = require('./src/routes/sitemap.routes');
+app.use('/sitemap.xml', sitemapRouter);
+
 // ============================ عمومی ============================
 
 app.get('/api/health', (req, res) => {

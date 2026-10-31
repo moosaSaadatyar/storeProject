@@ -14,6 +14,13 @@ export const routes: Routes = [
   {
     path: 'admin/login',
     canActivate: [BlockAuthGuard],
+    data: {
+      seo: {
+        title: 'ورود به پنل مدیریت | عزیزی کابینت‌سازی',
+        description: 'ورود مدیر به پنل مدیریت سایت عزیزی کابینت‌سازی',
+        noindex: true,
+      },
+    },
     loadComponent: () =>
       import('./feature/admin/login/admin-login.page').then((m) => m.AdminLoginPage),
   },
@@ -22,6 +29,13 @@ export const routes: Routes = [
   {
     path: 'admin',
     canActivate: [AuthGuard],
+    data: {
+      seo: {
+        title: 'پنل مدیریت | عزیزی کابینت‌سازی',
+        description: 'پنل مدیریت سایت عزیزی کابینت‌سازی',
+        noindex: true,
+      },
+    },
     children: [
       {
         path: '',
@@ -102,6 +116,13 @@ export const routes: Routes = [
       },
       {
         path: 'portfolio',
+        data: {
+          seo: {
+            title: 'نمونه‌کارها و پروژه‌های اجراشده | عزیزی کابینت‌سازی',
+            description: 'گالری نمونه‌کارهای اجراشده — کابینت آشپزخانه مدرن، نئوکلاسیک و کلاسیک، کمد دیواری و کلوزت با جزئیات کامل متریال و مشخصات هر پروژه.',
+            image: '/images/bg-Home.jpg',
+          },
+        },
         loadComponent: () =>
           import('./feature/portfolio/portfolio.page').then((m) => m.PortfolioPage),
       },
@@ -112,21 +133,48 @@ export const routes: Routes = [
       },
       {
         path: 'services',
+        data: {
+          seo: {
+            title: 'خدمات طراحی و ساخت کابینت | عزیزی کابینت‌سازی',
+            description: 'خدمات طراحی اختصاصی، ساخت، نصب و نوسازی کابینت — رندر سه‌بعدی رایگان، متریال درجه‌یک، ضمانت ۵ ساله ساخت و خدمات پس از فروش.',
+            image: '/images/bg-Home.jpg',
+          },
+        },
         loadComponent: () =>
           import('./feature/services/services.page').then((m) => m.ServicesPage),
       },
       {
         path: 'about',
+        data: {
+          seo: {
+            title: 'درباره ما | عزیزی کابینت‌سازی',
+            description: 'آشنایی با عزیزی کابینت‌سازی؛ بیش از ۱۲ سال تجربه در طراحی و اجرای کابینت با تیم مهندسی، استادکاران باتجربه و متریال درجه‌یک.',
+            image: '/images/bg-Home.jpg',
+          },
+        },
         loadComponent: () =>
           import('./feature/about/about.page').then((m) => m.AboutPage),
       },
       {
         path: 'contact',
+        data: {
+          seo: {
+            title: 'تماس با ما | عزیزی کابینت‌سازی',
+            description: 'تماس با عزیزی کابینت‌سازی — شماره تلفن، آدرس، ساعات کاری و ارسال پیام. مشاوره و بازدید برای اندازه‌گیری رایگان است.',
+            image: '/images/bg-Home.jpg',
+          },
+        },
         loadComponent: () =>
           import('./feature/contact/contact.page').then((m) => m.ContactPage),
       },
       {
         path: '**',
+        data: {
+          seo: {
+            title: 'صفحه یافت نشد | عزیزی کابینت‌سازی',
+            noindex: true,
+          },
+        },
         loadComponent: () =>
           import('./layouts/not-found/not-found.component').then((m) => m.NotFoundComponent),
       },
@@ -136,6 +184,12 @@ export const routes: Routes = [
   // سایر مسیرهای ناموجود (خارج از چیدمان عمومی)
   {
     path: '**',
+    data: {
+      seo: {
+        title: 'صفحه یافت نشد | عزیزی کابینت‌سازی',
+        noindex: true,
+      },
+    },
     loadComponent: () =>
       import('./layouts/not-found/not-found.component').then((m) => m.NotFoundComponent),
   },

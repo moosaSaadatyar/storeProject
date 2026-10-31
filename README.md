@@ -102,14 +102,32 @@ node test/smoke.js
 - **فشرده‌سازی خودکار تصاویر:** هر تصویر آپلودشده‌ی بزرگ‌تر از ۵۰۰KB به‌صورت خودکار با `sharp` فشرده می‌شود تا زیر ۵۰۰KB بماند (کاهش کیفیت و در صورت نیاز کوچک‌کردن ابعاد؛ خروجی نهایی JPEG). فایل‌های کوچک‌تر دست‌نخورده می‌مانند.
 - دیتابیس محلی MongoDB با نام `cabinet-store` استفاده می‌شود.
 
+## سئو (SEO)
+
+سایت به‌صورت کامل برای موتورهای جستجو بهینه شده است:
+
+- **Title و Meta Description پویا:** برای هر صفحه از طریق `data.seo` روی روت‌ها (`app.routes.ts` و `home.route.ts`) و اعمال خودکار توسط `core/seo/seo.service.ts`؛ صفحه‌ی جزئیات پروژه title و description اختصاصیِ خود پروژه را می‌گیرد.
+- **Canonical و Open Graph و Twitter Card:** برای هر صفحه تنظیم می‌شود تا در اشتراک‌گذاری اجتماعی (اینستاگرام، تلگرام و…) کارت درست نمایش داده شود.
+- **Canonical URL:** روی هر صفحه برای جلوگیری از محتوای تکراری.
+- **داده‌های ساختاریافته (JSON-LD):**
+  - `LocalBusiness` در `index.html` (اطلاعات کسب‌وکار، ساعت کاری، تلفن و آدرس)
+  - `BreadcrumbList` + `CreativeWork` روی صفحه‌ی جزئیات هر پروژه
+  - `FAQPage` برای بخش سوالات متداول صفحه‌ی خانه
+- **robots.txt:** در `frontEnd/public/robots.txt` — پنل مدیریت از ایندکس خارج شده و Sitemap ارجاع داده شده.
+- **sitemap.xml پویا:** در بک‌اند روی `/sitemap.xml` سرو می‌شود و شامل صفحات ثابت + همه‌ی پروژه‌های منتشرشده (با `lastmod`) است. مبدأ URLها از `SITEMAP_BASE_URL` می‌آید.
+- **نشان robots:** صفحات ۴۰۴ و پنل مدیریت `noindex, nofollow` دارند.
+
+> **نکته برای انتشار:** در `frontEnd/src/index.html` مقادیر `og:url` و `url` داخل JSON-LD `LocalBusiness`، در `frontEnd/public/robots.txt` خط `Sitemap:` و در `.env` متغیر `SITEMAP_BASE_URL` را با دامنه‌ی واقعی سایت جایگزین کنید.
+
 ## انتشار در Production (چک‌لیست)
 
 1. **فرانت‌اند:** مقدار `apiUrl` و `production` در `frontEnd/public/envierments/envierments.ts` را با دامنه‌ی واقعی API تنظیم کنید، سپس `npm run build` بزنید. خروجی در `frontEnd/dist/front-end/browser/` است.
-2. **هاست استاتیک:** محتوای `browser/` را روی هر هاست استاتیک (nginx و…) بگذارید و **SPA fallback** تنظیم کنید (هر مسیر ناموجود به `index.html` برسد تا deep-link‌ها مثل `/admin/login` کار کنند).
+2. **هاست استاتیک:** محتوای `browser/` را روی هر هاست استاتیک (nginx و…) بگذارید و **SPA fallback** تنظیم کنید (هر مسیر ناموجود به `index.html` برسد تا deep-link‌ها مثل `/admin/login` کار کنند). مسیرهای `/api`، `/uploads` و `/sitemap.xml` را با reverse proxy به بک‌اند بفرستید.
 3. **بک‌اند:** در `.env` مقادیر زیر را تغییر دهید:
    - `MONGO_URI` → آدرس MongoDB واقعی
    - `JWT_SECRET` → رشته‌ی تصادفی طولانی
    - `CORS_ORIGIN` → دامنه‌ی سایت (مثلاً `https://example.com`)
+   - `SITEMAP_BASE_URL` → دامنه‌ی سایت (برای تولید sitemap.xml)
    - `ADMIN_PASSWORD` → رمز قوی برای اولین seed
 4. **TLS:** بک‌اند را پشت reverse proxy با HTTPS (nginx + گواهی) اجرا کنید.
 5. **امنیت پس از راه‌اندازی:**
