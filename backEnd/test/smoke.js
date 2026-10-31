@@ -2,7 +2,23 @@
  * تست دود (smoke test) API — همه endpointهای عمومی و مدیریتی
  * اجرا: node test/smoke.js
  */
+const fs = require('fs');
+const path = require('path');
+
 const BASE = 'http://localhost:3000';
+
+/** رمز مدیر از .env خوانده می‌شود تا با محیط توسعه هم‌خوان باشد */
+function readAdminPassword() {
+  try {
+    const txt = fs.readFileSync(path.join(__dirname, '..', '.env'), 'utf8');
+    const m = txt.match(/^ADMIN_PASSWORD=(.+)$/m);
+    if (m) return m[1].trim();
+  } catch (e) {
+    /* .env موجود نیست — مقدار پیش‌فرض */
+  }
+  return 'Admin1234!';
+}
+const ADMIN_PASSWORD = readAdminPassword();
 
 let passed = 0;
 let failed = 0;
@@ -170,7 +186,7 @@ async function getJson(path, headers = {}) {
     const res = await fetch(BASE + '/api/admin/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: 'admin@cabinet.ir', password: 'Admin1234!' }),
+      body: JSON.stringify({ email: 'admin@cabinet.ir', password: ADMIN_PASSWORD }),
     });
     const body = await res.json();
     assert(res.status === 200 && body.success, `status=${res.status} ${body.message}`);
